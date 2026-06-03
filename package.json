@@ -1,0 +1,51 @@
+{
+  "name": "@aud/brand",
+  "version": "0.1.1",
+  "description": "AuD — the maker's-mark design system: the AuD lettermark, the AUDITOR wordmark, design tokens, and self-hosted brand fonts. Built for Aaron Durrant's operational audit/ops app suite.",
+  "author": "Aaron Durrant",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DurrantAaron/aud-design-system.git"
+  },
+  "keywords": ["design-system", "brand", "tokens", "react", "aud"],
+  "sideEffects": ["**/*.css"],
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./tokens": "./src/tokens.ts",
+    "./tokens.css": "./tokens/tokens.css",
+    "./fonts.css": "./fonts/fonts.css",
+    "./fonts-mark.css": "./fonts/fonts-mark.css",
+    "./tokens.json": "./tokens/tokens.json",
+    "./tailwind-preset": "./tokens/tailwind-preset.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "fonts",
+    "tokens",
+    "reference",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "fetch-fonts": "python3 scripts/fetch-fonts.py",
+    "showcase": "npm --prefix showcase run dev",
+    "showcase:build": "npm --prefix showcase run build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  }
+}

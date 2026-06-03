@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuD — Brand Identity Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --off-white: #F2F0EB;
+    --warm-white: #FAFAF8;
+    --ink: #0A0A0A;
+    --mid: #5A5A5A;
+    --rule: #D0CDC6;
+
+    /* Concept A — Stencil Military */
+    --a-accent: #C8A84B;
+    --a-dark: #1A1A14;
+
+    /* Concept B — Precision Instrument */
+    --b-accent: #2563EB;
+    --b-dark: #0D1117;
+
+    /* Concept C — Classified */
+    --c-accent: #D4443C;
+    --c-dark: #111111;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 48px 40px 24px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .header-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* ── CONCEPT SECTIONS ── */
+  .concept {
+    padding: 56px 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .concept-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .concept-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── CONCEPT A — STENCIL MILITARY ── */
+  .mark-a {
+    display: inline-flex;
+    align-items: baseline;
+    position: relative;
+  }
+  .mark-a .A {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mark-a .u {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--a-accent);
+  }
+  .mark-a .D {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mark-a-sm {
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .mark-a-sm .A { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--ink); }
+  .mark-a-sm .u { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--a-accent); }
+  .mark-a-sm .D { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--ink); }
+
+  .mark-a-xs {
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .mark-a-xs .A { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--ink); }
+  .mark-a-xs .u { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--a-accent); }
+  .mark-a-xs .D { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--ink); }
+
+  /* dark version */
+  .dark-swatch-a {
+    background: var(--a-dark);
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .dark-swatch-a .A { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #FFFFFF; }
+  .dark-swatch-a .u { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--a-accent); }
+  .dark-swatch-a .D { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #FFFFFF; }
+
+  /* ── CONCEPT B — PRECISION ── */
+  .mark-b-wrap {
+    display: inline-block;
+    position: relative;
+  }
+  .mark-b {
+    font-family: 'Space Mono', monospace;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+    position: relative;
+    display: inline-block;
+  }
+  .mark-b .highlight {
+    color: var(--b-accent);
+  }
+  .mark-b-rule {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--b-accent);
+    margin-top: 6px;
+  }
+  .mark-b-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-top: 6px;
+    display: block;
+  }
+
+  .mark-b-sm {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .mark-b-sm .highlight { color: var(--b-accent); }
+
+  .mark-b-xs {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mark-b-xs .highlight { color: var(--b-accent); }
+
+  .dark-swatch-b {
+    background: var(--b-dark);
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: inline-block;
+  }
+  .dark-swatch-b .mark-b-sm { color: #FFFFFF; }
+  .dark-swatch-b .mark-b-sm .highlight { color: var(--b-accent); }
+  .dark-swatch-b .mark-b-rule-sm { width: 100%; height: 2px; background: var(--b-accent); margin-top: 4px; }
+
+  /* ── CONCEPT C — CLASSIFIED ── */
+  .mark-c {
+    position: relative;
+    display: inline-block;
+  }
+  .mark-c-box {
+    border: 2.5px solid var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    position: relative;
+  }
+  .mark-c-box::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: -4px; bottom: -4px;
+    border: 1.5px solid var(--c-accent);
+    z-index: -1;
+  }
+  .mark-c-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .mark-c-text .A { color: var(--ink); }
+  .mark-c-text .u { color: var(--ink); font-weight: 300; }
+  .mark-c-text .D { color: var(--ink); }
+
+  .mark-c-sm .mark-c-box {
+    padding: 4px 8px;
+    border-width: 2px;
+  }
+  .mark-c-sm .mark-c-box::before {
+    top: 3px; left: 3px; right: -3px; bottom: -3px;
+    border-width: 1px;
+  }
+  .mark-c-sm .mark-c-text { font-size: 20px; }
+
+  .mark-c-xs .mark-c-box {
+    padding: 2px 5px;
+    border-width: 1.5px;
+  }
+  .mark-c-xs .mark-c-box::before {
+    top: 2px; left: 2px; right: -2px; bottom: -2px;
+    border-width: 1px;
+    border-color: var(--c-accent);
+  }
+  .mark-c-xs .mark-c-text { font-size: 11px; letter-spacing: 0.06em; }
+
+  .dark-swatch-c {
+    background: var(--c-dark);
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: inline-block;
+  }
+  .dark-swatch-c .mark-c-sm .mark-c-box { border-color: #FFFFFF; }
+  .dark-swatch-c .mark-c-sm .mark-c-box::before { border-color: var(--c-accent); }
+  .dark-swatch-c .mark-c-sm .mark-c-text .A,
+  .dark-swatch-c .mark-c-sm .mark-c-text .u,
+  .dark-swatch-c .mark-c-sm .mark-c-text .D { color: #FFFFFF; }
+
+  /* ── LAYOUT AIDS ── */
+  .scale-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .scale-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--mid);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .usage-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+
+  .powered-by {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .powered-by-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .concept-desc {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .desc-item {}
+  .desc-item-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+  .desc-item-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .swatch-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .swatch-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    color: var(--mid);
+    margin-left: 4px;
+  }
+  .swatch-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer-demo {
+    padding: 16px 20px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--warm-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .footer-demo-appname {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* ── DECISION SECTION ── */
+  .decision-section {
+    padding: 56px 40px;
+  }
+  .decision-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 24px;
+  }
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .decision-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-align: left;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .decision-table td {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    padding-right: 16px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-label">Identity Exploration / Rev 01</span>
+  <span class="header-title">AuD — Three Mark Directions</span>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONCEPT A -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-label">Concept A — Stencil</div>
+
+  <!-- Hero mark -->
+  <div class="mark-a">
+    <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+  </div>
+
+  <!-- Scale -->
+  <div class="scale-row">
+    <div>
+      <span class="scale-label">Nav / Corner</span>
+      <div class="mark-a-sm">
+        <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Footer badge</span>
+      <div class="powered-by">
+        <span class="powered-by-text">Powered by</span>
+        <div class="mark-a-xs">
+          <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Dark</span>
+      <div class="dark-swatch-a">
+        <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- In-context demo -->
+  <div class="footer-demo" style="margin-top: 24px;">
+    <span class="footer-demo-appname">GOM Venue Audit</span>
+    <div class="powered-by">
+      <span class="powered-by-text">Powered by</span>
+      <div class="mark-a-xs">
+        <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-desc">
+    <div class="desc-item">
+      <div class="desc-item-label">Typeface</div>
+      <div class="desc-item-value">Bebas Neue — stencil, condensed, zero-serif. Reads military issue without trying.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Mechanic</div>
+      <div class="desc-item-value">Lowercase "u" in the accent colour. Marks the pivot: A<em>u</em>D. Subtle at small sizes, intentional at display.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Accent</div>
+      <div class="desc-item-value">
+        <div class="swatch-row">
+          <div class="swatch-group"><div class="swatch" style="background:#0A0A0A;"></div><span class="swatch-label">#0A0A0A</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#C8A84B;"></div><span class="swatch-label">#C8A84B Gold</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#1A1A14;"></div><span class="swatch-label">#1A1A14 Dark</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Verdict</div>
+      <div class="desc-item-value">Highest military-grade signal. Gold accent reads "ops-grade, not consumer." Scales to a corner badge cleanly. Most opinionated direction.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONCEPT B -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-label">Concept B — Precision Instrument</div>
+
+  <div class="mark-b-wrap">
+    <div class="mark-b">
+      <span>A</span><span class="highlight">u</span><span>D</span>
+    </div>
+    <span class="mark-b-rule"></span>
+    <span class="mark-b-sub">Audit · Intelligence · Operations</span>
+  </div>
+
+  <div class="scale-row">
+    <div>
+      <span class="scale-label">Nav / Corner</span>
+      <div class="mark-b-sm">
+        <span>A</span><span class="highlight">u</span><span>D</span>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Footer badge</span>
+      <div class="powered-by">
+        <span class="powered-by-text">Powered by</span>
+        <div class="mark-b-xs">
+          <span>A</span><span class="highlight">u</span><span>D</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Dark</span>
+      <div class="dark-swatch-b">
+        <div class="mark-b-sm" style="color:#fff;">
+          <span>A</span><span class="highlight">u</span><span>D</span>
+        </div>
+        <div class="mark-b-rule-sm" style="width:100%;height:2px;background:#2563EB;margin-top:4px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-demo">
+    <span class="footer-demo-appname">First Aid Register</span>
+    <div class="powered-by">
+      <span class="powered-by-text">Powered by</span>
+      <div class="mark-b-xs">
+        <span>A</span><span class="highlight">u</span><span>D</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-desc">
+    <div class="desc-item">
+      <div class="desc-item-label">Typeface</div>
+      <div class="desc-item-value">Space Mono — monospaced, technical. Reads like instrument readout or terminal output. Every character equal-width: disciplined.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Mechanic</div>
+      <div class="desc-item-value">Rule line under the mark acts as a measurement baseline. Tagline optional — drops at small sizes, present at display.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Accent</div>
+      <div class="desc-item-value">
+        <div class="swatch-row">
+          <div class="swatch-group"><div class="swatch" style="background:#0A0A0A;"></div><span class="swatch-label">#0A0A0A</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#2563EB;"></div><span class="swatch-label">#2563EB Signal</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#0D1117;"></div><span class="swatch-label">#0D1117 Dark</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Verdict</div>
+      <div class="desc-item-value">Most versatile — sits cleanly next to technical UI, looks native in code-adjacent contexts. Less distinct personality than A or C.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONCEPT C -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="concept">
+  <div class="concept-label">Concept C — Classified</div>
+
+  <div class="mark-c">
+    <div class="mark-c-box">
+      <span class="mark-c-text">
+        <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div>
+      <span class="scale-label">Nav / Corner</span>
+      <div class="mark-c mark-c-sm">
+        <div class="mark-c-box">
+          <span class="mark-c-text">
+            <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Footer badge</span>
+      <div class="powered-by">
+        <span class="powered-by-text">Powered by</span>
+        <div class="mark-c mark-c-xs">
+          <div class="mark-c-box">
+            <span class="mark-c-text">
+              <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="scale-label">Dark</span>
+      <div class="dark-swatch-c">
+        <div class="mark-c mark-c-sm">
+          <div class="mark-c-box">
+            <span class="mark-c-text">
+              <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-demo">
+    <span class="footer-demo-appname">CTRL Log</span>
+    <div class="powered-by">
+      <span class="powered-by-text">Powered by</span>
+      <div class="mark-c mark-c-xs">
+        <div class="mark-c-box">
+          <span class="mark-c-text">
+            <span class="A">A</span><span class="u">u</span><span class="D">D</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-desc">
+    <div class="desc-item">
+      <div class="desc-item-label">Typeface</div>
+      <div class="desc-item-value">Barlow Condensed Heavy — condensed, institutional. Sits between a military stencil and a government stamp.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Mechanic</div>
+      <div class="desc-item-value">Double-rule box with offset shadow in accent. Reads like a classification stamp or equipment serial plate. The box is the mark.</div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Accent</div>
+      <div class="desc-item-value">
+        <div class="swatch-row">
+          <div class="swatch-group"><div class="swatch" style="background:#0A0A0A;"></div><span class="swatch-label">#0A0A0A</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#D4443C;"></div><span class="swatch-label">#D4443C Warning</span></div>
+          <div class="swatch-group"><div class="swatch" style="background:#111111;"></div><span class="swatch-label">#111111 Dark</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-item">
+      <div class="desc-item-label">Verdict</div>
+      <div class="desc-item-value">Most dramatic. Best fit for a "classified ops" feeling. Box gets muddy below 14px — only works at corner-badge size and up. Red accent has dual-use tension (danger vs. brand).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- DECISION AID -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="decision-section">
+  <div class="decision-title">Decision Aid</div>
+  <table class="decision-table">
+    <thead>
+      <tr>
+        <th style="width:8%">—</th>
+        <th style="width:20%">Military Grade</th>
+        <th style="width:20%">Scalability</th>
+        <th style="width:20%">App Store viability</th>
+        <th style="width:32%">Risk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>A</strong></td>
+        <td>★★★★★</td>
+        <td>★★★★☆</td>
+        <td>★★★☆☆</td>
+        <td>Strong personality — commits you to a tone. Bebas is heavily used in sports/fitness, less so in SaaS.</td>
+      </tr>
+      <tr>
+        <td><strong>B</strong></td>
+        <td>★★★☆☆</td>
+        <td>★★★★★</td>
+        <td>★★★★★</td>
+        <td>Lowest risk, least memorable. Looks like a dev tool. Safe but not distinctive.</td>
+      </tr>
+      <tr>
+        <td><strong>C</strong></td>
+        <td>★★★★★</td>
+        <td>★★★☆☆</td>
+        <td>★★★★☆</td>
+        <td>Box breaks at very small sizes. Red accent fights with error states in your UI.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

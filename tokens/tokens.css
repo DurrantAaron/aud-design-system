@@ -1,0 +1,102 @@
+/* ==========================================================================
+   AuD design tokens
+   --------------------------------------------------------------------------
+   Principle: constant neutrals, one moving accent.
+   The neutrals never change across the suite. Exactly one accent moves, one
+   per app, exposed as --aud-accent. Think NATO equipment markings: identical
+   language, different unit colour.
+
+   Import once per app:  import '@aud/brand/tokens.css'
+   Then set the app's accent on your root, e.g. for the control accent:
+       :root { --aud-accent: var(--aud-steel); }
+
+   Theme: light by default, auto-dark via prefers-color-scheme, with a hard
+   data-theme override (set data-theme to light or dark on a root element).
+   ========================================================================== */
+
+:root {
+  /* --- Accent palette (constant hexes; one of these becomes --aud-accent) --- */
+  --aud-brass: #C8A84B;     /* flagship / the signature                      */
+  --aud-clay: #C26B52;      /* warm "care" red                               */
+  --aud-steel: #5E7C93;     /* muted night-blue                              */
+  --aud-sage: #7C8A5C;      /* desaturated olive                             */
+  --aud-eucalypt: #4F8A80;  /* muted teal                                    */
+
+  /* The moving accent. Defaults to brass (the flagship). Override per app. */
+  --aud-accent: var(--aud-brass);
+
+  /* --- Shared neutrals — LIGHT (canonical, from the brief) --- */
+  --aud-ground: #F2F0EB;    /* primary background — warm off-white           */
+  --aud-surface: #FAFAF8;   /* raised surfaces, cards                        */
+  --aud-ink: #14130F;       /* primary text; the A/D of the mark on light    */
+  --aud-mid: #6B6960;       /* secondary / muted text, labels                */
+  --aud-rule: #D8D4CC;      /* borders, dividers, hairlines                  */
+
+  /* --- Typography --- */
+  --aud-font-display: 'Bebas Neue', 'Oswald', 'Anton', 'Arial Narrow', sans-serif;
+  --aud-font-heading: 'Barlow Condensed', 'Oswald', 'Arial Narrow', sans-serif;
+  --aud-font-body: 'Barlow', 'Inter', system-ui, -apple-system, sans-serif;
+  --aud-font-mono: 'Share Tech Mono', 'DM Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Type scale — restrained, instrument-panel. */
+  --aud-text-xs: 0.6875rem;   /* 11px — micro field markings                 */
+  --aud-text-sm: 0.8125rem;   /* 13px — fine labels                          */
+  --aud-text-base: 1rem;      /* 16px — body                                 */
+  --aud-text-lg: 1.25rem;     /* 20px                                        */
+  --aud-text-xl: 1.75rem;     /* 28px — screen titles                        */
+  --aud-text-2xl: 2.5rem;     /* 40px — display                              */
+  --aud-text-3xl: 4rem;       /* 64px — hero mark / numerics                 */
+
+  --aud-leading-tight: 1.1;
+  --aud-leading-body: 1.5;    /* comfortable body line-height                */
+  --aud-tracking-label: 0.2em;  /* uppercase micro-labels                    */
+  --aud-tracking-wide: 0.3em;   /* widest field markings                     */
+  --aud-tracking-mark: -0.02em; /* the lettermark's own tracking             */
+
+  /* --- Space & structure --- */
+  --aud-radius-sm: 2px;
+  --aud-radius: 4px;          /* default — sharp, never pillowy (2–6px)       */
+  --aud-radius-lg: 6px;
+  --aud-hairline: 1px;        /* rules do the structural work                 */
+  --aud-space-1: 4px;
+  --aud-space-2: 8px;
+  --aud-space-3: 12px;
+  --aud-space-4: 16px;
+  --aud-space-6: 24px;
+  --aud-space-8: 32px;
+  --aud-space-12: 48px;
+  --aud-space-16: 64px;
+}
+
+/* --- Dark neutrals ---------------------------------------------------------
+   Canonical from the brief: Dark Ground #17160F, text near-white #F2F0EB,
+   accents UNCHANGED. The surface / mid / rule values below are *derived* to
+   complete the dark theme in the same warm register — adjust here if the
+   brief is ever extended with official dark neutrals.
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --aud-ground: #17160F;   /* canonical                                     */
+    --aud-ink: #F2F0EB;      /* canonical near-white                          */
+    --aud-surface: #211F17;  /* derived — raised warm near-black              */
+    --aud-mid: #8E8B7F;      /* derived — warm muted grey, legible on dark    */
+    --aud-rule: #2E2C22;     /* derived — low-contrast warm hairline          */
+  }
+}
+
+[data-theme='dark'] {
+  --aud-ground: #17160F;
+  --aud-ink: #F2F0EB;
+  --aud-surface: #211F17;
+  --aud-mid: #8E8B7F;
+  --aud-rule: #2E2C22;
+}
+
+/* Hard light override (wins over system dark). */
+[data-theme='light'] {
+  --aud-ground: #F2F0EB;
+  --aud-ink: #14130F;
+  --aud-surface: #FAFAF8;
+  --aud-mid: #6B6960;
+  --aud-rule: #D8D4CC;
+}

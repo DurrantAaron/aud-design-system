@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuD — B & C in Family Colours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@300;400;600;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --off-white: #F2F0EB;
+    --warm-white: #FAFAF8;
+    --ink: #14130F;
+    --mid: #6B6960;
+    --rule: #D8D4CC;
+    --dark-ground: #17160F;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    padding-bottom: 60px;
+  }
+  .header {
+    padding: 48px 40px 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .header-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: var(--mid);
+    text-transform: uppercase; display: block; margin-bottom: 4px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .header-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--mid); margin-top: 12px; line-height: 1.5; max-width: 620px;
+  }
+
+  .concept {
+    padding: 48px 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 32px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background: var(--rule); }
+
+  .row {
+    display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-end;
+  }
+  .unit { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .unit-name {
+    font-family: 'Share Tech Mono', monospace; font-size: 8px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid);
+  }
+
+  /* ── CONCEPT B — PRECISION INSTRUMENT ── */
+  .b-wrap { display: inline-flex; flex-direction: column; align-items: flex-start; }
+  .b-mark {
+    font-family: 'Space Mono', monospace; font-size: 52px; font-weight: 700;
+    letter-spacing: -0.04em; line-height: 1; color: var(--ink);
+  }
+  .b-mark .hl { color: var(--accent); }
+  .b-rule { display:block; width: 100%; height: 3px; background: var(--accent); margin-top: 5px; }
+
+  /* ── CONCEPT C — CLASSIFIED ── */
+  .c-mark { position: relative; display: inline-block; }
+  .c-box {
+    border: 2.5px solid var(--ink); display: inline-flex; align-items: center;
+    justify-content: center; padding: 9px 16px; position: relative;
+  }
+  .c-box::before {
+    content:''; position: absolute; top: 4px; left: 4px; right: -4px; bottom: -4px;
+    border: 1.5px solid var(--accent); z-index: -1;
+  }
+  .c-text {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 900;
+    letter-spacing: 0.08em; line-height: 1; text-transform: uppercase; color: var(--ink);
+  }
+  .c-text .u { font-weight: 300; }
+
+  /* dark grounds */
+  .dark-tile {
+    background: var(--dark-ground); border-radius: 4px; padding: 24px 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .dark-tile .b-mark { color: #F2F0EB; font-size: 32px; }
+  .dark-tile .b-mark .hl { color: var(--accent); }
+  .dark-tile .b-rule { height: 2px; margin-top: 3px; }
+  .dark-tile .c-box { border-color: #F2F0EB; padding: 6px 11px; }
+  .dark-tile .c-box::before { border-color: var(--accent); top:3px;left:3px;right:-3px;bottom:-3px; }
+  .dark-tile .c-text { color: #F2F0EB; font-size: 30px; }
+
+  .grid5 {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+    gap: 28px; margin-top: 8px;
+  }
+  .cell {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 24px; background: var(--warm-white); border: 1px solid var(--rule); border-radius: 4px;
+  }
+  .cell-label {
+    font-family: 'Share Tech Mono', monospace; font-size: 8px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 500;
+  }
+  .b-mark.sm { font-size: 30px; }
+  .b-mark.sm + .b-rule { height: 2px; margin-top: 3px; width: 100%; }
+  .c-text.sm { font-size: 30px; }
+  .c-box.sm { padding: 6px 11px; }
+  .c-box.sm::before { top:3px;left:3px;right:-3px;bottom:-3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-label">AuD Identity / Rev 02-Alt</span>
+  <span class="header-title">Concepts B &amp; C — Family Colours</span>
+  <p class="header-note">A (stencil) stays the master mark. These are B (Precision/mono) and C (Classified/box) re-rendered in the five family accents, light and dark, so you can see the same colour logic on the other two letterforms. Pure comparison — not a switch.</p>
+</div>
+
+<!-- CONCEPT B -->
+<div class="concept">
+  <div class="section-label">Concept B — Precision Instrument · Space Mono + baseline rule</div>
+
+  <div class="row" style="margin-bottom:40px;">
+    <div class="unit" style="--accent:#C8A84B;">
+      <div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div>
+      <span class="unit-name">Brass · Venue Audit</span>
+    </div>
+    <div class="unit" style="--accent:#C26B52;">
+      <div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div>
+      <span class="unit-name">Clay · First Aid</span>
+    </div>
+    <div class="unit" style="--accent:#5E7C93;">
+      <div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div>
+      <span class="unit-name">Steel · Control Log</span>
+    </div>
+    <div class="unit" style="--accent:#7C8A5C;">
+      <div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div>
+      <span class="unit-name">Sage · Ops Dash</span>
+    </div>
+    <div class="unit" style="--accent:#4F8A80;">
+      <div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div>
+      <span class="unit-name">Eucalypt · Cleaning</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="unit" style="--accent:#C8A84B;">
+      <div class="dark-tile"><div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div></div>
+      <span class="unit-name">Brass · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#C26B52;">
+      <div class="dark-tile"><div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div></div>
+      <span class="unit-name">Clay · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#5E7C93;">
+      <div class="dark-tile"><div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div></div>
+      <span class="unit-name">Steel · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#7C8A5C;">
+      <div class="dark-tile"><div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div></div>
+      <span class="unit-name">Sage · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#4F8A80;">
+      <div class="dark-tile"><div class="b-wrap"><span class="b-mark">A<span class="hl">u</span>D</span><span class="b-rule"></span></div></div>
+      <span class="unit-name">Eucalypt · Dark</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONCEPT C -->
+<div class="concept">
+  <div class="section-label">Concept C — Classified · Barlow Heavy + offset box</div>
+
+  <div class="row" style="margin-bottom:40px;">
+    <div class="unit" style="--accent:#C8A84B;">
+      <div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div>
+      <span class="unit-name">Brass · Venue Audit</span>
+    </div>
+    <div class="unit" style="--accent:#C26B52;">
+      <div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div>
+      <span class="unit-name">Clay · First Aid</span>
+    </div>
+    <div class="unit" style="--accent:#5E7C93;">
+      <div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div>
+      <span class="unit-name">Steel · Control Log</span>
+    </div>
+    <div class="unit" style="--accent:#7C8A5C;">
+      <div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div>
+      <span class="unit-name">Sage · Ops Dash</span>
+    </div>
+    <div class="unit" style="--accent:#4F8A80;">
+      <div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div>
+      <span class="unit-name">Eucalypt · Cleaning</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="unit" style="--accent:#C8A84B;">
+      <div class="dark-tile"><div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div></div>
+      <span class="unit-name">Brass · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#C26B52;">
+      <div class="dark-tile"><div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div></div>
+      <span class="unit-name">Clay · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#5E7C93;">
+      <div class="dark-tile"><div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div></div>
+      <span class="unit-name">Steel · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#7C8A5C;">
+      <div class="dark-tile"><div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div></div>
+      <span class="unit-name">Sage · Dark</span>
+    </div>
+    <div class="unit" style="--accent:#4F8A80;">
+      <div class="dark-tile"><div class="c-mark"><div class="c-box"><span class="c-text">A<span class="u">u</span>D</span></div></div></div>
+      <span class="unit-name">Eucalypt · Dark</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

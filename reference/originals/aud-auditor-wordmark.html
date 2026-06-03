@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuD — AUDITOR Wordmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --off-white: #F2F0EB;
+    --warm-white: #FAFAF8;
+    --ink: #14130F;
+    --mid: #6B6960;
+    --rule: #D8D4CC;
+    --dark-ground: #17160F;
+    --brass: #C8A84B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--off-white); color: var(--ink); font-family: 'DM Mono', monospace; padding-bottom: 60px; }
+
+  .header { padding: 48px 40px 24px; border-bottom: 1px solid var(--rule); }
+  .header-label { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--mid); text-transform:uppercase; display:block; margin-bottom:4px; }
+  .header-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; }
+  .header-note { font-family:'DM Mono',monospace; font-size:11px; color:var(--mid); margin-top:12px; line-height:1.5; max-width:620px; }
+
+  .block { padding: 48px 40px; border-bottom: 1px solid var(--rule); }
+  .section-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--mid); margin-bottom:32px; display:flex; align-items:center; gap:12px; }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--rule); }
+
+  /* AUDITOR wordmark */
+  .wordmark {
+    font-family:'Bebas Neue',sans-serif; line-height:1; letter-spacing:0.04em; color:var(--ink);
+  }
+  .wordmark .hl { color: var(--brass); }
+  .wordmark.huge { font-size: 96px; }
+  .wordmark.big  { font-size: 56px; }
+
+  /* AuD mark for reference */
+  .mark { font-family:'Bebas Neue',sans-serif; line-height:1; letter-spacing:-0.02em; }
+  .mark .A, .mark .D { color: var(--ink); }
+  .mark .u { color: var(--brass); }
+
+  /* ── LOGIN / SPLASH CONTEXT ── */
+  .splash-row { display:flex; gap:24px; flex-wrap:wrap; }
+  .splash {
+    flex:1; min-width:300px; border-radius:6px; overflow:hidden;
+    border:1px solid var(--rule);
+  }
+  .splash-screen {
+    aspect-ratio: 9/14; max-height: 460px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:0; position:relative; padding:40px;
+  }
+  .splash.light .splash-screen { background: var(--warm-white); }
+  .splash.dark  .splash-screen { background: var(--dark-ground); }
+  .splash.dark .wordmark { color:#F2F0EB; }
+  .splash.dark .wordmark .hl { color: var(--brass); }
+
+  .splash-org {
+    font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:300;
+    letter-spacing:0.35em; text-transform:uppercase; color:var(--mid); margin-bottom:auto;
+    padding-top:8px;
+  }
+  .splash-wm { margin: auto 0; text-align:center; }
+  .splash-wm .wordmark.big { font-size: clamp(38px, 9vw, 56px); }
+  .splash-sub {
+    font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:0.3em;
+    text-transform:uppercase; color:var(--mid); margin-top:10px;
+  }
+  .splash-foot {
+    margin-top:auto; display:flex; align-items:center; gap:5px; padding-bottom:4px;
+  }
+  .splash-foot-text { font-family:'Share Tech Mono',monospace; font-size:7px; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); }
+  .splash-foot .mark { font-size:11px; }
+  .splash.dark .splash-foot .mark .A, .splash.dark .splash-foot .mark .D { color:#F2F0EB; }
+
+  .caption { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--mid); text-align:center; padding:10px; background:var(--off-white); }
+
+  /* ── READABILITY TEST ── */
+  .compare { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:6px; overflow:hidden; }
+  .compare-cell { background:var(--warm-white); padding:36px 28px; display:flex; flex-direction:column; gap:16px; }
+  .compare-cell .wordmark { font-size: clamp(34px, 6vw, 52px); }
+  .compare-verdict { font-family:'DM Mono',monospace; font-size:11px; line-height:1.55; color:var(--ink); }
+  .compare-verdict strong { color:var(--brass); }
+  .compare-tag { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); }
+
+  /* meaning callouts */
+  .meaning { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px; margin-top:8px; }
+  .meaning-item { padding:20px; background:var(--warm-white); border:1px solid var(--rule); border-radius:4px; }
+  .meaning-key { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--brass); line-height:1; }
+  .meaning-label { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin:8px 0 4px; }
+  .meaning-desc { font-family:'DM Mono',monospace; font-size:11px; color:var(--mid); line-height:1.5; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-label">AuD Identity / Rev 03 — Wordmark</span>
+  <span class="header-title">AUDITOR — The “you &amp; i” layer</span>
+  <p class="header-note">A single deliberate easter egg, not a branding rule. The <strong>U</strong> and <strong>I</strong> in AUDITOR carry the brass accent — reading as “you &amp; i” (auditor ↔ venue, maker ↔ user) and “U/I”. Lives in ONE place (login / splash), never in running UI. The AuD mark stays the everyday brand.</p>
+</div>
+
+<!-- HERO WORDMARK -->
+<div class="block">
+  <div class="section-label">The Wordmark — U + I in Brass</div>
+  <div class="wordmark huge">A<span class="hl">U</span>D<span class="hl">I</span>TOR</div>
+</div>
+
+<!-- MEANING -->
+<div class="block">
+  <div class="section-label">What it carries</div>
+  <div class="meaning">
+    <div class="meaning-item">
+      <div class="meaning-key">U + I</div>
+      <div class="meaning-label">You &amp; I</div>
+      <div class="meaning-desc">Auditor and venue. Maker and user. The relationship the tool sits between.</div>
+    </div>
+    <div class="meaning-item">
+      <div class="meaning-key">UI</div>
+      <div class="meaning-label">User Interface</div>
+      <div class="meaning-desc">The craft layer — these are built to be used, not endured.</div>
+    </div>
+    <div class="meaning-item">
+      <div class="meaning-key">AuD</div>
+      <div class="meaning-label">The mark within</div>
+      <div class="meaning-desc">A·u·D still sit at the front of the word — the wordmark contains the lettermark.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN CONTEXT -->
+<div class="block">
+  <div class="section-label">In context — login / splash (its one home)</div>
+  <div class="splash-row">
+    <div class="splash light">
+      <div class="splash-screen">
+        <div class="splash-org">Acme · Acme Precinct</div>
+        <div class="splash-wm">
+          <div class="wordmark big">A<span class="hl">U</span>D<span class="hl">I</span>TOR</div>
+          <div class="splash-sub">Venue Audit</div>
+        </div>
+        <div class="splash-foot">
+          <span class="splash-foot-text">Powered by</span>
+          <span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span>
+        </div>
+      </div>
+      <div class="caption">Light</div>
+    </div>
+    <div class="splash dark">
+      <div class="splash-screen">
+        <div class="splash-org">Acme · Acme Precinct</div>
+        <div class="splash-wm">
+          <div class="wordmark big">A<span class="hl">U</span>D<span class="hl">I</span>TOR</div>
+          <div class="splash-sub">Venue Audit</div>
+        </div>
+        <div class="splash-foot">
+          <span class="splash-foot-text">Powered by</span>
+          <span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span>
+        </div>
+      </div>
+      <div class="caption">Dark</div>
+    </div>
+  </div>
+</div>
+
+<!-- READABILITY TEST -->
+<div class="block">
+  <div class="section-label">The honest test — does U+I read?</div>
+  <div class="compare">
+    <div class="compare-cell">
+      <span class="compare-tag">Option · U + I (your call)</span>
+      <div class="wordmark">A<span class="hl">U</span>D<span class="hl">I</span>TOR</div>
+      <div class="compare-verdict">The D sits between U and I, so they don’t visually fuse into “UI”. The meaning is a <strong>told story</strong>, not self-evident. Perfect as a private signature; does no communicating on its own.</div>
+    </div>
+    <div class="compare-cell">
+      <span class="compare-tag">Alt · AuD reinforced</span>
+      <div class="wordmark">A<span class="hl">U</span><span class="hl">D</span>ITOR</div>
+      <div class="compare-verdict">Highlighting A·u·D instead would tie straight back to the mark — more disciplined, but loses the “you &amp; i” idea entirely. Shown only so you can see the trade.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

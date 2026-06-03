@@ -1,0 +1,260 @@
+/* Showcase styling — deliberately built ONLY from the AuD token variables
+   (--aud-*), so the page itself is a proof that the token layer works. Flip the
+   theme and every neutral re-resolves with no extra CSS. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--aud-ground);
+  color: var(--aud-ink);
+  font-family: var(--aud-font-body);
+  line-height: var(--aud-leading-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.page { max-width: 1080px; margin: 0 auto; }
+
+/* ── field markings (mono uppercase) ───────────────────────────── */
+.field {
+  font-family: var(--aud-font-mono);
+  font-size: var(--aud-text-xs);
+  letter-spacing: var(--aud-tracking-label);
+  text-transform: uppercase;
+  color: var(--aud-mid);
+}
+.field-wide { letter-spacing: var(--aud-tracking-wide); }
+
+/* ── header ────────────────────────────────────────────────────── */
+.masthead {
+  padding: 48px 40px 28px;
+  border-bottom: var(--aud-hairline) solid var(--aud-rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+.masthead h1 {
+  font-family: var(--aud-font-heading);
+  font-weight: 600;
+  font-size: var(--aud-text-xl);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.masthead .lede {
+  font-size: var(--aud-text-sm);
+  color: var(--aud-mid);
+  max-width: 520px;
+  margin-top: 10px;
+}
+.masthead-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.theme-toggle {
+  font-family: var(--aud-font-mono);
+  font-size: var(--aud-text-xs);
+  letter-spacing: var(--aud-tracking-label);
+  text-transform: uppercase;
+  color: var(--aud-ink);
+  background: var(--aud-surface);
+  border: var(--aud-hairline) solid var(--aud-rule);
+  border-radius: var(--aud-radius);
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--aud-accent); }
+
+/* ── sections ──────────────────────────────────────────────────── */
+.section { padding: 48px 40px; border-bottom: var(--aud-hairline) solid var(--aud-rule); }
+.section-label {
+  font-family: var(--aud-font-mono);
+  font-size: 9px;
+  letter-spacing: var(--aud-tracking-wide);
+  text-transform: uppercase;
+  color: var(--aud-mid);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after { content: ''; flex: 1; height: var(--aud-hairline); background: var(--aud-rule); }
+
+/* ── the mark ──────────────────────────────────────────────────── */
+.mark-row { display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap; }
+.mark-panel {
+  flex: 1;
+  min-width: 280px;
+  border: var(--aud-hairline) solid var(--aud-rule);
+  border-radius: var(--aud-radius-lg);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.mark-panel.on-light { background: var(--aud-surface); }
+.mark-panel.on-dark { background: #17160F; color: #F2F0EB; }
+.mark-panel.on-dark .field { color: #8E8B7F; }
+.mark-hero { font-size: 96px; }
+.mark-scale { display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap; }
+
+/* ── the family ────────────────────────────────────────────────── */
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--aud-rule);
+  border: var(--aud-hairline) solid var(--aud-rule);
+  border-radius: var(--aud-radius-lg);
+  overflow: hidden;
+}
+.card {
+  background: var(--aud-surface);
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.card-app {
+  font-family: var(--aud-font-heading);
+  font-weight: 600;
+  font-size: var(--aud-text-lg);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 2px;
+}
+.card-accent { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.chip {
+  width: 40px; height: 40px;
+  border-radius: var(--aud-radius-sm);
+  background: var(--aud-accent);
+  border: var(--aud-hairline) solid rgba(0,0,0,0.08);
+}
+.card-accent-name {
+  font-family: var(--aud-font-heading);
+  font-weight: 600;
+  font-size: var(--aud-text-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aud-accent);
+}
+.card-hero { font-size: 60px; }
+.card-demos { display: flex; gap: 8px; }
+.demo {
+  flex: 1;
+  border-radius: var(--aud-radius);
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.demo.light { background: var(--aud-ground); border: var(--aud-hairline) solid var(--aud-rule); }
+.demo.dark { background: #17160F; color: #F2F0EB; }
+.demo-bar { height: 4px; border-radius: 2px; background: var(--aud-accent); width: 40%; }
+.demo-line { height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); width: 80%; }
+.demo.dark .demo-line { background: rgba(255,255,255,0.1); }
+.demo-line.short { width: 55%; }
+.demo-foot { margin-top: 2px; }
+
+/* ── wordmark splash ───────────────────────────────────────────── */
+.splash-row { display: flex; gap: 24px; flex-wrap: wrap; }
+.splash {
+  flex: 1; min-width: 300px;
+  border: var(--aud-hairline) solid var(--aud-rule);
+  border-radius: var(--aud-radius-lg);
+  overflow: hidden;
+}
+.splash-screen {
+  aspect-ratio: 9 / 13;
+  max-height: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+.splash.light .splash-screen { background: var(--aud-surface); }
+.splash.dark .splash-screen { background: #17160F; color: #F2F0EB; }
+.splash-client {
+  position: absolute; top: 28px;
+  font-family: var(--aud-font-heading);
+  font-weight: 300;
+  font-size: var(--aud-text-sm);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--aud-mid);
+}
+.splash.dark .splash-client { color: #8E8B7F; }
+.splash-wm { text-align: center; }
+.splash-sub {
+  font-family: var(--aud-font-mono);
+  font-size: 8px;
+  letter-spacing: var(--aud-tracking-wide);
+  text-transform: uppercase;
+  color: var(--aud-mid);
+  margin-top: 12px;
+}
+.splash-foot { position: absolute; bottom: 28px; }
+.splash-cap {
+  font-family: var(--aud-font-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--aud-mid);
+  text-align: center;
+  padding: 10px;
+  background: var(--aud-ground);
+  border-top: var(--aud-hairline) solid var(--aud-rule);
+}
+
+/* ── colour ────────────────────────────────────────────────────── */
+.swatch-set { display: flex; gap: 12px; flex-wrap: wrap; }
+.swatch { display: flex; flex-direction: column; gap: 6px; }
+.swatch-chip {
+  width: 72px; height: 52px;
+  border-radius: var(--aud-radius-sm);
+  border: var(--aud-hairline) solid rgba(0,0,0,0.08);
+}
+.swatch-meta { font-family: var(--aud-font-mono); font-size: 8px; color: var(--aud-mid); line-height: 1.5; }
+.swatch-meta strong { color: var(--aud-ink); font-weight: 500; display: block; }
+.subhead {
+  font-family: var(--aud-font-mono);
+  font-size: var(--aud-text-xs);
+  letter-spacing: var(--aud-tracking-label);
+  text-transform: uppercase;
+  color: var(--aud-mid);
+  margin: 28px 0 14px;
+}
+
+/* ── type ──────────────────────────────────────────────────────── */
+.type-row { padding: 18px 0; border-top: var(--aud-hairline) solid var(--aud-rule); }
+.type-row:first-of-type { border-top: none; }
+.type-tag {
+  font-family: var(--aud-font-mono);
+  font-size: 8px;
+  letter-spacing: var(--aud-tracking-label);
+  text-transform: uppercase;
+  color: var(--aud-mid);
+  margin-bottom: 8px;
+}
+.type-display { font-family: var(--aud-font-display); font-size: 56px; line-height: 1; }
+.type-heading { font-family: var(--aud-font-heading); font-weight: 600; font-size: 28px; letter-spacing: 0.04em; text-transform: uppercase; }
+.type-body { font-family: var(--aud-font-body); font-size: var(--aud-text-base); max-width: 620px; }
+.type-mono { font-family: var(--aud-font-mono); font-size: var(--aud-text-base); }
+
+/* ── footer ────────────────────────────────────────────────────── */
+.foot {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .masthead, .section, .foot { padding-left: 24px; padding-right: 24px; }
+  .mark-hero { font-size: 64px; }
+}

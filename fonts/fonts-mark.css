@@ -1,0 +1,28 @@
+/* ==========================================================================
+   AuD mark fonts only — the lean import for apps that use just the maker's
+   mark (<AudMark> / <PoweredByAud>) and not the full brand type system.
+
+     import '@aud/brand/fonts-mark.css'   // ~27KB: Bebas + Share Tech Mono
+
+   For the full type system (Barlow / Barlow Condensed too) use fonts.css.
+   Self-hosted (SIL OFL), never CDN-loaded — the mark renders offline.
+   ========================================================================== */
+
+/* AuD-Bebas — the dedicated, scoped family for the mark. Named separately
+   from "Bebas Neue" so an app's global font rules can never repoint it. */
+@font-face {
+  font-family: 'AuD-Bebas';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./bebas-neue-400.woff2') format('woff2');
+}
+
+/* Share Tech Mono — the instrument-panel field marking ("POWERED BY"). */
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./share-tech-mono-400.woff2') format('woff2');
+}

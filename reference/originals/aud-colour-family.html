@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuD — Colour Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --off-white: #F2F0EB;
+    --warm-white: #FAFAF8;
+    --ink: #14130F;
+    --mid: #6B6960;
+    --rule: #D8D4CC;
+    --dark-ground: #17160F;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    padding-bottom: 60px;
+  }
+
+  .header {
+    padding: 48px 40px 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .header-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: var(--mid);
+    text-transform: uppercase; display: block; margin-bottom: 4px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .header-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--mid); margin-top: 12px; line-height: 1.5;
+    max-width: 620px;
+  }
+
+  /* ── THE MARK ── */
+  .mark {
+    display: inline-flex; align-items: baseline;
+    font-family: 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -0.02em;
+  }
+  .mark .A, .mark .D { color: var(--ink); }
+  .mark .u { color: var(--accent); }
+
+  /* App card grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .card {
+    background: var(--off-white);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .app-codename {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--mid);
+  }
+  .app-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--ink); line-height: 1; margin-top: 2px;
+  }
+  .hero-mark .mark { font-size: 64px; }
+
+  /* swatch chip */
+  .accent-chip {
+    width: 40px; height: 40px; border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: var(--accent);
+  }
+  .accent-code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; color: var(--mid); margin-top: 6px; text-align: right;
+  }
+  .accent-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); text-align: right;
+  }
+
+  /* light/dark mini demos */
+  .demos { display: flex; gap: 8px; }
+  .demo {
+    flex: 1; border-radius: 4px; padding: 14px 14px 12px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .demo.light { background: var(--warm-white); border: 1px solid var(--rule); }
+  .demo.dark  { background: var(--dark-ground); }
+  .demo-bar {
+    height: 4px; border-radius: 2px; background: var(--accent); width: 40%;
+  }
+  .demo-line {
+    height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); width: 80%;
+  }
+  .demo.dark .demo-line { background: rgba(255,255,255,0.1); }
+  .demo-line.short { width: 55%; }
+  .demo-foot {
+    display: flex; align-items: center; gap: 4px; margin-top: 2px;
+  }
+  .demo-foot-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 6px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+  }
+  .demo.dark .demo-foot-text { color: #8A887E; }
+  .demo .mark { font-size: 9px; }
+  .demo.dark .mark .A, .demo.dark .mark .D { color: #F2F0EB; }
+
+  /* ── FAMILY STRIP ── */
+  .family {
+    padding: 48px 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background: var(--rule); }
+  .strip { display: flex; gap: 0; border-radius: 4px; overflow: hidden; }
+  .strip-cell {
+    flex: 1; height: 88px; display: flex; align-items: flex-end;
+    padding: 10px; position: relative;
+  }
+  .strip-cell span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.05em; color: rgba(255,255,255,0.85);
+  }
+
+  /* ── SYSTEM PALETTE ── */
+  .system {
+    padding: 48px 40px;
+  }
+  .neutral-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .neutral {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .neutral-sw {
+    width: 64px; height: 48px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.08);
+  }
+  .neutral-meta {
+    font-family: 'Share Tech Mono', monospace; font-size: 8px; color: var(--mid);
+    line-height: 1.4;
+  }
+  .neutral-meta strong { color: var(--ink); font-weight: 500; display: block; }
+
+  .principle {
+    margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; max-width: 900px;
+  }
+  .principle-item-label {
+    font-family: 'Share Tech Mono', monospace; font-size: 8px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 4px;
+  }
+  .principle-item-value {
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink); line-height: 1.55;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-label">AuD Identity / Rev 02</span>
+  <span class="header-title">One Mark · One Style · Five Signals</span>
+  <p class="header-note">Concept A stencil locked. Each app carries the same AuD mark — only the accent (the lowercase “u”, rule lines, active states) shifts. All accents are desaturated and warm so they read as one family on the shared off-white ground. The gold is the anchor; the others are tuned to sit beside it.</p>
+</div>
+
+<!-- APP CARDS -->
+<div class="grid">
+
+  <!-- GOM VENUE AUDIT -->
+  <div class="card" style="--accent:#C8A84B;">
+    <div class="card-top">
+      <div>
+        <div class="app-codename">App 01</div>
+        <div class="app-name">Venue Audit</div>
+      </div>
+      <div>
+        <div class="accent-chip"></div>
+        <div class="accent-name">Brass</div>
+        <div class="accent-code">#C8A84B</div>
+      </div>
+    </div>
+    <div class="hero-mark"><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+    <div class="demos">
+      <div class="demo light">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+      <div class="demo dark">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIRST AID REGISTER -->
+  <div class="card" style="--accent:#C26B52;">
+    <div class="card-top">
+      <div>
+        <div class="app-codename">App 02</div>
+        <div class="app-name">First Aid Register</div>
+      </div>
+      <div>
+        <div class="accent-chip"></div>
+        <div class="accent-name">Clay</div>
+        <div class="accent-code">#C26B52</div>
+      </div>
+    </div>
+    <div class="hero-mark"><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+    <div class="demos">
+      <div class="demo light">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+      <div class="demo dark">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROL LOG -->
+  <div class="card" style="--accent:#5E7C93;">
+    <div class="card-top">
+      <div>
+        <div class="app-codename">App 03</div>
+        <div class="app-name">Control Log</div>
+      </div>
+      <div>
+        <div class="accent-chip"></div>
+        <div class="accent-name">Steel</div>
+        <div class="accent-code">#5E7C93</div>
+      </div>
+    </div>
+    <div class="hero-mark"><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+    <div class="demos">
+      <div class="demo light">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+      <div class="demo dark">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPS DASHBOARD -->
+  <div class="card" style="--accent:#7C8A5C;">
+    <div class="card-top">
+      <div>
+        <div class="app-codename">App 04</div>
+        <div class="app-name">Ops Dashboard</div>
+      </div>
+      <div>
+        <div class="accent-chip"></div>
+        <div class="accent-name">Sage</div>
+        <div class="accent-code">#7C8A5C</div>
+      </div>
+    </div>
+    <div class="hero-mark"><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+    <div class="demos">
+      <div class="demo light">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+      <div class="demo dark">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEANING AUDIT -->
+  <div class="card" style="--accent:#4F8A80;">
+    <div class="card-top">
+      <div>
+        <div class="app-codename">App 05</div>
+        <div class="app-name">Cleaning Audit</div>
+      </div>
+      <div>
+        <div class="accent-chip"></div>
+        <div class="accent-name">Eucalypt</div>
+        <div class="accent-code">#4F8A80</div>
+      </div>
+    </div>
+    <div class="hero-mark"><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+    <div class="demos">
+      <div class="demo light">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+      <div class="demo dark">
+        <div class="demo-bar"></div><div class="demo-line"></div><div class="demo-line short"></div>
+        <div class="demo-foot"><span class="demo-foot-text">Powered by</span><span class="mark"><span class="A">A</span><span class="u">u</span><span class="D">D</span></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FAMILY STRIP -->
+<div class="family">
+  <div class="section-label">The Family — Side by Side</div>
+  <div class="strip">
+    <div class="strip-cell" style="background:#C8A84B;"><span>BRASS · 01</span></div>
+    <div class="strip-cell" style="background:#C26B52;"><span>CLAY · 02</span></div>
+    <div class="strip-cell" style="background:#5E7C93;"><span>STEEL · 03</span></div>
+    <div class="strip-cell" style="background:#7C8A5C;"><span>SAGE · 04</span></div>
+    <div class="strip-cell" style="background:#4F8A80;"><span>EUCALYPT · 05</span></div>
+  </div>
+</div>
+
+<!-- SYSTEM PALETTE -->
+<div class="system">
+  <div class="section-label">Shared Neutrals — The Constant</div>
+  <div class="neutral-row">
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#F2F0EB;"></div>
+      <div class="neutral-meta"><strong>Ground</strong>#F2F0EB</div>
+    </div>
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#FAFAF8;"></div>
+      <div class="neutral-meta"><strong>Surface</strong>#FAFAF8</div>
+    </div>
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#14130F;"></div>
+      <div class="neutral-meta"><strong>Ink</strong>#14130F</div>
+    </div>
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#6B6960;"></div>
+      <div class="neutral-meta"><strong>Mid</strong>#6B6960</div>
+    </div>
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#D8D4CC;"></div>
+      <div class="neutral-meta"><strong>Rule</strong>#D8D4CC</div>
+    </div>
+    <div class="neutral">
+      <div class="neutral-sw" style="background:#17160F;"></div>
+      <div class="neutral-meta"><strong>Dark Gnd</strong>#17160F</div>
+    </div>
+  </div>
+
+  <div class="principle">
+    <div>
+      <div class="principle-item-label">The rule</div>
+      <div class="principle-item-value">Neutrals never change. Ground, ink, type and layout are identical across every app — that’s what makes them read as one suite. Only the accent moves.</div>
+    </div>
+    <div>
+      <div class="principle-item-label">Why warm</div>
+      <div class="principle-item-value">The off-white ground (#F2F0EB) is the same warm paper Anthropic uses. Every accent is pulled toward that warmth and desaturated, so nothing screams or clashes against it.</div>
+    </div>
+    <div>
+      <div class="principle-item-label">Colour logic</div>
+      <div class="principle-item-value">Brass = the anchor / flagship. Clay = care &amp; first aid (warm red without the alarm). Steel = night-shift control. Sage = operations overview. Eucalypt = cleaning, the most Australian note in the set.</div>
+    </div>
+    <div>
+      <div class="principle-item-label">Accent discipline</div>
+      <div class="principle-item-value">Accent is for the “u”, active states, key rules and the one thing that matters per screen — never large fills. Restraint is the military-grade signal.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

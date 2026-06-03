@@ -1,0 +1,91 @@
+/* ==========================================================================
+   AuD brand fonts — self-hosted (SIL OFL). Never CDN-loaded, so the mark
+   survives offline. Import once per app:  import '@aud/brand/fonts.css'
+   ==========================================================================
+
+   AuD-Bebas
+     The dedicated, scoped family for the <AudMark> / <AuditorWordmark>.
+     Named separately from "Bebas Neue" on purpose: the mark must NEVER be
+     repointed by an app's global font rules. The components ask for this
+     family by name; nothing else does.
+   ========================================================================== */
+@font-face {
+  font-family: 'AuD-Bebas';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./bebas-neue-400.woff2') format('woff2');
+}
+
+/* Bebas Neue — display / big numerics (the brand's display face).
+   Same file as AuD-Bebas, exposed under its real name for app display use. */
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./bebas-neue-400.woff2') format('woff2');
+}
+
+/* Barlow Condensed — UI headings, screen titles. Weights 300 / 400 / 600. */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./barlow-condensed-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./barlow-condensed-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./barlow-condensed-600.woff2') format('woff2');
+}
+
+/* Barlow — body / running text. Weights 400 / 500 / 600 / 700. */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./barlow-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./barlow-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./barlow-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./barlow-700.woff2') format('woff2');
+}
+
+/* Share Tech Mono — data / technical labels, codes, IDs, timestamps, and the
+   instrument-panel field markings (APP 01, REV 03, POWERED BY). One weight. */
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./share-tech-mono-400.woff2') format('woff2');
+}
