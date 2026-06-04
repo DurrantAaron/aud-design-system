@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties } from 'react'
 import {
   AudMark,
   PoweredByAud,
   AuditorWordmark,
   SplashScreen,
+  AppMark,
   accents,
   neutrals,
   fonts,
@@ -20,6 +21,15 @@ const FAMILY = [
   { app: 'App 03', name: 'Steel', hex: accents.steel, code: 'APP 03' },
   { app: 'App 04', name: 'Sage', hex: accents.sage, code: 'APP 04' },
   { app: 'App 05', name: 'Eucalypt', hex: accents.eucalypt, code: 'APP 05' },
+]
+
+/** One app each: same tile, the accent + glyph are the only things that move. */
+const APPS = [
+  { name: 'Venue Audit', hex: accents.brass, Glyph: GlyphClipboard, note: 'brass' },
+  { name: 'First Aid', hex: accents.clay, Glyph: GlyphCross, note: 'clay' },
+  { name: 'Cleaning Audit', hex: accents.eucalypt, Glyph: GlyphSparkle, note: 'eucalypt' },
+  { name: 'Precinct Ops', hex: accents.sage, Glyph: GlyphGauge, note: 'sage' },
+  { name: 'Compliance', hex: accents.steel, Glyph: GlyphShield, note: 'steel' },
 ]
 
 const NEUTRALS = [
@@ -123,6 +133,64 @@ export function App() {
         </div>
       </section>
 
+      {/* ── the app mark ─────────────────────────────────────── */}
+      <section className="section">
+        <div className="section-label">The App Mark — one tile, five glyphs</div>
+        <p className="lede" style={{ marginBottom: 20 }}>
+          Identical construction every time — same size, radius and glyph scale. Only the
+          accent and the glyph move, so each app stays recognisable while the suite reads as
+          one family. Each app supplies its own icon; the tile is system-owned.
+        </p>
+        {(['light', 'dark'] as const).map((mode) => (
+          <div
+            key={mode}
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 28,
+              padding: '24px 20px',
+              marginBottom: 12,
+              borderRadius: 12,
+              background: neutrals[mode].ground,
+              border: `1px solid ${neutrals[mode].rule}`,
+            }}
+          >
+            {APPS.map(({ name, hex, Glyph, note }) => (
+              <div
+                key={name}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: 92 }}
+              >
+                <AppMark accent={hex} theme={mode} label={name}>
+                  <Glyph />
+                </AppMark>
+                <div
+                  style={{
+                    fontFamily: fonts.heading,
+                    fontWeight: 600,
+                    fontSize: 13,
+                    textAlign: 'center',
+                    color: neutrals[mode].ink,
+                  }}
+                >
+                  {name}
+                </div>
+                <span
+                  style={{
+                    fontFamily: fonts.mono,
+                    fontSize: 10,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.15em',
+                    color: neutrals[mode].mid,
+                  }}
+                >
+                  {note}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </section>
+
       {/* ── AUDITOR wordmark ─────────────────────────────────── */}
       <section className="section">
         <div className="section-label">The AUDITOR Wordmark — login / splash, once per app</div>
@@ -162,7 +230,7 @@ export function App() {
                 style={{ minHeight: 460 }}
                 theme="dark"
                 accent={accents.steel}
-                mark={<DemoTile hex={accents.steel}>IVY</DemoTile>}
+                mark={<AppMark accent={accents.steel}><GlyphShield /></AppMark>}
                 title="Precinct Compliance"
                 subtitle="AusComply checklist analytics · IVY Precinct"
                 primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
@@ -177,7 +245,7 @@ export function App() {
                 style={{ minHeight: 460 }}
                 theme="light"
                 accent={accents.brass}
-                mark={<DemoTile hex={accents.brass}>A01</DemoTile>}
+                mark={<AppMark accent={accents.brass}><GlyphClipboard /></AppMark>}
                 title="Field Audit"
                 subtitle="Quarterly venue compliance"
                 primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
@@ -244,26 +312,50 @@ export function App() {
   )
 }
 
-function DemoTile({ children, hex }: { children: ReactNode; hex: string }) {
+/* ── per-app glyphs ──────────────────────────────────────────
+   Stand-ins for each app's own icon (apps pass their own Lucide icon as the
+   AppMark child). Drawn with currentColor; AppMark sizes the <svg>. */
+function GlyphClipboard() {
   return (
-    <div
-      style={{
-        width: 56,
-        height: 56,
-        borderRadius: 16,
-        background: hex,
-        color: neutrals.dark.ground,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: fonts.heading,
-        fontWeight: 700,
-        fontSize: 18,
-        letterSpacing: '0.02em',
-      }}
-    >
-      {children}
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <path d="m9 14 2 2 4-4" />
+    </svg>
+  )
+}
+
+function GlyphCross() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  )
+}
+
+function GlyphSparkle() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3c.5 3.5 1.5 4.5 5 5-3.5.5-4.5 1.5-5 5-.5-3.5-1.5-4.5-5-5 3.5-.5 4.5-1.5 5-5z" />
+    </svg>
+  )
+}
+
+function GlyphGauge() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 13.5 18 8" />
+      <path d="M3.5 18a9 9 0 1 1 17 0" />
+    </svg>
+  )
+}
+
+function GlyphShield() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
   )
 }
 

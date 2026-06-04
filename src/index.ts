@@ -22,6 +22,9 @@ export type { AuditorWordmarkProps } from './components/AuditorWordmark'
 export { SplashScreen } from './components/SplashScreen'
 export type { SplashScreenProps, SplashAction } from './components/SplashScreen'
 
+export { AppMark } from './components/AppMark'
+export type { AppMarkProps } from './components/AppMark'
+
 export {
   accents,
   neutrals,
