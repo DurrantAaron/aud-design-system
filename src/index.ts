@@ -19,6 +19,9 @@ export type { PoweredByAudProps } from './components/PoweredByAud'
 export { AuditorWordmark } from './components/AuditorWordmark'
 export type { AuditorWordmarkProps } from './components/AuditorWordmark'
 
+export { SplashScreen } from './components/SplashScreen'
+export type { SplashScreenProps, SplashAction } from './components/SplashScreen'
+
 export {
   accents,
   neutrals,

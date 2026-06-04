@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import {
   AudMark,
   PoweredByAud,
   AuditorWordmark,
+  SplashScreen,
   accents,
   neutrals,
+  fonts,
 } from '@aud/brand'
 
 /** Set --aud-accent on a container; everything inside (the mark, the badge) follows. */
@@ -150,6 +152,42 @@ export function App() {
         </div>
       </section>
 
+      {/* ── SplashScreen scaffold ────────────────────────────── */}
+      <section className="section">
+        <div className="section-label">The Splash — shared sign-in scaffold</div>
+        <div className="splash-row">
+          <div className="splash dark">
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: `1px solid ${neutrals.dark.rule}` }}>
+              <SplashScreen
+                style={{ minHeight: 460 }}
+                theme="dark"
+                accent={accents.steel}
+                mark={<DemoTile hex={accents.steel}>IVY</DemoTile>}
+                title="Precinct Compliance"
+                subtitle="AusComply checklist analytics · IVY Precinct"
+                primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
+                secondary={{ label: 'Continue with static data' }}
+              />
+            </div>
+            <div className="splash-cap">Dark · steel · primary + secondary + footer</div>
+          </div>
+          <div className="splash light">
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: `1px solid ${neutrals.light.rule}` }}>
+              <SplashScreen
+                style={{ minHeight: 460 }}
+                theme="light"
+                accent={accents.brass}
+                mark={<DemoTile hex={accents.brass}>A01</DemoTile>}
+                title="Field Audit"
+                subtitle="Quarterly venue compliance"
+                primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
+              />
+            </div>
+            <div className="splash-cap">Light · brass · primary only · same component</div>
+          </div>
+        </div>
+      </section>
+
       {/* ── colour ───────────────────────────────────────────── */}
       <section className="section">
         <div className="section-label">Colour — constant neutrals, one moving accent</div>
@@ -203,5 +241,39 @@ export function App() {
         <PoweredByAud />
       </footer>
     </div>
+  )
+}
+
+function DemoTile({ children, hex }: { children: ReactNode; hex: string }) {
+  return (
+    <div
+      style={{
+        width: 56,
+        height: 56,
+        borderRadius: 16,
+        background: hex,
+        color: neutrals.dark.ground,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: fonts.heading,
+        fontWeight: 700,
+        fontSize: 18,
+        letterSpacing: '0.02em',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
+function MsLogo() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 23 23" aria-hidden="true">
+      <rect x="1" y="1" width="10" height="10" fill="#F25022" />
+      <rect x="12" y="1" width="10" height="10" fill="#7FBA00" />
+      <rect x="1" y="12" width="10" height="10" fill="#00A4EF" />
+      <rect x="12" y="12" width="10" height="10" fill="#FFB900" />
+    </svg>
   )
 }
