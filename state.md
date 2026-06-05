@@ -1,22 +1,25 @@
 ---
-# state.md — aud-design-system — 2026-06-06 06:17 AEST
-Active goal: Family model + unified splash is shipped in @aud/brand; next horizon is wiring FamilyProvider into the live apps.
+# state.md — aud-design-system — 2026-06-06 07:20 AEST
+Active goal: Settle the venue-ops suite's cross-app colour/theme direction — the fresh "Wayfinder" proposal vs the adopted @aud/brand family model — then roll the chosen one out.
 Decisions locked:
-- Apps group BY FUNCTION into 4 families: Audits/brass·light, Dashboards/steel·dark, Registers/clay·light, Logs/sage·dark. Eucalypt reserved for a 5th. Grouping axis is settled — don't re-debate (resolves last wrap's Decision 1).
-- @aud/brand is PUBLIC: employer/venue/app names (Merivale, ivy Precinct, Sydney, GOM, AusComply) stay OUT. The repo's de-identified files win over Drive drafts.
-- SplashScreen stays OAuth-first by default; formMode/actionsLast is opt-in for PIN/code apps. theme now follows the enclosing FamilyProvider (defaults dark when none).
-- GOM-specific docs do NOT belong in this public repo — they go with gom-venue-audit.
-- Within a family: sibling splashes (same scheme/scaffold, per-app glyph via AppMark) — identical mode also supported.
+- This session designed a FRESH scheme ("Wayfinder") at Aaron's request — set @aud/brand aside as the *basis* but kept its proven STRUCTURE: constant neutrals + one accent per app + light/dark.
+- One accent per app (colour alone distinguishes apps). Launcher (precinct-ops-dashboard) is a NEUTRAL HUB showing every line accent at once — no accent of its own.
+- This pass is SPEC/DECISIONS ONLY — no app code changes.
+- Wayfinder saved ADDITIVELY under proposals/wayfinder/ — does NOT modify canonical @aud/brand (src/, tokens/, fonts/ untouched), so live apps consuming @aud/brand are unaffected. Lives in open PR #5.
+- Wayfinder per-app map: VA amber #BE8A2E · CL green #3F8B5C · FA coral #C8483E · CO blue #2E6FAE · SE indigo #5A4F9C · GS plum #9E4A80. Type = Space Grotesk + IBM Plex Sans + IBM Plex Mono.
 Open questions:
-- [CONFIRM] Pre-existing leak on main: showcase/src/App.tsx has "AusComply checklist analytics · IVY Precinct" — fix in a separate de-identification PR?
-- [CONFIRM] Move the two GOM files (GOM-Venue-Audit-Quick-Tour.html, aud-mark-gom-audit-spec.md) into the gom-venue-audit repo?
-- Which live app adopts FamilyProvider first? (Venue Audit / First Aid are the obvious candidates.)
+- [CONFIRM] "a revision of something new": current state is ADDITIVE (Wayfinder beside @aud/brand). Alternative = promote it to a v2 that SUPERSEDES @aud/brand (rewrites the canonical tokens 3 live apps pull) — deliberately not done silently. Which does Aaron want?
+- Open levers before any rollout: neutral temperature (cool-fresh vs re-warm), colour confidence (line bars vs strict accent-only), per-app hue swaps (security↔guest, cleaning→teal), final name ("Wayfinder" is a placeholder).
+- Merge PR #5 as-is (version-controls the exploration) or iterate first?
+- [CONFIRM] Pre-existing leak on main: showcase/src/App.tsx has "AusComply checklist analytics · IVY Precinct" — still unfixed; de-identify in a separate PR? (PUBLIC repo)
+- [CONFIRM] Move the two GOM files (GOM-Venue-Audit-Quick-Tour.html, aud-mark-gom-audit-spec.md) into the gom-venue-audit repo? (still open)
 Built/shipped since last update:
-- d1b2ed2 feat(families): add app-family model + FamilyProvider, splash formMode/fieldNote (#3)
-Next session starts with: de-identify the showcase IVY/AusComply leak (separate quick PR), then wire FamilyProvider into the first consuming app.
+- (nothing merged to main this session) — work is in open PR #5, branch proposal/wayfinder: proposals/wayfinder/ (README spec + specimen.html + render), commit 9e2e29c. Additive; canonical @aud/brand untouched.
+Next session starts with: Decide additive-vs-supersede for Wayfinder and lock the open levers, then either merge PR #5 or iterate the proposal.
 Out of scope right now:
-- The GOM quick-tour + gom-audit-spec files (belong with gom-venue-audit, not here).
-- The per-app glyph set (spec lists glyphs; AppMark still takes short-codes/icons — not built).
-- Overwriting the de-identified originals with the Drive drafts.
+- App code changes / per-app rollout (separate session, pilot app first in a worktree).
+- Non-UI projects (auscomply, mempalace, gridfinity) and the parked NTE dashboard.
+- precinct-ops-dashboard has no Tailwind/brand yet; guest-screening-tool isn't a git repo yet — flagged for rollout, not actioned.
+- FamilyProvider rollout into live apps (prior wrap's goal) — parked behind the scheme-direction decision.
 ---
-Previous wrap: b4a886f
+Previous wrap: 2e8a93b
