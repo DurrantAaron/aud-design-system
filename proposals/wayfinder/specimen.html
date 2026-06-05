@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wayfinder — venue ops suite design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#F5F5F3; --surface:#FFFFFF; --ink:#16171A; --mid:#6B6C70; --rule:#E3E3DF;
+    --success:#2E7D46; --warning:#D08A12; --danger:#D33A2C; --info:#2E6FAE;
+    --amber:#BE8A2E; --coral:#C8483E; --green:#3F8B5C; --blue:#2E6FAE; --indigo:#5A4F9C; --plum:#9E4A80;
+    --display:'Space Grotesk',sans-serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ground);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 40px 96px}
+  .code{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--mid)}
+  h1{font-family:var(--display);font-weight:700;font-size:46px;letter-spacing:-.02em;line-height:1.04}
+  h2{font-family:var(--display);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:var(--mid);margin:0 0 22px;
+     padding-bottom:10px;border-bottom:1px solid var(--rule)}
+  section{margin-top:64px}
+  .lede{color:var(--mid);max-width:62ch;margin-top:14px;font-size:15px}
+
+  /* masthead line strip */
+  .strip{display:flex;gap:4px;margin-top:30px}
+  .strip span{height:8px;flex:1;border-radius:2px}
+
+  /* swatch ramps */
+  .ramps{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .ramp{border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--surface)}
+  .ramp .hd{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:12px 16px;border-bottom:1px solid var(--rule);color:var(--mid)}
+  .ramp.dark{background:#1D1F24;border-color:#2A2C32}
+  .ramp.dark .hd{color:#8A8C92;border-color:#2A2C32}
+  .chips{display:flex}
+  .chip{flex:1;height:92px;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px}
+  .chip b{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.06em}
+
+  /* line set */
+  .lines{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .linecard{border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--surface)}
+  .linecard .bar{height:10px}
+  .linecard .inner{padding:16px 18px}
+  .linecard .nm{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .linecard .app{color:var(--mid);font-size:13px;margin-top:2px}
+  .linecard .hex{display:flex;gap:8px;margin-top:14px}
+  .linecard .hex span{font-family:var(--mono);font-size:10.5px;color:var(--mid);display:flex;align-items:center;gap:6px}
+  .dot{width:13px;height:13px;border-radius:3px;display:inline-block}
+
+  /* in-context app cards */
+  .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .app-card{border-radius:9px;overflow:hidden;border:1px solid var(--rule)}
+  .app-card .top{padding:14px 16px 0}
+  .app-card .row{display:flex;align-items:center;justify-content:space-between}
+  .app-card .title{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .app-card .lc{font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:3px 7px;border-radius:3px;font-weight:500}
+  .linebar{height:3px;margin:12px -16px 0;}
+  .app-card .body{padding:14px 16px 16px}
+  .app-card .label{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.16em;margin-bottom:5px}
+  .app-card .val{font-family:var(--display);font-size:26px;font-weight:600;letter-spacing:-.02em}
+  .nav{display:flex;gap:6px;margin:12px 0}
+  .nav span{font-size:11px;padding:5px 9px;border-radius:5px}
+  .btn{display:inline-block;font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;font-family:var(--body)}
+  .lk{font-size:12px;text-decoration:underline;text-underline-offset:2px}
+  .app-card.light{background:#F5F5F3;color:#16171A;border-color:#E3E3DF}
+  .app-card.light .top{background:#FFFFFF;border-bottom:0}
+  .app-card.light .row{padding-bottom:0}
+  .app-card.dark{background:#16171B;color:#ECEDEF;border-color:#2A2C32}
+  .app-card.dark .label{color:#8A8C92}
+  .app-card.dark .top{background:#1D1F24}
+
+  /* hub */
+  .hub{background:#16171B;border:1px solid #2A2C32;border-radius:12px;padding:26px}
+  .hub .hubhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .hub .hubhd .t{font-family:var(--display);font-weight:600;font-size:20px;color:#ECEDEF;letter-spacing:-.01em}
+  .hub .hubhd .s{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#8A8C92;text-transform:uppercase}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .tile{background:#1D1F24;border:1px solid #2A2C32;border-radius:9px;padding:0 0 14px;overflow:hidden;position:relative}
+  .tile .tbar{height:5px}
+  .tile .ti{padding:14px 16px 0}
+  .tile .tc{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#8A8C92}
+  .tile .tn{font-family:var(--display);font-weight:600;font-size:16px;color:#ECEDEF;margin-top:8px;letter-spacing:-.01em}
+  .tile .td{color:#8A8C92;font-size:12px;margin-top:2px}
+  .tile .pip{position:absolute;top:14px;right:14px;width:8px;height:8px;border-radius:50%}
+
+  /* type */
+  .type-row{border:1px solid var(--rule);border-radius:8px;background:var(--surface);padding:22px 24px;margin-bottom:14px}
+  .type-row .meta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+
+  /* status */
+  .status{display:flex;gap:12px;flex-wrap:wrap}
+  .st{display:flex;align-items:center;gap:9px;border:1px solid var(--rule);background:var(--surface);border-radius:7px;padding:10px 14px;font-size:13px}
+  .st .sw{width:14px;height:14px;border-radius:4px}
+  .st .mono{font-family:var(--mono);font-size:11px;color:var(--mid)}
+  .foot{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;color:var(--mid);font-size:12px}
+  .foot .sig{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="code">design system · spec preview · not yet rolled out</div>
+  <h1>Wayfinder</h1>
+  <p class="lede">One transit network for the venue-ops suite. The <b>network</b> is shared —
+  same map-paper neutrals, signage type, layout grammar and status language (cohesion).
+  Each <b>app is a line</b> with its own colour and two-letter code (identity). The
+  <b>launcher is the map</b>, where every line meets.</p>
+  <div class="strip">
+    <span style="background:var(--amber)"></span>
+    <span style="background:var(--green)"></span>
+    <span style="background:var(--coral)"></span>
+    <span style="background:var(--blue)"></span>
+    <span style="background:var(--indigo)"></span>
+    <span style="background:var(--plum)"></span>
+  </div>
+
+  <!-- NEUTRALS -->
+  <section>
+    <h2>Cohesion · the map paper (neutrals)</h2>
+    <div class="ramps">
+      <div class="ramp">
+        <div class="hd">Light</div>
+        <div class="chips">
+          <div class="chip" style="background:#F5F5F3;color:#16171A"><b>ground</b><b>#F5F5F3</b></div>
+          <div class="chip" style="background:#FFFFFF;color:#16171A"><b>surface</b><b>#FFFFFF</b></div>
+          <div class="chip" style="background:#16171A;color:#F5F5F3"><b>ink</b><b>#16171A</b></div>
+          <div class="chip" style="background:#6B6C70;color:#fff"><b>mid</b><b>#6B6C70</b></div>
+          <div class="chip" style="background:#E3E3DF;color:#16171A"><b>rule</b><b>#E3E3DF</b></div>
+        </div>
+      </div>
+      <div class="ramp dark">
+        <div class="hd">Dark</div>
+        <div class="chips">
+          <div class="chip" style="background:#16171B;color:#ECEDEF"><b>ground</b><b>#16171B</b></div>
+          <div class="chip" style="background:#1D1F24;color:#ECEDEF"><b>surface</b><b>#1D1F24</b></div>
+          <div class="chip" style="background:#ECEDEF;color:#16171B"><b>ink</b><b>#ECEDEF</b></div>
+          <div class="chip" style="background:#8A8C92;color:#16171B"><b>mid</b><b>#8A8C92</b></div>
+          <div class="chip" style="background:#2A2C32;color:#ECEDEF"><b>rule</b><b>#2A2C32</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINES -->
+  <section>
+    <h2>Identity · the six lines (one accent per app)</h2>
+    <div class="lines">
+      <div class="linecard"><div class="bar" style="background:var(--amber)"></div><div class="inner">
+        <div class="nm">Amber · flagship</div><div class="app">gom-venue-audit</div>
+        <div class="hex"><span><i class="dot" style="background:#BE8A2E"></i>#BE8A2E</span><span><i class="dot" style="background:#DEAC52"></i>#DEAC52 tint</span></div></div></div>
+      <div class="linecard"><div class="bar" style="background:var(--green)"></div><div class="inner">
+        <div class="nm">Field Green</div><div class="app">cleaning-audit-app</div>
+        <div class="hex"><span><i class="dot" style="background:#3F8B5C"></i>#3F8B5C</span><span><i class="dot" style="background:#62B07E"></i>#62B07E tint</span></div></div></div>
+      <div class="linecard"><div class="bar" style="background:var(--coral)"></div><div class="inner">
+        <div class="nm">Coral Red</div><div class="app">firstaid-register</div>
+        <div class="hex"><span><i class="dot" style="background:#C8483E"></i>#C8483E</span><span><i class="dot" style="background:#E27A6F"></i>#E27A6F tint</span></div></div></div>
+      <div class="linecard"><div class="bar" style="background:var(--blue)"></div><div class="inner">
+        <div class="nm">Signal Blue</div><div class="app">compliance-v2</div>
+        <div class="hex"><span><i class="dot" style="background:#2E6FAE"></i>#2E6FAE</span><span><i class="dot" style="background:#5C94CF"></i>#5C94CF tint</span></div></div></div>
+      <div class="linecard"><div class="bar" style="background:var(--indigo)"></div><div class="inner">
+        <div class="nm">Indigo</div><div class="app">security-tracker</div>
+        <div class="hex"><span><i class="dot" style="background:#5A4F9C"></i>#5A4F9C</span><span><i class="dot" style="background:#867BC6"></i>#867BC6 tint</span></div></div></div>
+      <div class="linecard"><div class="bar" style="background:var(--plum)"></div><div class="inner">
+        <div class="nm">Plum</div><div class="app">guest-screening-tool</div>
+        <div class="hex"><span><i class="dot" style="background:#9E4A80"></i>#9E4A80</span><span><i class="dot" style="background:#C571A6"></i>#C571A6 tint</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- IN CONTEXT -->
+  <section>
+    <h2>Same family, different app · each line in its own UI</h2>
+    <div class="apps">
+
+      <!-- VA light -->
+      <div class="app-card light">
+        <div class="top"><div class="row"><div class="title">Venue Audit</div>
+          <div class="lc" style="background:#BE8A2E;color:#fff">VA</div></div>
+          <div class="linebar" style="background:#BE8A2E"></div></div>
+        <div class="body">
+          <div class="label">Q2 score · ivy precinct</div><div class="val">92.4</div>
+          <div class="nav"><span style="background:#BE8A2E;color:#fff">Audits</span><span style="color:#6B6C70">History</span><span style="color:#6B6C70">Venues</span></div>
+          <a class="btn" style="background:#BE8A2E;color:#fff">Start audit</a>
+        </div>
+      </div>
+
+      <!-- CL light -->
+      <div class="app-card light">
+        <div class="top"><div class="row"><div class="title">Cleaning Audit</div>
+          <div class="lc" style="background:#3F8B5C;color:#fff">CL</div></div>
+          <div class="linebar" style="background:#3F8B5C"></div></div>
+        <div class="body">
+          <div class="label">Pass rate · this week</div><div class="val">88%</div>
+          <div class="nav"><span style="background:#3F8B5C;color:#fff">Today</span><span style="color:#6B6C70">Sites</span><span style="color:#6B6C70">Photos</span></div>
+          <a class="btn" style="background:#3F8B5C;color:#fff">New inspection</a>
+        </div>
+      </div>
+
+      <!-- FA light -->
+      <div class="app-card light">
+        <div class="top"><div class="row"><div class="title">First Aid Register</div>
+          <div class="lc" style="background:#C8483E;color:#fff">FA</div></div>
+          <div class="linebar" style="background:#C8483E"></div></div>
+        <div class="body">
+          <div class="label">Kits compliant</div><div class="val">14 / 15</div>
+          <div class="nav"><span style="background:#C8483E;color:#fff">Kits</span><span style="color:#6B6C70">Restock</span><span style="color:#6B6C70">Log</span></div>
+          <a class="btn" style="background:#C8483E;color:#fff">Check kit</a>
+        </div>
+      </div>
+
+      <!-- CO dark -->
+      <div class="app-card dark">
+        <div class="top"><div class="row"><div class="title">Compliance</div>
+          <div class="lc" style="background:#2E6FAE;color:#fff">CO</div></div>
+          <div class="linebar" style="background:#2E6FAE"></div></div>
+        <div class="body">
+          <div class="label">Licences current</div><div class="val" style="color:#ECEDEF">31 / 33</div>
+          <div class="nav"><span style="background:#2E6FAE;color:#fff">Overview</span><span style="color:#8A8C92">Bars</span><span style="color:#8A8C92">Gaming</span></div>
+          <a class="btn" style="background:#2E6FAE;color:#fff">Run report</a>
+        </div>
+      </div>
+
+      <!-- SE dark -->
+      <div class="app-card dark">
+        <div class="top"><div class="row"><div class="title">Security Tracker</div>
+          <div class="lc" style="background:#5A4F9C;color:#fff">SE</div></div>
+          <div class="linebar" style="background:#5A4F9C"></div></div>
+        <div class="body">
+          <div class="label">Guards on · RSA ok</div><div class="val" style="color:#ECEDEF">18</div>
+          <div class="nav"><span style="background:#5A4F9C;color:#fff">Live</span><span style="color:#8A8C92">Roster</span><span style="color:#8A8C92">Burn</span></div>
+          <a class="lk" style="color:#867BC6">View sign-on log →</a>
+        </div>
+      </div>
+
+      <!-- GS dark -->
+      <div class="app-card dark">
+        <div class="top"><div class="row"><div class="title">Guest Screening</div>
+          <div class="lc" style="background:#9E4A80;color:#fff">GS</div></div>
+          <div class="linebar" style="background:#9E4A80"></div></div>
+        <div class="body">
+          <div class="label">Flagged tonight</div><div class="val" style="color:#ECEDEF">3</div>
+          <div class="nav"><span style="background:#9E4A80;color:#fff">Door</span><span style="color:#8A8C92">Watchlist</span><span style="color:#8A8C92">History</span></div>
+          <a class="lk" style="color:#C571A6">Open watchlist →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HUB -->
+  <section>
+    <h2>The launcher · neutral hub (every line at once)</h2>
+    <div class="hub">
+      <div class="hubhd"><div class="t">Precinct Ops</div><div class="s">OPS · network map</div></div>
+      <div class="tiles">
+        <div class="tile"><div class="tbar" style="background:#BE8A2E"></div><div class="pip" style="background:#2E7D46"></div><div class="ti"><div class="tc">VA</div><div class="tn">Venue Audit</div><div class="td">Quarterly audits</div></div></div>
+        <div class="tile"><div class="tbar" style="background:#3F8B5C"></div><div class="pip" style="background:#2E7D46"></div><div class="ti"><div class="tc">CL</div><div class="tn">Cleaning Audit</div><div class="td">Daily inspections</div></div></div>
+        <div class="tile"><div class="tbar" style="background:#C8483E"></div><div class="pip" style="background:#D08A12"></div><div class="ti"><div class="tc">FA</div><div class="tn">First Aid Register</div><div class="td">Kit compliance</div></div></div>
+        <div class="tile"><div class="tbar" style="background:#2E6FAE"></div><div class="pip" style="background:#2E7D46"></div><div class="ti"><div class="tc">CO</div><div class="tn">Compliance</div><div class="td">Licences &amp; records</div></div></div>
+        <div class="tile"><div class="tbar" style="background:#5A4F9C"></div><div class="pip" style="background:#2E7D46"></div><div class="ti"><div class="tc">SE</div><div class="tn">Security Tracker</div><div class="td">Guard sign-on</div></div></div>
+        <div class="tile"><div class="tbar" style="background:#9E4A80"></div><div class="pip" style="background:#D33A2C"></div><div class="ti"><div class="tc">GS</div><div class="tn">Guest Screening</div><div class="td">Door watchlist</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section>
+    <h2>Typography · signage stack</h2>
+    <div class="type-row">
+      <div class="meta">Display — Space Grotesk · screen titles, big numerics, line codes</div>
+      <div style="font-family:var(--display);font-weight:600;font-size:40px;letter-spacing:-.02em">Venue Audit · 92.4</div>
+    </div>
+    <div class="type-row">
+      <div class="meta">Body — IBM Plex Sans · running text, controls, tables</div>
+      <div style="font-size:17px">Every kit on site was checked against the register; one restock is outstanding and flagged for the morning shift.</div>
+    </div>
+    <div class="type-row">
+      <div class="meta">Data — IBM Plex Mono · codes, IDs, timestamps, field markings</div>
+      <div style="font-family:var(--mono);font-size:15px;letter-spacing:.04em">LINE VA · REV 03 · 2026-06-05 04:12 · KIT-014</div>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section>
+    <h2>Status language · universal (icon + colour, every app)</h2>
+    <div class="status">
+      <div class="st"><span class="sw" style="background:#2E7D46"></span>Success <span class="mono">#2E7D46</span></div>
+      <div class="st"><span class="sw" style="background:#D08A12"></span>Warning <span class="mono">#D08A12</span></div>
+      <div class="st"><span class="sw" style="background:#D33A2C"></span>Danger <span class="mono">#D33A2C</span></div>
+      <div class="st"><span class="sw" style="background:#2E6FAE"></span>Info <span class="mono">#2E6FAE</span></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Cohesion: shared neutrals · type · grammar · status. &nbsp; Identity: one line colour + code per app.</span>
+    <span class="sig">◆ wayfinder suite</span>
+  </div>
+
+</div>
+</body>
+</html>
