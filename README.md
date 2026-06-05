@@ -226,7 +226,8 @@ All accept standard `HTMLSpanElement` props (`className`, `style`, …) plus:
 | `<AuditorWordmark />` | `accent?`, `label?` | the wordmark. One place per app only. |
 
 Token exports (`@aud/brand` or `@aud/brand/tokens`): `accents`, `neutrals`, `fonts`,
-and type `AccentName`.
+and type `AccentName`. Family exports: `familyPresets`, `reservedAccent`, and types
+`FamilyKey`, `FamilyPreset` (see [Families](#families)).
 
 ---
 
@@ -243,6 +244,47 @@ Each app sets one accent and consumes the package:
 ```
 
 Fix the mark or the footer badge once here, and every app picks it up.
+
+---
+
+## Families
+
+Apps are grouped into four **function families**, each owning one accent + a base
+light/dark mode. `familyPresets` is the single source of truth; `<FamilyProvider>`
+applies a family to a subtree by setting `--aud-accent` and `data-theme` from one
+key — so the mark, the splash and any accent-keyed CSS follow with no further wiring.
+
+| Family | Accent | Base mode | Context |
+|--------|--------|-----------|---------|
+| `audits` | brass | light | field inspection, daytime |
+| `dashboards` | steel | dark | control-room monitoring, low light |
+| `registers` | clay | light | staffed service desks, daytime |
+| `logs` | sage | dark | security / control logging, night shift |
+
+`eucalypt` is held in reserve (`reservedAccent`) for a 5th family.
+
+```tsx
+import { FamilyProvider, SplashScreen, AppMark } from '@aud/brand'
+
+// accent + light/dark both come from the family key — no theme/accent props:
+<FamilyProvider family="registers">
+  <SplashScreen
+    mark={<AppMark><CrossIcon /></AppMark>}
+    title="First Aid Register"
+    formMode                                   {/* fields above the button */}
+    fieldNote="REV 03 · ask your supervisor"   {/* mono micro-line under the fields */}
+    primary={{ label: 'Continue' }}
+  >
+    <input aria-label="Access code" /* … */ />
+  </SplashScreen>
+</FamilyProvider>
+```
+
+`<SplashScreen>` is OAuth-first by default (primary button on top); pass `formMode`
+(alias `actionsLast`) for PIN/code apps that need the fields above the button. Read
+the raw preset values directly via `familyPresets[key]` when you need them in JS.
+The full design rationale lives in
+[`reference/originals/aud-family-model-splash-spec.md`](./reference/originals/aud-family-model-splash-spec.md).
 
 ---
 
@@ -269,7 +311,9 @@ aud-design-system/
 ├─ src/
 │  ├─ index.ts            ← barrel
 │  ├─ tokens.ts           ← accents / neutrals / fonts as TS constants
-│  └─ components/         ← AudMark, PoweredByAud, AuditorWordmark
+│  ├─ families.ts         ← familyPresets (the four function families)
+│  └─ components/         ← AudMark, PoweredByAud, AuditorWordmark,
+│                           SplashScreen, AppMark, FamilyProvider
 ├─ tokens/
 │  ├─ tokens.css          ← :root --aud-* vars + light/dark
 │  ├─ tokens.json         ← structured token data
