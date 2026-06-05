@@ -6,10 +6,13 @@ import {
   AuditorWordmark,
   SplashScreen,
   AppMark,
+  FamilyProvider,
+  familyPresets,
   accents,
   neutrals,
   fonts,
 } from '@aud/brand'
+import type { FamilyKey } from '@aud/brand'
 
 /** Set --aud-accent on a container; everything inside (the mark, the badge) follows. */
 const accentVar = (hex: string): CSSProperties =>
@@ -256,6 +259,69 @@ export function App() {
         </div>
       </section>
 
+      {/* ── Families ─────────────────────────────────────────── */}
+      <section className="section">
+        <div className="section-label">The Families — four function families, one accent + mode each</div>
+        <div className="splash-row">
+          {(Object.keys(familyPresets) as FamilyKey[]).map((key) => {
+            const f = familyPresets[key]
+            const Glyph = FAMILY_GLYPH[key]
+            return (
+              // The provider sets --aud-accent + data-theme; the tile and labels
+              // inside inherit the family scheme with no per-card props.
+              <FamilyProvider key={key} family={key}>
+                <div
+                  style={{
+                    padding: 20,
+                    borderRadius: 12,
+                    border: '1px solid var(--aud-rule)',
+                    background: 'var(--aud-ground)',
+                    color: 'var(--aud-ink)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                    fontFamily: fonts.body,
+                  }}
+                >
+                  <AppMark theme={f.mode}><Glyph /></AppMark>
+                  <div style={{ fontFamily: fonts.heading, fontWeight: 600, fontSize: '1.1rem' }}>{f.name}</div>
+                  <div style={{ fontFamily: fonts.mono, fontSize: '0.6875rem', letterSpacing: '0.04em', color: 'var(--aud-mid)' }}>
+                    {f.accentName.toUpperCase()} · {f.mode.toUpperCase()}
+                  </div>
+                </div>
+              </FamilyProvider>
+            )
+          })}
+        </div>
+        <div className="splash-cap">Each card is wrapped in one &lt;FamilyProvider family="…" /&gt; — accent and light/dark fall out of the family key.</div>
+      </section>
+
+      {/* ── Splash · form mode ───────────────────────────────── */}
+      <section className="section">
+        <div className="section-label">The Splash — form mode (fields above the button) + field note</div>
+        <div className="splash-row">
+          <div className="splash light">
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: `1px solid ${neutrals.light.rule}` }}>
+              {/* No theme/accent props: both come from the Registers family. */}
+              <FamilyProvider family="registers">
+                <SplashScreen
+                  style={{ minHeight: 460 }}
+                  mark={<AppMark><GlyphCross /></AppMark>}
+                  title="First Aid Register"
+                  subtitle="Enter your access code to sign in"
+                  formMode
+                  fieldNote="REV 03 · ask your supervisor for the code"
+                  primary={{ label: 'Continue' }}
+                >
+                  <DemoCodeField />
+                </SplashScreen>
+              </FamilyProvider>
+            </div>
+            <div className="splash-cap">Registers · clay · light (from FamilyProvider) · formMode · fieldNote</div>
+          </div>
+        </div>
+      </section>
+
       {/* ── colour ───────────────────────────────────────────── */}
       <section className="section">
         <div className="section-label">Colour — constant neutrals, one moving accent</div>
@@ -367,5 +433,38 @@ function MsLogo() {
       <rect x="1" y="12" width="10" height="10" fill="#00A4EF" />
       <rect x="12" y="12" width="10" height="10" fill="#FFB900" />
     </svg>
+  )
+}
+
+/** One glyph per family (identical mode uses the family mark). */
+const FAMILY_GLYPH: Record<FamilyKey, () => JSX.Element> = {
+  audits: GlyphClipboard,
+  dashboards: GlyphGauge,
+  registers: GlyphCross,
+  logs: GlyphShield,
+}
+
+/** A demo passcode field for the form-mode splash — inherits the family scheme. */
+function DemoCodeField() {
+  return (
+    <input
+      type="text"
+      inputMode="numeric"
+      placeholder="Access code"
+      aria-label="Access code"
+      style={{
+        width: '100%',
+        padding: '12px 14px',
+        borderRadius: 12,
+        border: '1px solid var(--aud-rule)',
+        background: 'var(--aud-surface)',
+        color: 'var(--aud-ink)',
+        fontFamily: fonts.mono,
+        fontSize: '0.95rem',
+        letterSpacing: '0.15em',
+        textAlign: 'center',
+        boxSizing: 'border-box',
+      }}
+    />
   )
 }

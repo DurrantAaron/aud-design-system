@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { neutrals, fonts } from '../tokens'
 import { PoweredByAud } from './PoweredByAud'
+import { useFamily } from './FamilyProvider'
 
 const DEFAULT_ACCENT = 'var(--aud-accent, #C8A84B)'
 
@@ -33,11 +34,23 @@ export interface SplashScreenProps
   error?: string
   /** Accent for the primary fill and the footer mark. Defaults to `--aud-accent`. */
   accent?: string
-  /** Neutral palette. Defaults to "dark". */
+  /**
+   * Neutral palette. Defaults to the enclosing `<FamilyProvider>`'s mode, or
+   * "dark" when there is none.
+   */
   theme?: 'light' | 'dark'
+  /**
+   * Render the `children` (fields) ABOVE the actions, for PIN/code apps where
+   * the inputs come first. Default false — OAuth-first, button on top.
+   */
+  actionsLast?: boolean
+  /** Alias for {@link SplashScreenProps.actionsLast}. */
+  formMode?: boolean
+  /** A mono micro-line under the fields — a hint, env tag, or revision marker. */
+  fieldNote?: React.ReactNode
   /** Footer node. Defaults to <PoweredByAud accent />; pass `null` to hide it. */
   footer?: React.ReactNode
-  /** Extra content below the actions (e.g. a passcode form). */
+  /** Extra content next to the actions (e.g. a passcode form). */
   children?: React.ReactNode
 }
 
@@ -70,16 +83,67 @@ export function SplashScreen({
   dividerLabel = 'or',
   error,
   accent = DEFAULT_ACCENT,
-  theme = 'dark',
+  theme,
+  actionsLast,
+  formMode,
+  fieldNote,
   footer,
   children,
   style,
   ...rest
 }: SplashScreenProps) {
-  const n = neutrals[theme]
+  // Theme follows the enclosing family (if any), then the explicit prop, then dark.
+  const family = useFamily()
+  const resolvedTheme = theme ?? family?.mode ?? 'dark'
+  const fieldsFirst = !!(actionsLast || formMode)
+  const n = neutrals[resolvedTheme]
   // Dark ink on the accent fill reads on all five (mid-luminance) accents.
   const onAccent = neutrals.dark.ground
-  const errorColor = theme === 'dark' ? '#F0857C' : '#B23B30'
+  const errorColor = resolvedTheme === 'dark' ? '#F0857C' : '#B23B30'
+
+  // The app-provided fields (children) + an optional mono micro-line under them.
+  const fields =
+    children || fieldNote ? (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {children}
+        {fieldNote && (
+          <p
+            style={{
+              margin: 0,
+              fontFamily: fonts.mono,
+              fontSize: '0.6875rem',
+              letterSpacing: '0.04em',
+              lineHeight: 1.5,
+              textAlign: 'center',
+              color: n.mid,
+            }}
+          >
+            {fieldNote}
+          </p>
+        )}
+      </div>
+    ) : null
+
+  const actions = (
+    <>
+      <SplashButton variant="primary" action={primary} accent={accent} onAccent={onAccent} n={n} />
+
+      {error && (
+        <p style={{ margin: 0, fontSize: '0.75rem', textAlign: 'center', color: errorColor }}>{error}</p>
+      )}
+
+      {secondary && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.75rem', color: n.mid }}>
+            <span style={{ flex: 1, height: 1, background: n.rule }} />
+            <span>{dividerLabel}</span>
+            <span style={{ flex: 1, height: 1, background: n.rule }} />
+          </div>
+          <SplashButton variant="ghost" action={secondary} accent={accent} onAccent={onAccent} n={n} />
+        </>
+      )}
+    </>
+  )
 
   return (
     <div
@@ -125,24 +189,17 @@ export function SplashScreen({
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <SplashButton variant="primary" action={primary} accent={accent} onAccent={onAccent} n={n} />
-
-          {error && (
-            <p style={{ margin: 0, fontSize: '0.75rem', textAlign: 'center', color: errorColor }}>{error}</p>
-          )}
-
-          {secondary && (
+          {fieldsFirst ? (
             <>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.75rem', color: n.mid }}>
-                <span style={{ flex: 1, height: 1, background: n.rule }} />
-                <span>{dividerLabel}</span>
-                <span style={{ flex: 1, height: 1, background: n.rule }} />
-              </div>
-              <SplashButton variant="ghost" action={secondary} accent={accent} onAccent={onAccent} n={n} />
+              {fields}
+              {actions}
+            </>
+          ) : (
+            <>
+              {actions}
+              {fields}
             </>
           )}
-
-          {children}
         </div>
       </div>
 
