@@ -466,6 +466,22 @@ export function DuotoneMissionControl({
   const rawId = useId()
   const scope = `aud-mc-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`
 
+  // Paint the page (html/body) the same colour as the hub backdrop while this
+  // hub is mounted, so iOS standalone/overscroll never flashes a white band
+  // above the Dynamic Island or below the home indicator. Restored on unmount.
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return
+    const html = document.documentElement
+    const prevHtml = html.style.backgroundColor
+    const prevBody = document.body.style.backgroundColor
+    html.style.backgroundColor = t.bodyBg
+    document.body.style.backgroundColor = t.bodyBg
+    return () => {
+      html.style.backgroundColor = prevHtml
+      document.body.style.backgroundColor = prevBody
+    }
+  }, [t.bodyBg])
+
   // CSS custom properties feed the scoped <style> rules (gradients reference
   // multiple vars, which inline styles cannot express cleanly).
   const vars = {
@@ -808,9 +824,10 @@ function scopedCss(s: string): string {
 
 /* ---------- STAGE / PAGE FRAME ---------- */
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;
+  position:relative;width:100%;max-width:430px;height:100dvh;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
-  display:flex;flex-direction:column;padding:14px 14px 14px;overflow:hidden;
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
 }
 .${s}-stage::before{
   content:"";position:absolute;left:50%;bottom:-14%;width:130%;height:48%;

@@ -364,6 +364,22 @@ export function DuotoneSplash({
   const f = FRAME[resolvedTheme]
   const accentColor = accent ?? duo.accent
 
+  // Paint the document background to match the splash while it's mounted, so the
+  // page behind it (e.g. a light app body, or the gap iOS leaves when the
+  // keyboard resizes the viewport) never flashes a white band. Restored on unmount.
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return
+    const html = document.documentElement
+    const prevHtml = html.style.backgroundColor
+    const prevBody = document.body.style.backgroundColor
+    html.style.backgroundColor = f.bodyBg
+    document.body.style.backgroundColor = f.bodyBg
+    return () => {
+      html.style.backgroundColor = prevHtml
+      document.body.style.backgroundColor = prevBody
+    }
+  }, [f.bodyBg])
+
   // A scope id so the (necessarily class-based) plate/grain layers and hover
   // states never leak between two splashes on the same page.
   const rawId = useId()
@@ -650,9 +666,10 @@ function scopedCss(s: string): string {
 @keyframes ${s}-pulse{0%,100%{opacity:1;box-shadow:0 0 0 3px var(--halo)}50%{opacity:.55;box-shadow:0 0 0 6px transparent}}
 
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;
+  position:relative;width:100%;max-width:430px;height:100dvh;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
-  display:flex;flex-direction:column;padding:18px 18px 22px;overflow:hidden;
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
 }
 .${s}-stage::before{
   content:"";position:absolute;left:50%;bottom:-12%;width:120%;height:46%;
