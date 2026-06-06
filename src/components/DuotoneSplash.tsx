@@ -1,6 +1,7 @@
 import React, { useId, useLayoutEffect, useRef, useState } from 'react'
 import type { SplashAction } from './SplashScreen'
 import { useFamily } from './FamilyProvider'
+import { useTakeoverBody } from '../useTakeoverBody'
 import type { FamilyKey } from '../families'
 
 /**
@@ -367,18 +368,7 @@ export function DuotoneSplash({
   // Paint the document background to match the splash while it's mounted, so the
   // page behind it (e.g. a light app body, or the gap iOS leaves when the
   // keyboard resizes the viewport) never flashes a white band. Restored on unmount.
-  React.useEffect(() => {
-    if (typeof document === 'undefined') return
-    const html = document.documentElement
-    const prevHtml = html.style.backgroundColor
-    const prevBody = document.body.style.backgroundColor
-    html.style.backgroundColor = f.bodyBg
-    document.body.style.backgroundColor = f.bodyBg
-    return () => {
-      html.style.backgroundColor = prevHtml
-      document.body.style.backgroundColor = prevBody
-    }
-  }, [f.bodyBg])
+  useTakeoverBody(f.bodyBg)
 
   // A scope id so the (necessarily class-based) plate/grain layers and hover
   // states never leak between two splashes on the same page.
