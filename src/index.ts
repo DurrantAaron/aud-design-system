@@ -25,6 +25,12 @@ export type { SplashScreenProps, SplashAction } from './components/SplashScreen'
 export { AppMark } from './components/AppMark'
 export type { AppMarkProps } from './components/AppMark'
 
+export { EditorialSplash, MsLogo } from './components/EditorialSplash'
+export type { EditorialSplashProps, EditorialFamily } from './components/EditorialSplash'
+
+export { DuotoneSplash } from './components/DuotoneSplash'
+export type { DuotoneSplashProps, DuotoneMeta } from './components/DuotoneSplash'
+
 export { FamilyProvider, useFamily } from './components/FamilyProvider'
 export type { FamilyProviderProps, FamilyContextValue } from './components/FamilyProvider'
 
