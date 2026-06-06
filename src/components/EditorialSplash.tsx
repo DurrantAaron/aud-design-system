@@ -1,6 +1,7 @@
 import React, { useId, useLayoutEffect, useRef, useState } from 'react'
 import type { SplashAction } from './SplashScreen'
 import { useFamily } from './FamilyProvider'
+import { useTakeoverBody } from '../useTakeoverBody'
 
 /**
  * ─── FONT REQUIREMENT ──────────────────────────────────────────────────────
@@ -370,20 +371,10 @@ export function EditorialSplash({
     document.head.appendChild(link)
   }, [])
 
-  // Paint html/body to the splash backdrop while mounted so an iOS standalone
-  // PWA never flashes a white band behind a translucent status bar / overscroll.
-  React.useEffect(() => {
-    if (typeof document === 'undefined') return
-    const html = document.documentElement
-    const prevHtml = html.style.backgroundColor
-    const prevBody = document.body.style.backgroundColor
-    html.style.backgroundColor = p.behind
-    document.body.style.backgroundColor = p.behind
-    return () => {
-      html.style.backgroundColor = prevHtml
-      document.body.style.backgroundColor = prevBody
-    }
-  }, [p.behind])
+  // Paint the page backdrop + lock document scroll while mounted so an iOS
+  // standalone PWA never flashes a white band behind the status bar and can't
+  // rubber-band-scroll / elongate the 100dvh stage. Restored on unmount.
+  useTakeoverBody(p.behind)
 
   // Scope every rule to this instance so multiple splashes / themes coexist.
   const uid = useId().replace(/[:]/g, '')

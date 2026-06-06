@@ -1,4 +1,5 @@
 import React, { useId, useLayoutEffect } from 'react'
+import { useTakeoverBody } from '../useTakeoverBody'
 import type { FamilyKey } from '../families'
 
 /**
@@ -466,21 +467,10 @@ export function DuotoneMissionControl({
   const rawId = useId()
   const scope = `aud-mc-${rawId.replace(/[^a-zA-Z0-9_-]/g, '')}`
 
-  // Paint the page (html/body) the same colour as the hub backdrop while this
-  // hub is mounted, so iOS standalone/overscroll never flashes a white band
-  // above the Dynamic Island or below the home indicator. Restored on unmount.
-  React.useEffect(() => {
-    if (typeof document === 'undefined') return
-    const html = document.documentElement
-    const prevHtml = html.style.backgroundColor
-    const prevBody = document.body.style.backgroundColor
-    html.style.backgroundColor = t.bodyBg
-    document.body.style.backgroundColor = t.bodyBg
-    return () => {
-      html.style.backgroundColor = prevHtml
-      document.body.style.backgroundColor = prevBody
-    }
-  }, [t.bodyBg])
+  // Paint the page backdrop + lock document scroll while this hub is mounted, so
+  // iOS standalone never flashes a white band behind the status bar and can't
+  // rubber-band-scroll / elongate the 100dvh stage. Restored on unmount.
+  useTakeoverBody(t.bodyBg)
 
   // CSS custom properties feed the scoped <style> rules (gradients reference
   // multiple vars, which inline styles cannot express cleanly).
