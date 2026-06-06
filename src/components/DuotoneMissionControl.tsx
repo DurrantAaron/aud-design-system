@@ -553,7 +553,7 @@ export function DuotoneMissionControl({
       data-theme={theme}
       style={{
         ...vars,
-        minHeight: '100vh',
+        minHeight: '100dvh',
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -808,7 +808,7 @@ function scopedCss(s: string): string {
 
 /* ---------- STAGE / PAGE FRAME ---------- */
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100vh;max-height:932px;
+  position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
   display:flex;flex-direction:column;padding:14px 14px 14px;overflow:hidden;
 }
@@ -832,7 +832,8 @@ function scopedCss(s: string): string {
 /* Clip the blurred/blended bg layers to the rounded shape — iOS Safari leaks
    composited children past border-radius+overflow:hidden (square corners). */
 .${s}-cardbg{position:absolute;inset:0;z-index:0;border-radius:24px;overflow:hidden;
-  clip-path:inset(0 round 24px);-webkit-clip-path:inset(0 round 24px);pointer-events:none}
+  clip-path:inset(0 round 24px);-webkit-clip-path:inset(0 round 24px);
+  transform:translateZ(0);isolation:isolate;pointer-events:none}
 
 .${s}-plate{position:absolute;inset:0;z-index:0;overflow:hidden;
   background:

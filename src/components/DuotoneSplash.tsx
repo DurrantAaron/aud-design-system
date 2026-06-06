@@ -451,7 +451,7 @@ export function DuotoneSplash({
       data-theme={resolvedTheme}
       style={{
         ...vars,
-        minHeight: '100vh',
+        minHeight: '100dvh',
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -650,7 +650,7 @@ function scopedCss(s: string): string {
 @keyframes ${s}-pulse{0%,100%{opacity:1;box-shadow:0 0 0 3px var(--halo)}50%{opacity:.55;box-shadow:0 0 0 6px transparent}}
 
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100vh;max-height:932px;
+  position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
   display:flex;flex-direction:column;padding:18px 18px 22px;overflow:hidden;
 }
@@ -675,7 +675,8 @@ function scopedCss(s: string): string {
    border-radius+overflow:hidden — they leak square corners. clip-path on this
    wrapper forces the rounded clip while the card keeps its drop shadow. */
 .${s}-cardbg{position:absolute;inset:0;z-index:0;border-radius:28px;overflow:hidden;
-  clip-path:inset(0 round 28px);-webkit-clip-path:inset(0 round 28px);pointer-events:none}
+  clip-path:inset(0 round 28px);-webkit-clip-path:inset(0 round 28px);
+  transform:translateZ(0);isolation:isolate;pointer-events:none}
 
 .${s}-plate{position:absolute;inset:0;z-index:0;overflow:hidden;
   background:

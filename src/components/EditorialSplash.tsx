@@ -391,13 +391,13 @@ export function EditorialSplash({
     >
       <style>{`
 .${scope}{
-  min-height:100vh;width:100%;
+  min-height:100dvh;width:100%;
   display:flex;align-items:center;justify-content:center;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 .${scope} *{box-sizing:border-box}
 .${scope} .stage{
-  position:relative;width:100%;max-width:480px;min-height:100vh;
+  position:relative;width:100%;max-width:480px;min-height:100dvh;
   display:flex;flex-direction:column;
   padding:44px 30px 28px;overflow:hidden;
   background:radial-gradient(125% 80% at 50% -12%, ${p.paper} 0%, ${p.paper} 50%, ${p.paper2} 100%);
