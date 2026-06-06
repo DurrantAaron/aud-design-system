@@ -485,16 +485,30 @@ export function EditorialMissionControl({
     return () => window.clearInterval(id)
   }, [])
 
+  // Paint html/body to the hub backdrop while mounted so an iOS standalone PWA
+  // never flashes a white band behind a translucent status bar / overscroll.
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    const html = document.documentElement
+    const prevHtml = html.style.backgroundColor
+    const prevBody = document.body.style.backgroundColor
+    html.style.backgroundColor = t.behind
+    document.body.style.backgroundColor = t.behind
+    return () => {
+      html.style.backgroundColor = prevHtml
+      document.body.style.backgroundColor = prevBody
+    }
+  }, [t.behind])
+
   return (
     <div
       data-theme={theme}
       style={{
         ...vars,
-        minHeight: '100vh',
+        position: 'relative',
+        height: '100dvh',
         width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        overflow: 'hidden',
         background: t.behind,
         color: t.ink,
         fontFamily: BODY_FONT,
@@ -779,9 +793,10 @@ function scopedCss(s: string): string {
 
 /* ---------- STAGE / PAGE FRAME ---------- */
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100vh;max-height:932px;
+  position:absolute;inset:0;margin-inline:auto;max-width:430px;min-height:0;
   background:radial-gradient(125% 80% at 50% -12%, var(--paper) 0%, var(--paper) 50%, var(--paper-2) 100%);
   display:flex;flex-direction:column;overflow:hidden;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   font-family:${BODY_FONT};color:var(--ink);
 }
 /* faint paper grain / fibre */
