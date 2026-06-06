@@ -467,11 +467,10 @@ export function DuotoneSplash({
       data-theme={resolvedTheme}
       style={{
         ...vars,
-        minHeight: '100dvh',
+        position: 'relative',
+        height: '100dvh',
         width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        overflow: 'hidden',
         background: f.bodyBg,
         fontFamily: BODY_FONT,
         WebkitFontSmoothing: 'antialiased',
@@ -666,10 +665,10 @@ function scopedCss(s: string): string {
 @keyframes ${s}-pulse{0%,100%{opacity:1;box-shadow:0 0 0 3px var(--halo)}50%{opacity:.55;box-shadow:0 0 0 6px transparent}}
 
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100dvh;
+  position:absolute;inset:0;margin-inline:auto;max-width:430px;min-height:0;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
-  display:flex;flex-direction:column;overflow:hidden;
-  padding:max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+  padding:max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
 }
 .${s}-stage::before{
   content:"";position:absolute;left:50%;bottom:-12%;width:120%;height:46%;
@@ -679,7 +678,7 @@ function scopedCss(s: string): string {
 }
 
 .${s}-card{
-  position:relative;flex:1 1 auto;border-radius:28px;overflow:hidden;
+  position:relative;flex:1 1 0;min-height:0;max-height:600px;border-radius:28px;overflow:hidden;
   background:var(--duo-dark);
   box-shadow:${FRAME.dark.cardShadow.replace(/,/g, ',\n    ')};
   display:flex;flex-direction:column;isolation:isolate;
@@ -773,8 +772,8 @@ function scopedCss(s: string): string {
   background:linear-gradient(180deg, var(--scrim-top) 0%, transparent 20%, transparent 40%, var(--scrim-mid) 72%, var(--scrim-bot) 100%);
 }
 
-.${s}-content{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;
-  padding:22px 22px 24px;animation:${s}-fadeUp .9s .15s cubic-bezier(.2,.8,.2,1) both}
+.${s}-content{position:relative;z-index:5;flex:1;min-height:0;display:flex;flex-direction:column;
+  padding:clamp(16px,4.5vh,22px) clamp(18px,5vw,22px) clamp(16px,3.2vh,24px);animation:${s}-fadeUp .9s .15s cubic-bezier(.2,.8,.2,1) both}
 
 .${s}-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .${s}-brandchip{
@@ -846,7 +845,7 @@ function scopedCss(s: string): string {
 [data-theme="light"] .${s}-v{color:${FRAME.light.heroInk}}
 .${s}-live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--halo);flex:0 0 auto;animation:${s}-pulse 2.6s ease-in-out infinite}
 
-.${s}-dock{flex:0 0 auto;padding:18px 6px 4px;display:flex;flex-direction:column;gap:11px;animation:${s}-fadeUp .9s .28s cubic-bezier(.2,.8,.2,1) both}
+.${s}-dock{flex:0 0 auto;padding:clamp(12px,2.4vh,18px) 6px 2px;display:flex;flex-direction:column;gap:clamp(9px,1.5vh,11px);animation:${s}-fadeUp .9s .28s cubic-bezier(.2,.8,.2,1) both}
 .${s}-btn{
   width:100%;border:0;font-family:${BODY_FONT};
   display:flex;align-items:center;justify-content:center;gap:11px;

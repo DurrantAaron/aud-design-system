@@ -6,3 +6,6 @@ dist/
 .DS_Store
 .vite/
 verification/*.png
+
+# Consolidated Claude.ai chat-project context (local-only)
+CLAUDE.local.md

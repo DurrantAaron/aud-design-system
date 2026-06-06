@@ -569,11 +569,10 @@ export function DuotoneMissionControl({
       data-theme={theme}
       style={{
         ...vars,
-        minHeight: '100dvh',
+        position: 'relative',
+        height: '100dvh',
         width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        overflow: 'hidden',
         background: t.bodyBg,
         color: t.onDark,
         fontFamily: BODY_FONT,
@@ -824,7 +823,7 @@ function scopedCss(s: string): string {
 
 /* ---------- STAGE / PAGE FRAME ---------- */
 .${s}-stage{
-  position:relative;width:100%;max-width:430px;height:100dvh;
+  position:absolute;inset:0;margin-inline:auto;max-width:430px;min-height:0;
   background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
   display:flex;flex-direction:column;overflow:hidden;
   padding:max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
