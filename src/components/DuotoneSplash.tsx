@@ -248,7 +248,58 @@ export interface DuotoneSplashProps
   primary: SplashAction
   /** Optional secondary action — the ghost button under the CTA. */
   secondary?: SplashAction
+  /**
+   * The app's own field(s) — e.g. a code / PIN `<input>` for the many apps that
+   * authenticate on the splash instead of via OAuth. Wrapped in an on-brand
+   * glass slot on the action dock. A plain `<input className={DUOTONE_FIELD_CLASS}>`
+   * (or any `<input>` — the slot styles bare inputs by default) reads correctly
+   * against the duotone dock. See {@link DUOTONE_FIELD_CLASS}.
+   */
+  children?: React.ReactNode
+  /**
+   * Render `children` (the fields) ABOVE the primary action, for code/PIN apps
+   * where the input comes first. Default false — OAuth-first, CTA on top and
+   * the fields below, matching the base SplashScreen.
+   */
+  actionsLast?: boolean
+  /** Alias for {@link DuotoneSplashProps.actionsLast}. */
+  formMode?: boolean
+  /** A micro-line under the fields — a hint, env tag, or revision marker. */
+  fieldNote?: React.ReactNode
 }
+
+/**
+ * The className to put on a plain `<input>` (or `<select>`) passed in as a
+ * child, so it inherits the duotone dock's glass/edge field styling and matches
+ * the CTA + meta row. The field slot also styles bare `<input>`/`<select>`
+ * descendants automatically, so this class is only needed when the app's input
+ * carries its own competing styles and you want to opt back in.
+ *
+ * ```tsx
+ * import { DuotoneSplash, DUOTONE_FIELD_CLASS } from '@aud/brand'
+ *
+ * <DuotoneSplash
+ *   formMode
+ *   primary={{ label: 'Enter', onClick: submit }}
+ *   {...rest}
+ * >
+ *   <input
+ *     className={DUOTONE_FIELD_CLASS}
+ *     inputMode="numeric"
+ *     placeholder="Access code"
+ *     value={code}
+ *     onChange={(e) => setCode(e.target.value)}
+ *   />
+ * </DuotoneSplash>
+ * ```
+ *
+ * Naming mirrors the sibling skins (e.g. `EDITORIAL_FIELD_CLASS`).
+ * `duotoneFieldInputClass` is kept as a camelCase alias to the same value.
+ */
+export const DUOTONE_FIELD_CLASS = 'aud-duotone-field'
+
+/** camelCase alias of {@link DUOTONE_FIELD_CLASS}. */
+export const duotoneFieldInputClass = DUOTONE_FIELD_CLASS
 
 /**
  * The premium framed-duotone app splash.
@@ -290,10 +341,18 @@ export function DuotoneSplash({
   liveword = 'Secure',
   primary,
   secondary,
+  children,
+  actionsLast,
+  formMode,
+  fieldNote,
   style,
   ...rest
 }: DuotoneSplashProps) {
   useFontsLink()
+
+  // Fields-first when the app declares either flag — matches the base
+  // SplashScreen (`actionsLast` / `formMode` are aliases).
+  const fieldsFirst = !!(actionsLast || formMode)
 
   // Family + theme follow the enclosing provider, then the explicit props.
   const ctx = useFamily()
@@ -475,8 +534,18 @@ export function DuotoneSplash({
 
         {/* ACTION DOCK */}
         <div className={`${scope}-dock`}>
+          {fieldsFirst && (children || fieldNote) && (
+            <DuotoneFieldSlot scope={scope} fieldNote={fieldNote}>
+              {children}
+            </DuotoneFieldSlot>
+          )}
           <DuotoneButton variant="primary" action={primary} scope={scope} />
           {secondary && <DuotoneButton variant="ghost" action={secondary} scope={scope} />}
+          {!fieldsFirst && (children || fieldNote) && (
+            <DuotoneFieldSlot scope={scope} fieldNote={fieldNote}>
+              {children}
+            </DuotoneFieldSlot>
+          )}
           <div className={`${scope}-foot`}>
             Crafted by{' '}
             <span className={`${scope}-seal`}>
@@ -522,6 +591,30 @@ function DuotoneButton({
       <span>{loading ? loadingLabel ?? label : label}</span>
       {variant === 'ghost' && !loading && <span className={`${scope}-arrow`}>&rarr;</span>}
     </button>
+  )
+}
+
+/**
+ * The on-brand field slot for the action dock. Wraps the app's own field(s) in a
+ * glass/edge container that matches the CTA + meta-row chrome, and styles bare
+ * `<input>`/`<select>` descendants (or anything carrying
+ * {@link DUOTONE_FIELD_CLASS}) so a plain input the app passes in reads
+ * on-brand without the app importing any styles.
+ */
+function DuotoneFieldSlot({
+  scope,
+  fieldNote,
+  children,
+}: {
+  scope: string
+  fieldNote?: React.ReactNode
+  children?: React.ReactNode
+}) {
+  return (
+    <div className={`${scope}-fieldslot`}>
+      {children}
+      {fieldNote && <p className={`${scope}-fieldnote`}>{fieldNote}</p>}
+    </div>
   )
 }
 
@@ -769,6 +862,66 @@ function scopedCss(s: string): string {
 [data-theme="light"] .${s}-btn-ghost:hover{background:${FRAME.light.ghostBgHover}}
 .${s}-arrow{color:var(--accent);font-weight:700;transition:transform .2s ease}
 .${s}-btn-ghost:hover .${s}-arrow{transform:translateX(3px)}
+
+/* ===== ON-BRAND FIELD SLOT (code / PIN inputs on the dock) ===== */
+.${s}-fieldslot{display:flex;flex-direction:column;gap:9px}
+/* The app supplies the input; the slot styles bare inputs + the opt-in class so
+   a plain <input> reads on the duotone dock (glass/edge, like the CTA + meta). */
+.${s}-fieldslot input,
+.${s}-fieldslot select,
+.${s}-fieldslot textarea,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}{
+  width:100%;box-sizing:border-box;height:52px;
+  font-family:${BODY_FONT};font-size:16px;font-weight:600;letter-spacing:.1px;
+  color:${FRAME.dark.heroInk};
+  background:${FRAME.dark.chipBg};
+  border:1px solid ${FRAME.dark.chipHair};border-radius:15px;
+  padding:0 16px;outline:none;-webkit-appearance:none;appearance:none;
+  box-shadow:0 1px 0 var(--chip-sheen) inset;
+  backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);
+  transition:border-color .18s ease, box-shadow .25s ease, background .2s ease;
+}
+.${s}-fieldslot textarea{height:auto;min-height:84px;padding:13px 16px;line-height:1.4;resize:vertical}
+[data-theme="light"] .${s}-fieldslot input,
+[data-theme="light"] .${s}-fieldslot select,
+[data-theme="light"] .${s}-fieldslot textarea,
+[data-theme="light"] .${s}-fieldslot .${DUOTONE_FIELD_CLASS}{
+  color:${FRAME.light.heroInk};background:${FRAME.light.chipBg};border-color:${FRAME.light.chipHairSoft};
+}
+.${s}-fieldslot input::placeholder,
+.${s}-fieldslot textarea::placeholder,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}::placeholder{color:${FRAME.dark.heroFaint};font-weight:500}
+[data-theme="light"] .${s}-fieldslot input::placeholder,
+[data-theme="light"] .${s}-fieldslot textarea::placeholder,
+[data-theme="light"] .${s}-fieldslot .${DUOTONE_FIELD_CLASS}::placeholder{color:${FRAME.light.heroFaint}}
+.${s}-fieldslot input:hover,
+.${s}-fieldslot select:hover,
+.${s}-fieldslot textarea:hover,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}:hover{border-color:color-mix(in srgb,var(--accent) 38%, ${FRAME.dark.chipHair})}
+[data-theme="light"] .${s}-fieldslot input:hover,
+[data-theme="light"] .${s}-fieldslot select:hover,
+[data-theme="light"] .${s}-fieldslot textarea:hover,
+[data-theme="light"] .${s}-fieldslot .${DUOTONE_FIELD_CLASS}:hover{border-color:color-mix(in srgb,var(--accent) 38%, ${FRAME.light.chipHairSoft})}
+.${s}-fieldslot input:focus,
+.${s}-fieldslot input:focus-visible,
+.${s}-fieldslot select:focus,
+.${s}-fieldslot select:focus-visible,
+.${s}-fieldslot textarea:focus,
+.${s}-fieldslot textarea:focus-visible,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}:focus,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}:focus-visible{
+  border-color:var(--accent);
+  box-shadow:0 1px 0 var(--chip-sheen) inset, 0 0 0 3px var(--halo);
+}
+.${s}-fieldslot input:disabled,
+.${s}-fieldslot select:disabled,
+.${s}-fieldslot textarea:disabled,
+.${s}-fieldslot .${DUOTONE_FIELD_CLASS}:disabled{opacity:.55;cursor:default}
+.${s}-fieldnote{
+  margin:0;text-align:center;color:${FRAME.dark.footInk};
+  font-family:${HERO_FONT};font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+}
+[data-theme="light"] .${s}-fieldnote{color:${FRAME.light.footInk}}
 
 .${s}-foot{display:flex;align-items:center;justify-content:center;gap:8px;padding-top:7px;color:${FRAME.dark.footInk};font-size:11px;font-weight:500;letter-spacing:.04em}
 [data-theme="light"] .${s}-foot{color:${FRAME.light.footInk}}

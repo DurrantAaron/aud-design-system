@@ -25,11 +25,32 @@ export type { SplashScreenProps, SplashAction } from './components/SplashScreen'
 export { AppMark } from './components/AppMark'
 export type { AppMarkProps } from './components/AppMark'
 
-export { EditorialSplash, MsLogo } from './components/EditorialSplash'
+export { EditorialSplash, MsLogo, EDITORIAL_FIELD_CLASS } from './components/EditorialSplash'
 export type { EditorialSplashProps, EditorialFamily } from './components/EditorialSplash'
 
-export { DuotoneSplash } from './components/DuotoneSplash'
+export {
+  DuotoneSplash,
+  DUOTONE_FIELD_CLASS,
+  duotoneFieldInputClass,
+} from './components/DuotoneSplash'
 export type { DuotoneSplashProps, DuotoneMeta } from './components/DuotoneSplash'
+
+export { DuotoneMissionControl } from './components/DuotoneMissionControl'
+export type {
+  DuotoneMissionControlProps,
+  MissionControlOps,
+  MissionControlApp,
+} from './components/DuotoneMissionControl'
+
+// The OS-style hub. Its App/Ops shapes mirror the ones above, so only the
+// component + its own Props type are re-exported (avoids a duplicate-name clash).
+export { MissionControlHub } from './components/MissionControlHub'
+export type { MissionControlHubProps } from './components/MissionControlHub'
+
+// EditorialMissionControl reuses the shared MissionControlOps / MissionControlApp
+// shapes already exported above, so only its own component + props are re-exported.
+export { EditorialMissionControl } from './components/EditorialMissionControl'
+export type { EditorialMissionControlProps } from './components/EditorialMissionControl'
 
 export { FamilyProvider, useFamily } from './components/FamilyProvider'
 export type { FamilyProviderProps, FamilyContextValue } from './components/FamilyProvider'

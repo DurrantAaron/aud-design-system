@@ -161,7 +161,42 @@ export interface EditorialSplashProps
   titleMax?: number
   /** Legible floor for the auto-fit title, in px. Default 30. */
   titleMin?: number
+  /**
+   * The app's own field(s) — e.g. a CODE/PIN `<input>` for the suite's
+   * passcode-authenticated apps. Rendered inside an editorially-styled field
+   * slot (a fine-ruled input area). A plain `<input>` (and `<select>` /
+   * `<textarea>`) passed in here inherits the on-brand styling automatically;
+   * see {@link EDITORIAL_FIELD_CLASS} to opt a specific element in explicitly.
+   * When omitted, the splash renders exactly as before — actions-only.
+   */
+  children?: React.ReactNode
+  /**
+   * Render `children` (the field slot) ABOVE the primary action, for CODE/PIN
+   * apps where the input comes first. Default false — OAuth-first, the CTA slab
+   * stays on top and the field slot sits below the actions (like the base
+   * `SplashScreen`).
+   */
+  formMode?: boolean
+  /** Alias for {@link EditorialSplashProps.formMode}. */
+  actionsLast?: boolean
 }
+
+/**
+ * Stable, documented class an app can put on its own input so it picks up the
+ * editorial field styling explicitly. (Any plain `<input>` / `<select>` /
+ * `<textarea>` inside the field slot already inherits the styling without it —
+ * this is the opt-in escape hatch for wrapped or custom-className inputs.)
+ *
+ * ```tsx
+ * import { EditorialSplash, EDITORIAL_FIELD_CLASS } from '@aud/brand'
+ *
+ * <EditorialSplash …formMode primary={…}>
+ *   <input className={EDITORIAL_FIELD_CLASS} inputMode="numeric"
+ *          placeholder="Team passcode" />
+ * </EditorialSplash>
+ * ```
+ */
+export const EDITORIAL_FIELD_CLASS = 'aud-editorial-field'
 
 const TITLE_SAFETY = 0.985 // lines must use <= 98.5% of available width
 const FIT_PRECISION = 0.25 // px — binary search convergence
@@ -205,6 +240,23 @@ function MsLogo() {
  *   secondary={{ label: 'Enter with a team passcode', onClick: passcode }}
  * />
  * ```
+ *
+ * For the suite's CODE/PIN apps, pass the field(s) as `children` and set
+ * `formMode` to lift them above the CTA. A plain `<input>` reads on-brand
+ * automatically inside the fine-ruled field slot:
+ *
+ * ```tsx
+ * <EditorialSplash
+ *   family="audits" category="Audits" appName="Venue Audit"
+ *   primary={{ label: 'Enter', onClick: submit, loading }}
+ *   formMode
+ * >
+ *   <label htmlFor="code">Team passcode</label>
+ *   <input id="code" inputMode="numeric" autoComplete="one-time-code"
+ *          value={code} onChange={(e) => setCode(e.target.value)}
+ *          placeholder="••••••" />
+ * </EditorialSplash>
+ * ```
  */
 export function EditorialSplash({
   appName,
@@ -223,9 +275,16 @@ export function EditorialSplash({
   edition,
   titleMax = 88,
   titleMin = 30,
+  children,
+  formMode,
+  actionsLast,
   style,
   ...rest
 }: EditorialSplashProps) {
+  // Field slot ordering mirrors the base SplashScreen: formMode / actionsLast
+  // puts the app's fields ABOVE the primary action (CODE/PIN-first); otherwise
+  // they sit below the actions (OAuth-first default).
+  const fieldsFirst = !!(formMode || actionsLast)
   // Family + theme follow the enclosing provider when not set explicitly.
   const ctx = useFamily()
   const resolvedFamily: EditorialFamily = family ?? (ctx?.key as EditorialFamily) ?? 'audits'
@@ -444,6 +503,49 @@ export function EditorialSplash({
 }
 .${scope} .byline .dot{width:3px;height:3px;border-radius:50%;background:${liveAccent};display:inline-block}
 
+/* ===== FIELD SLOT — the app's CODE/PIN input, set editorially ===== */
+/* A fine-ruled input area: no boxy chrome, just a hairline baseline rule that
+   warms to the live accent on focus — the masthead rule language, applied to a
+   form field. Plain <input>/<select>/<textarea> the app passes in inherits this. */
+.${scope} .field-slot{display:flex;flex-direction:column;gap:14px}
+.${scope} .field-slot.above{margin-bottom:24px}
+.${scope} .field-slot.below{margin-top:22px}
+.${scope} .field-slot input,
+.${scope} .field-slot select,
+.${scope} .field-slot textarea,
+.${scope} .field-slot .${EDITORIAL_FIELD_CLASS}{
+  width:100%;display:block;margin:0;appearance:none;-webkit-appearance:none;
+  background:transparent;color:${p.ink};
+  font-family:${fonts};font-size:17px;font-weight:400;line-height:1.5;
+  letter-spacing:.01em;
+  border:none;border-bottom:1px solid ${p.rule};border-radius:0;
+  padding:10px 2px;outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.${scope} .field-slot textarea{resize:vertical;min-height:72px}
+.${scope} .field-slot input::placeholder,
+.${scope} .field-slot textarea::placeholder,
+.${scope} .field-slot .${EDITORIAL_FIELD_CLASS}::placeholder{
+  color:${p.inkFaint};font-style:italic;opacity:1;
+}
+.${scope} .field-slot input:focus,
+.${scope} .field-slot select:focus,
+.${scope} .field-slot textarea:focus,
+.${scope} .field-slot .${EDITORIAL_FIELD_CLASS}:focus{
+  border-bottom-color:${isDark ? liveAccent : ink.deep};
+  box-shadow:0 1px 0 0 ${isDark ? liveAccent : ink.deep};
+}
+.${scope} .field-slot input:disabled,
+.${scope} .field-slot select:disabled,
+.${scope} .field-slot textarea:disabled,
+.${scope} .field-slot .${EDITORIAL_FIELD_CLASS}:disabled{opacity:.55;cursor:default}
+/* a label inside the slot reads as an editorial small-caps eyebrow */
+.${scope} .field-slot label{
+  font-family:${fonts};font-size:9.5px;font-weight:500;
+  letter-spacing:.3em;text-transform:uppercase;color:${p.inkFaint};
+  margin-bottom:-6px;
+}
+
 /* ===== ACTIONS ===== */
 .${scope} .foot{position:relative;z-index:2}
 .${scope} .actions{display:flex;flex-direction:column;align-items:stretch;gap:0}
@@ -498,8 +600,10 @@ export function EditorialSplash({
   .${scope} .display .line2{animation:${scope}-rise .95s .5s cubic-bezier(.16,.8,.2,1) both}
   .${scope} .standfirst{animation:${scope}-rise .85s .64s cubic-bezier(.2,.75,.2,1) both}
   .${scope} .byline{animation:${scope}-fade .8s .76s ease both}
+  .${scope} .field-slot.above{animation:${scope}-rise .85s .8s cubic-bezier(.2,.75,.2,1) both}
   .${scope} .btn-primary{animation:${scope}-rise .85s .86s cubic-bezier(.2,.75,.2,1) both}
   .${scope} .secondary-wrap{animation:${scope}-fade .8s .98s ease both}
+  .${scope} .field-slot.below{animation:${scope}-rise .85s 1s cubic-bezier(.2,.75,.2,1) both}
   .${scope} .colophon{animation:${scope}-fade .9s 1.06s ease both}
 }
 @keyframes ${scope}-wipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -551,6 +655,10 @@ export function EditorialSplash({
 
         {/* ACTIONS */}
         <div className="foot">
+          {/* App field(s) — above the primary in formMode/actionsLast. */}
+          {children != null && fieldsFirst && (
+            <div className="field-slot above">{children}</div>
+          )}
           <div className="actions">
             <button
               type="button"
@@ -573,6 +681,10 @@ export function EditorialSplash({
                 <SecondaryLabel label={secondary.loading ? secondary.loadingLabel ?? secondary.label : secondary.label} />
               </button>
             </div>
+          )}
+          {/* App field(s) — below the actions by default (OAuth-first). */}
+          {children != null && !fieldsFirst && (
+            <div className="field-slot below">{children}</div>
           )}
           <div className="colophon">
             <span className="maker">
