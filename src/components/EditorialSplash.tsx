@@ -370,6 +370,21 @@ export function EditorialSplash({
     document.head.appendChild(link)
   }, [])
 
+  // Paint html/body to the splash backdrop while mounted so an iOS standalone
+  // PWA never flashes a white band behind a translucent status bar / overscroll.
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return
+    const html = document.documentElement
+    const prevHtml = html.style.backgroundColor
+    const prevBody = document.body.style.backgroundColor
+    html.style.backgroundColor = p.behind
+    document.body.style.backgroundColor = p.behind
+    return () => {
+      html.style.backgroundColor = prevHtml
+      document.body.style.backgroundColor = prevBody
+    }
+  }, [p.behind])
+
   // Scope every rule to this instance so multiple splashes / themes coexist.
   const uid = useId().replace(/[:]/g, '')
   const scope = `aud-editorial-${uid}`
@@ -391,15 +406,14 @@ export function EditorialSplash({
     >
       <style>{`
 .${scope}{
-  min-height:100dvh;width:100%;
-  display:flex;align-items:center;justify-content:center;
+  position:relative;height:100dvh;width:100%;overflow:hidden;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 .${scope} *{box-sizing:border-box}
 .${scope} .stage{
-  position:relative;width:100%;max-width:480px;min-height:100dvh;
+  position:absolute;inset:0;margin-inline:auto;max-width:480px;min-height:0;
   display:flex;flex-direction:column;
-  padding:44px 30px 28px;overflow:hidden;
+  padding:max(28px, env(safe-area-inset-top)) max(30px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom)) max(30px, env(safe-area-inset-left));overflow:hidden;
   background:radial-gradient(125% 80% at 50% -12%, ${p.paper} 0%, ${p.paper} 50%, ${p.paper2} 100%);
 }
 .${scope} .stage::before{
@@ -432,7 +446,7 @@ export function EditorialSplash({
 .${scope} .rule-bot{height:.6px;background:${p.rule};margin-top:1px;transform-origin:left center}
 
 /* ===== HERO ===== */
-.${scope} .hero{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:4px 0 2px}
+.${scope} .hero{position:relative;z-index:2;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:4px 0 2px}
 
 /* the seal / identity mark — embossed medallion (light) / debossed glow (dark) */
 .${scope} .seal{

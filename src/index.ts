@@ -64,3 +64,8 @@ export type { AccentName } from './tokens'
 
 export { familyPresets, reservedAccent } from './families'
 export type { FamilyKey, FamilyPreset } from './families'
+
+// PWA helper: keep an installed (Home Screen / standalone) app on the latest
+// deploy automatically — no remove/re-add of the icon needed.
+export { startAutoUpdate } from './autoUpdate'
+export type { AutoUpdateOptions } from './autoUpdate'
