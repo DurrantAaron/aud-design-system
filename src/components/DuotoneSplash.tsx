@@ -754,7 +754,6 @@ function scopedCss(s: string): string {
   display:flex;align-items:center;gap:9px;padding:7px 12px 7px 8px;border-radius:999px;
   background:${FRAME.dark.chipBg};border:1px solid ${FRAME.dark.chipHair};
   box-shadow:0 1px 0 var(--chip-sheen) inset, 0 8px 20px -14px rgba(0,0,0,.7);
-  backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);
 }
 [data-theme="light"] .${s}-brandchip{background:${FRAME.light.chipBg};border-color:${FRAME.light.chipHair};}
 .${s}-mark{
@@ -777,7 +776,6 @@ function scopedCss(s: string): string {
   padding:7px 12px;border-radius:999px;
   background:${FRAME.dark.chipBg};border:1px solid ${FRAME.dark.chipHairSoft};
   box-shadow:0 1px 0 var(--chip-sheen) inset, 0 8px 20px -14px rgba(0,0,0,.7);
-  backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);
 }
 [data-theme="light"] .${s}-live{color:${FRAME.light.heroInk};background:${FRAME.light.chipBg};border-color:${FRAME.light.chipHairSoft}}
 .${s}-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
@@ -855,7 +853,6 @@ function scopedCss(s: string): string {
   height:50px;color:${FRAME.dark.ghostInk};background:${FRAME.dark.ghostBg};
   border:1px solid ${FRAME.dark.ghostHair};font-weight:600;font-size:14.5px;
   box-shadow:0 1px 0 var(--chip-sheen) inset;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
 [data-theme="light"] .${s}-btn-ghost{color:${FRAME.light.ghostInk};background:${FRAME.light.ghostBg};border-color:${FRAME.light.ghostHair}}
 .${s}-btn-ghost:hover{background:${FRAME.dark.ghostBgHover}}
@@ -878,7 +875,6 @@ function scopedCss(s: string): string {
   border:1px solid ${FRAME.dark.chipHair};border-radius:15px;
   padding:0 16px;outline:none;-webkit-appearance:none;appearance:none;
   box-shadow:0 1px 0 var(--chip-sheen) inset;
-  backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);
   transition:border-color .18s ease, box-shadow .25s ease, background .2s ease;
 }
 .${s}-fieldslot textarea{height:auto;min-height:84px;padding:13px 16px;line-height:1.4;resize:vertical}

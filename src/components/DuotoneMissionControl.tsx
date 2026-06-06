@@ -913,7 +913,6 @@ function scopedCss(s: string): string {
   display:flex;align-items:center;gap:9px;padding:6px 12px 6px 7px;border-radius:999px;
   background:var(--chip-bg);border:1px solid var(--chip-hair);
   box-shadow:0 1px 0 var(--chip-sheen) inset, 0 8px 20px -14px rgba(0,0,0,.7);
-  backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);
 }
 .${s}-mark{
   width:24px;height:24px;border-radius:8px;display:grid;place-items:center;
@@ -932,7 +931,6 @@ function scopedCss(s: string): string {
   padding:7px 12px;border-radius:999px;
   background:var(--chip-bg);border:1px solid var(--chip-hair-soft);
   box-shadow:0 1px 0 var(--chip-sheen) inset, 0 8px 20px -14px rgba(0,0,0,.7);
-  backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);
 }
 .${s}-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
   box-shadow:0 0 0 3px var(--halo);animation:${s}-pulse 2.6s ease-in-out infinite}
