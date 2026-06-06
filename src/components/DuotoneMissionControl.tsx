@@ -571,14 +571,16 @@ export function DuotoneMissionControl({
       <div className={`${scope}-stage`}>
         {/* ============ 1 · FRAMED DUOTONE HEADER PLATE ============ */}
         <div className={`${scope}-plate-card`}>
-          <div className={`${scope}-plate`} />
-          <div className={`${scope}-mesh`} />
-          <div className={`${scope}-streak`} />
-          <div className={`${scope}-leak`} />
-          <div className={`${scope}-lift`} />
-          <div className={`${scope}-grain`} />
-          <div className={`${scope}-vignette`} />
-          <div className={`${scope}-scrim`} />
+          <div className={`${scope}-cardbg`}>
+            <div className={`${scope}-plate`} />
+            <div className={`${scope}-mesh`} />
+            <div className={`${scope}-streak`} />
+            <div className={`${scope}-leak`} />
+            <div className={`${scope}-lift`} />
+            <div className={`${scope}-grain`} />
+            <div className={`${scope}-vignette`} />
+            <div className={`${scope}-scrim`} />
+          </div>
 
           <div className={`${scope}-pc`}>
             <div className={`${scope}-topbar`}>
@@ -826,6 +828,11 @@ function scopedCss(s: string): string {
   animation:${s}-cardIn 1s cubic-bezier(.2,.8,.2,1) both;
 }
 [data-theme="light"] .${s}-plate-card{box-shadow:${THEME.light.cardShadow.replace(/,/g, ',\n    ')};}
+
+/* Clip the blurred/blended bg layers to the rounded shape — iOS Safari leaks
+   composited children past border-radius+overflow:hidden (square corners). */
+.${s}-cardbg{position:absolute;inset:0;z-index:0;border-radius:24px;overflow:hidden;
+  clip-path:inset(0 round 24px);-webkit-clip-path:inset(0 round 24px);pointer-events:none}
 
 .${s}-plate{position:absolute;inset:0;z-index:0;overflow:hidden;
   background:
