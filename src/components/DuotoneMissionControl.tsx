@@ -1010,7 +1010,11 @@ function scopedCss(s: string): string {
 .${s}-legend span{display:flex;align-items:center;gap:4px;font-size:8px;letter-spacing:.08em}
 .${s}-sw{width:7px;height:7px;border-radius:2px;flex:none}
 
-.${s}-rows{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px}
+/* Rows scroll within the launcher area when they exceed it (e.g. 8 apps on an
+   iPhone SE in standalone), so the bottom apps + footer stay reachable instead
+   of being clipped by the stage's overflow:hidden. Fits-no-scroll on tall phones. */
+.${s}-rows{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;
+  overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 
 .${s}-row{
   position:relative;display:flex;align-items:center;gap:11px;width:100%;text-align:left;
