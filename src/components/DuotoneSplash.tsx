@@ -471,72 +471,30 @@ export function DuotoneSplash({
       <style>{scopedCss(scope)}</style>
 
       <div className={`${scope}-stage`}>
-        {/* THE FRAMED DUOTONE CARD */}
-        <div className={`${scope}-card`}>
-          <div className={`${scope}-cardbg`}>
-            <div className={`${scope}-plate`} />
-            <div className={`${scope}-mesh`} />
-            <div className={`${scope}-streak`} />
-            <div className={`${scope}-leak`} />
-            <div className={`${scope}-lift`} />
-            <div className={`${scope}-grain`} />
-            <div className={`${scope}-vignette`} />
-            <div className={`${scope}-scrim`} />
+        {/* FULL-BLEED DUOTONE FILL — the colour runs edge to edge */}
+        <div className={`${scope}-cardbg`}>
+          <div className={`${scope}-plate`} />
+          <div className={`${scope}-mesh`} />
+          <div className={`${scope}-streak`} />
+          <div className={`${scope}-leak`} />
+          <div className={`${scope}-lift`} />
+          <div className={`${scope}-grain`} />
+          <div className={`${scope}-vignette`} />
+          <div className={`${scope}-scrim`} />
+        </div>
+
+        {/* IDENTITY — what app this is, nothing more */}
+        <div className={`${scope}-hero`}>
+          <div className={`${scope}-catrow`}>
+            <span className={`${scope}-pill`}>{category}</span>
           </div>
-
-          <div className={`${scope}-content`}>
-            <div className={`${scope}-topbar`}>
-              <div className={`${scope}-brandchip`}>
-                <span className={`${scope}-mark`}>{mark ?? 'A'}</span>
-                <b>AuD</b>
-                <span>{suite}</span>
-              </div>
-              <div className={`${scope}-live`}>
-                <span className={`${scope}-dot`} />
-                <span>{liveword}</span>
-              </div>
-            </div>
-
-            <div className={`${scope}-hero`}>
-              <div className={`${scope}-catrow`}>
-                <span className={`${scope}-pill`}>{category}</span>
-              </div>
-              <h1
-                ref={nameRef}
-                className={`${scope}-name${fitted ? ` ${scope}-name-fit` : ''}`}
-              >
-                {appName}
-              </h1>
-              {description && <p className={`${scope}-desc`}>{description}</p>}
-
-              {/* IDENTITY metadata only — mode / sync / access. No scores. */}
-              {(meta?.mode || meta?.sync || meta?.access) && (
-                <div className={`${scope}-meta`}>
-                  {meta?.mode && (
-                    <div>
-                      <div className={`${scope}-k`}>Mode</div>
-                      <div className={`${scope}-v`}>{meta.mode}</div>
-                    </div>
-                  )}
-                  {meta?.sync && (
-                    <div>
-                      <div className={`${scope}-k`}>Sync</div>
-                      <div className={`${scope}-v`}>
-                        <span className={`${scope}-live-dot`} />
-                        Live {meta.sync}
-                      </div>
-                    </div>
-                  )}
-                  {meta?.access && (
-                    <div>
-                      <div className={`${scope}-k`}>Access</div>
-                      <div className={`${scope}-v`}>{meta.access}</div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
+          <h1
+            ref={nameRef}
+            className={`${scope}-name${fitted ? ` ${scope}-name-fit` : ''}`}
+          >
+            {appName}
+          </h1>
+          {description && <p className={`${scope}-desc`}>{description}</p>}
         </div>
 
         {/* ACTION DOCK */}
@@ -554,11 +512,10 @@ export function DuotoneSplash({
             </DuotoneFieldSlot>
           )}
           <div className={`${scope}-foot`}>
-            Crafted by{' '}
+            powered by{' '}
             <span className={`${scope}-seal`}>
               Au<b>D</b>
-            </span>{' '}
-            &middot; powered by the AuD Operations Suite
+            </span>
           </div>
         </div>
       </div>
@@ -655,10 +612,10 @@ function scopedCss(s: string): string {
 @keyframes ${s}-pulse{0%,100%{opacity:1;box-shadow:0 0 0 3px var(--halo)}50%{opacity:.55;box-shadow:0 0 0 6px transparent}}
 
 .${s}-stage{
-  position:absolute;inset:0;margin-inline:auto;max-width:430px;min-height:0;
-  background:radial-gradient(135% 88% at 50% -16%, var(--bg-2) 0%, var(--bg) 58%, var(--bg-floor) 100%);
-  display:flex;flex-direction:column;justify-content:center;overflow:hidden;
-  padding:max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  position:absolute;inset:0;margin-inline:auto;max-width:520px;min-height:0;
+  background:var(--duo-dark);
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:max(26px, env(safe-area-inset-top)) max(26px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(26px, env(safe-area-inset-left));
 }
 .${s}-stage::before{
   content:"";position:absolute;left:50%;bottom:-12%;width:120%;height:46%;
@@ -667,21 +624,10 @@ function scopedCss(s: string): string {
   opacity:var(--page-halo-op);pointer-events:none;filter:blur(8px);
 }
 
-.${s}-card{
-  position:relative;flex:1 1 0;min-height:0;max-height:600px;border-radius:28px;overflow:hidden;
-  background:var(--duo-dark);
-  box-shadow:${FRAME.dark.cardShadow.replace(/,/g, ',\n    ')};
-  display:flex;flex-direction:column;isolation:isolate;
-  animation:${s}-cardIn 1s cubic-bezier(.2,.8,.2,1) both;
-}
-[data-theme="light"] .${s}-card{box-shadow:${FRAME.light.cardShadow.replace(/,/g, ',\n    ')};}
-
-/* Clips the blurred/blended bg layers to the card's rounded shape. iOS Safari
-   does NOT clip composited children (filter/blend/transform) to a parent's
-   border-radius+overflow:hidden — they leak square corners. clip-path on this
-   wrapper forces the rounded clip while the card keeps its drop shadow. */
-.${s}-cardbg{position:absolute;inset:0;z-index:0;border-radius:28px;overflow:hidden;
-  clip-path:inset(0 round 28px);-webkit-clip-path:inset(0 round 28px);
+/* Full-bleed duotone backdrop — the colour runs edge to edge behind the
+   content (no framed card). overflow:hidden keeps the blurred plate layers
+   inside the screen. */
+.${s}-cardbg{position:absolute;inset:0;z-index:0;overflow:hidden;
   transform:translateZ(0);isolation:isolate;pointer-events:none}
 
 .${s}-plate{position:absolute;inset:0;z-index:0;overflow:hidden;
@@ -762,8 +708,8 @@ function scopedCss(s: string): string {
   background:linear-gradient(180deg, var(--scrim-top) 0%, transparent 20%, transparent 40%, var(--scrim-mid) 72%, var(--scrim-bot) 100%);
 }
 
-.${s}-content{position:relative;z-index:5;flex:1;min-height:0;display:flex;flex-direction:column;
-  padding:clamp(16px,4.5vh,22px) clamp(18px,5vw,22px) clamp(16px,3.2vh,24px);animation:${s}-fadeUp .9s .15s cubic-bezier(.2,.8,.2,1) both}
+/* identity + dock sit directly on the full-bleed stage (no inner card/content
+   wrapper); the stage padding already insets them from the safe-area edges. */
 
 .${s}-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .${s}-brandchip{
@@ -797,7 +743,7 @@ function scopedCss(s: string): string {
 .${s}-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
   box-shadow:0 0 0 3px var(--halo);animation:${s}-pulse 2.6s ease-in-out infinite}
 
-.${s}-hero{margin-top:auto;display:flex;flex-direction:column}
+.${s}-hero{position:relative;z-index:5;margin-top:auto;display:flex;flex-direction:column;animation:${s}-fadeUp .9s .15s cubic-bezier(.2,.8,.2,1) both}
 .${s}-catrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}
 .${s}-pill{
   font-family:${HERO_FONT};font-size:10px;font-weight:600;
@@ -835,7 +781,7 @@ function scopedCss(s: string): string {
 [data-theme="light"] .${s}-v{color:${FRAME.light.heroInk}}
 .${s}-live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--halo);flex:0 0 auto;animation:${s}-pulse 2.6s ease-in-out infinite}
 
-.${s}-dock{flex:0 0 auto;padding:clamp(12px,2.4vh,18px) 6px 2px;display:flex;flex-direction:column;gap:clamp(9px,1.5vh,11px);animation:${s}-fadeUp .9s .28s cubic-bezier(.2,.8,.2,1) both}
+.${s}-dock{position:relative;z-index:5;flex:0 0 auto;padding:clamp(14px,2.6vh,20px) 0 2px;display:flex;flex-direction:column;gap:clamp(9px,1.5vh,11px);animation:${s}-fadeUp .9s .28s cubic-bezier(.2,.8,.2,1) both}
 .${s}-btn{
   width:100%;border:0;font-family:${BODY_FONT};
   display:flex;align-items:center;justify-content:center;gap:11px;
