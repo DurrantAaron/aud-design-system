@@ -1,24 +1,25 @@
 ---
-# state.md — aud-design-system — 2026-06-07 17:06 AEST
-Active goal: Splash-skin system for the suite is shipped + saved; the still-open strategic decision is the "Wayfinder" colour direction (additive vs supersede). The latest run productionised the sign-in splashes (full-bleed) and saved a Wordmark skin revision.
+# state.md — aud-design-system — 2026-06-07 18:04 AEST
+Active goal: Concurrent Claude sessions on this repo are now collision-proof (worktree-per-aspect); the live open design call remains the Wayfinder colour direction (PR #5), with glyph + splash work now isolated in their own worktrees.
 Decisions locked:
-- THREE selectable splash skins, all drop-in (same props: appName/family/theme/formMode+children/primary/secondary): `DuotoneSplash`, `EditorialSplash`, and NEW `WordmarkSplash`. Hubs: `DuotoneMissionControl`, `EditorialMissionControl`.
-- `DuotoneSplash` is now FULL-BLEED (#16): the duotone colour fills the screen edge-to-edge (no framed card), top chrome removed (brand chip + SECURE pill + meta), foot = plain "powered by AuD".
-- iOS-standalone correctness baked into every takeover: absolute stage in a fixed-height `overflow:hidden` outer; `min-height:0`; safe-area-inset padding; `useTakeoverBody(bg)` paints html/body + locks document scroll (overscroll-behavior:none) so iOS can't rubber-band-elongate the 100dvh stage; wordmark/title auto-fit. (Root cause earlier: a `height:100dvh` stage that is a FLEX ITEM in a min-height wrapper inflates to content instead of clamping.)
-- `startAutoUpdate()` exported (PWA): installed apps reload to a new deploy on foreground-return — no icon re-add (needs no-cache `/` + `/index.html` headers, which both apps now have).
-- `WordmarkSplash` (#17) = the early AUDITOR/CLEANSE/FIRSTAID stencil wordmark + instrument chrome (REV·SECURE, grid, accent glow, corner ticks, BUILT IN AUSTRALIA). SAVED AS A REVISION (#18, design/REVISIONS.md + design/revisions/wordmark-splash.png) — NOT wired into any app (Aaron's call). Codenames kept as-is.
-- Per-app theme is set by each app, not here: Precinct Ops = dark, First Aid = light.
-- (carry, Wayfinder) "Wayfinder" remains an ADDITIVE proposal under proposals/wayfinder/ in open PR #5 — does NOT modify canonical @aud/brand. Per-app map: VA amber #BE8A2E · CL green #3F8B5C · FA coral #C8483E · CO blue #2E6FAE · SE indigo #5A4F9C · GS plum #9E4A80.
+- [NEW] Trunk-mirror model: ~/projects/aud-design-system stays on clean `main`; ALL work happens in ~/projects/_wt/<aspect> on `feat/<aspect>` branches. One aspect → one branch → one PR. This RESOLVES the prior "concurrent edits clobber each other" problem.
+- [NEW] `worktree-guard` PreToolUse hook (in ~/.claude, backed up in mempalace repo) enforces it across every ~/projects repo: blocks Edit/Write to a primary checkout sitting on main/master. `state.md` excepted (wrap convention). Fails open on uncertainty.
+- [NEW] ~/projects/_wt/ is the canonical worktree location (not ~/worktrees/). Glyph design provenance lives in main under design/; shipped glyphs (src/glyphs) were already in main.
+- THREE drop-in splash skins (same props): `DuotoneSplash` (FULL-BLEED, #16), `EditorialSplash`, `WordmarkSplash` (#17, saved-only, NOT wired into any app). Hubs: `DuotoneMissionControl`, `EditorialMissionControl`. Per-app theme set by each app, not here.
+- (carry) Wayfinder remains an ADDITIVE proposal under proposals/wayfinder/ in open PR #5 — does NOT modify canonical @aud/brand. Per-app map: VA #BE8A2E · CL #3F8B5C · FA #C8483E · CO #2E6FAE · SE #5A4F9C · GS #9E4A80.
 Open questions:
-- (carry) Wayfinder: additive (beside @aud/brand) vs SUPERSEDE (rewrite canonical tokens the 3 live apps pull)? Merge PR #5 as-is or iterate? [CONFIRM]
-- (carry) Pre-existing IVY leak on main: showcase/src/App.tsx has "…· IVY Precinct" — de-identify in a separate PR (PUBLIC repo). [CONFIRM]
-- ⚠️ CONCURRENT EDITS: another actor/session also commits here (e.g. #15 hub launcher-scroll fix → bd032e6, and the Wayfinder PR #5). Always `git pull` before branching; my splash bumps are forward of bd032e6 so they merge clean.
-- Wire `WordmarkSplash` into an app to trial it live? (currently saved-only) [CONFIRM]
-Built/shipped since last update (all merged to main):
-- #11 iOS standalone safe-area + body paint; #12 iPhone-fit (absolute stage); #13 Editorial fit + startAutoUpdate; #14 scroll-lock (useTakeoverBody); #16 full-bleed DuotoneSplash; #17 WordmarkSplash skin; #18 wordmark saved as revision. (#15 hub-scroll was the concurrent session.)
-Next session starts with: Decide Wayfinder additive-vs-supersede (PR #5), or wire WordmarkSplash into a pilot app — and de-identify the showcase IVY string.
+- (carry) Wayfinder: additive (beside @aud/brand) vs SUPERSEDE canonical tokens? Merge PR #5 as-is or iterate? [CONFIRM]
+- (carry) ⚠️ Pre-existing IVY leak on main: showcase/src/App.tsx has "…· IVY Precinct" — de-identify in a separate PR (this repo is PUBLIC). [CONFIRM]
+- (carry) Wire `WordmarkSplash` into an app to trial it live? (currently saved-only) [CONFIRM]
+- [NEW] ~9 other already-merged remote branches still on origin (feat/wordmark-splash, feat/splash-fullbleed, fix/ios-overscroll, fix/ios-standalone, fix/splash-fit, feat/app-mark, feat/editorial-fit-autoupdate, docs/wordmark-revision, state/wrap-20260607) — sweep them too? [CONFIRM]
+- [NEW] atmos showcase harness on feat/splash predates recent SplashScreen changes — prop sanity-check when splash work resumes. [CONFIRM]
+- [NEW] finalists.png + home-screen.png filed with the splash/atmosphere renders; move to glyphs if mis-sorted. [CONFIRM]
+Built/shipped since last update:
+- 4df09e9 feat(design): glyph provenance — generator, source SVGs, direction doc + renders (#20)
+Next session starts with: cd into ~/projects/_wt/aud-glyphs or ~/projects/_wt/aud-splash (NEVER the trunk checkout) and continue that aspect — feat/splash already carries the rescued atmosphere provenance, ready to PR. Or resolve Wayfinder (PR #5) / de-identify the showcase IVY string.
 Out of scope right now:
-- Wayfinder per-app rollout into live apps.
-- Editorial skin is phone-ready but unused by any live app.
+- Other repos' stale-branch cleanup (pending the CONFIRM above)
+- Regenerating glyphs (generator landed; no rebuild needed)
+- proposal/wayfinder rollout into live apps; Editorial skin live rollout
 ---
-Previous wrap: b32c163
+Previous wrap: 1b2a567
