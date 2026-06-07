@@ -1,25 +1,24 @@
 ---
-# state.md — aud-design-system — 2026-06-06 07:20 AEST
-Active goal: Settle the venue-ops suite's cross-app colour/theme direction — the fresh "Wayfinder" proposal vs the adopted @aud/brand family model — then roll the chosen one out.
+# state.md — aud-design-system — 2026-06-07 17:06 AEST
+Active goal: Splash-skin system for the suite is shipped + saved; the still-open strategic decision is the "Wayfinder" colour direction (additive vs supersede). The latest run productionised the sign-in splashes (full-bleed) and saved a Wordmark skin revision.
 Decisions locked:
-- This session designed a FRESH scheme ("Wayfinder") at Aaron's request — set @aud/brand aside as the *basis* but kept its proven STRUCTURE: constant neutrals + one accent per app + light/dark.
-- One accent per app (colour alone distinguishes apps). Launcher (precinct-ops-dashboard) is a NEUTRAL HUB showing every line accent at once — no accent of its own.
-- This pass is SPEC/DECISIONS ONLY — no app code changes.
-- Wayfinder saved ADDITIVELY under proposals/wayfinder/ — does NOT modify canonical @aud/brand (src/, tokens/, fonts/ untouched), so live apps consuming @aud/brand are unaffected. Lives in open PR #5.
-- Wayfinder per-app map: VA amber #BE8A2E · CL green #3F8B5C · FA coral #C8483E · CO blue #2E6FAE · SE indigo #5A4F9C · GS plum #9E4A80. Type = Space Grotesk + IBM Plex Sans + IBM Plex Mono.
+- THREE selectable splash skins, all drop-in (same props: appName/family/theme/formMode+children/primary/secondary): `DuotoneSplash`, `EditorialSplash`, and NEW `WordmarkSplash`. Hubs: `DuotoneMissionControl`, `EditorialMissionControl`.
+- `DuotoneSplash` is now FULL-BLEED (#16): the duotone colour fills the screen edge-to-edge (no framed card), top chrome removed (brand chip + SECURE pill + meta), foot = plain "powered by AuD".
+- iOS-standalone correctness baked into every takeover: absolute stage in a fixed-height `overflow:hidden` outer; `min-height:0`; safe-area-inset padding; `useTakeoverBody(bg)` paints html/body + locks document scroll (overscroll-behavior:none) so iOS can't rubber-band-elongate the 100dvh stage; wordmark/title auto-fit. (Root cause earlier: a `height:100dvh` stage that is a FLEX ITEM in a min-height wrapper inflates to content instead of clamping.)
+- `startAutoUpdate()` exported (PWA): installed apps reload to a new deploy on foreground-return — no icon re-add (needs no-cache `/` + `/index.html` headers, which both apps now have).
+- `WordmarkSplash` (#17) = the early AUDITOR/CLEANSE/FIRSTAID stencil wordmark + instrument chrome (REV·SECURE, grid, accent glow, corner ticks, BUILT IN AUSTRALIA). SAVED AS A REVISION (#18, design/REVISIONS.md + design/revisions/wordmark-splash.png) — NOT wired into any app (Aaron's call). Codenames kept as-is.
+- Per-app theme is set by each app, not here: Precinct Ops = dark, First Aid = light.
+- (carry, Wayfinder) "Wayfinder" remains an ADDITIVE proposal under proposals/wayfinder/ in open PR #5 — does NOT modify canonical @aud/brand. Per-app map: VA amber #BE8A2E · CL green #3F8B5C · FA coral #C8483E · CO blue #2E6FAE · SE indigo #5A4F9C · GS plum #9E4A80.
 Open questions:
-- [CONFIRM] "a revision of something new": current state is ADDITIVE (Wayfinder beside @aud/brand). Alternative = promote it to a v2 that SUPERSEDES @aud/brand (rewrites the canonical tokens 3 live apps pull) — deliberately not done silently. Which does Aaron want?
-- Open levers before any rollout: neutral temperature (cool-fresh vs re-warm), colour confidence (line bars vs strict accent-only), per-app hue swaps (security↔guest, cleaning→teal), final name ("Wayfinder" is a placeholder).
-- Merge PR #5 as-is (version-controls the exploration) or iterate first?
-- [CONFIRM] Pre-existing leak on main: showcase/src/App.tsx has "AusComply checklist analytics · IVY Precinct" — still unfixed; de-identify in a separate PR? (PUBLIC repo)
-- [CONFIRM] Move the two GOM files (GOM-Venue-Audit-Quick-Tour.html, aud-mark-gom-audit-spec.md) into the gom-venue-audit repo? (still open)
-Built/shipped since last update:
-- (nothing merged to main this session) — work is in open PR #5, branch proposal/wayfinder: proposals/wayfinder/ (README spec + specimen.html + render), commit 9e2e29c. Additive; canonical @aud/brand untouched.
-Next session starts with: Decide additive-vs-supersede for Wayfinder and lock the open levers, then either merge PR #5 or iterate the proposal.
+- (carry) Wayfinder: additive (beside @aud/brand) vs SUPERSEDE (rewrite canonical tokens the 3 live apps pull)? Merge PR #5 as-is or iterate? [CONFIRM]
+- (carry) Pre-existing IVY leak on main: showcase/src/App.tsx has "…· IVY Precinct" — de-identify in a separate PR (PUBLIC repo). [CONFIRM]
+- ⚠️ CONCURRENT EDITS: another actor/session also commits here (e.g. #15 hub launcher-scroll fix → bd032e6, and the Wayfinder PR #5). Always `git pull` before branching; my splash bumps are forward of bd032e6 so they merge clean.
+- Wire `WordmarkSplash` into an app to trial it live? (currently saved-only) [CONFIRM]
+Built/shipped since last update (all merged to main):
+- #11 iOS standalone safe-area + body paint; #12 iPhone-fit (absolute stage); #13 Editorial fit + startAutoUpdate; #14 scroll-lock (useTakeoverBody); #16 full-bleed DuotoneSplash; #17 WordmarkSplash skin; #18 wordmark saved as revision. (#15 hub-scroll was the concurrent session.)
+Next session starts with: Decide Wayfinder additive-vs-supersede (PR #5), or wire WordmarkSplash into a pilot app — and de-identify the showcase IVY string.
 Out of scope right now:
-- App code changes / per-app rollout (separate session, pilot app first in a worktree).
-- Non-UI projects (auscomply, mempalace, gridfinity) and the parked NTE dashboard.
-- precinct-ops-dashboard has no Tailwind/brand yet; guest-screening-tool isn't a git repo yet — flagged for rollout, not actioned.
-- FamilyProvider rollout into live apps (prior wrap's goal) — parked behind the scheme-direction decision.
+- Wayfinder per-app rollout into live apps.
+- Editorial skin is phone-ready but unused by any live app.
 ---
-Previous wrap: 2e8a93b
+Previous wrap: b32c163
