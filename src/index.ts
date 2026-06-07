@@ -28,6 +28,9 @@ export type { AppMarkProps } from './components/AppMark'
 export { EditorialSplash, MsLogo, EDITORIAL_FIELD_CLASS } from './components/EditorialSplash'
 export type { EditorialSplashProps, EditorialFamily } from './components/EditorialSplash'
 
+export { WordmarkSplash } from './components/WordmarkSplash'
+export type { WordmarkSplashProps } from './components/WordmarkSplash'
+
 export {
   DuotoneSplash,
   DUOTONE_FIELD_CLASS,
