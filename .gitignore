@@ -9,3 +9,8 @@ verification/*.png
 
 # Consolidated Claude.ai chat-project context (local-only)
 CLAUDE.local.md
+
+# graphify: commit the graph + report (shared/instant on checkout); ignore local/volatile bits
+graphify-out/cache/
+graphify-out/cost.json
+graphify-out/.graphify_python
