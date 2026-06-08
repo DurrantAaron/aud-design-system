@@ -66,6 +66,108 @@
   --aud-space-8: 32px;
   --aud-space-12: 48px;
   --aud-space-16: 64px;
+
+  /* --- Display tightening — the "make big text read pro" lever ------------
+     Apply to large / display text alongside --aud-leading-tight (1.1).
+     ~-2.5% optical tracking; the bigger the type, the more it wants this.
+     (--aud-tracking-mark stays reserved for the lettermark itself.)         */
+  --aud-tracking-tight: -0.025em;
+
+  /* --- Semantic status colours -------------------------------------------
+     CONSTANT across the suite, like the neutrals — these are NOT the moving
+     accent. Muted to sit inside the warm instrument register. Each has:
+       -base  solid / icon / border / chart series
+       -fg    text or icon sitting on its own tint
+       -tint  subtle fill for chips, banners, row highlights
+     Use for meaning, never decoration: success · warning · danger · info.   */
+  --aud-success: #557A4E;  --aud-success-fg: #37512F;  --aud-success-tint: #E7EDE1;
+  --aud-warning: #B5832E;  --aud-warning-fg: #6F501A;  --aud-warning-tint: #F2E9D2;
+  --aud-danger:  #B14C3A;  --aud-danger-fg:  #732E22;  --aud-danger-tint:  #F3E1DB;
+  --aud-info:    #4D6C88;  --aud-info-fg:    #314659;  --aud-info-tint:    #E0E7ED;
+
+  /* --- Elevation ----------------------------------------------------------
+     Restrained, warm-tinted. Rules still do the structural work; reserve
+     shadows for surfaces that genuinely float. Low alpha, generous blur —
+     things that sit above other content (menus, sheets) cast more than cards.
+     In dark mode depth comes from the lighter --aud-surface, not shadow.    */
+  --aud-shadow-sm:      0 1px 2px  rgba(20, 19, 15, 0.06);   /* barely-raised card    */
+  --aud-shadow:         0 2px 8px  rgba(20, 19, 15, 0.08);   /* raised card           */
+  --aud-shadow-lg:      0 8px 24px rgba(20, 19, 15, 0.12);   /* menus, popovers       */
+  --aud-shadow-overlay: 0 12px 40px rgba(20, 19, 15, 0.18);  /* bottom sheets, modals */
+
+  /* --- Interaction states -------------------------------------------------
+     hover / press auto-flip with the theme because --aud-ink flips. The
+     focus ring is accent-tinted so it inherits each app's colour for free.  */
+  --aud-overlay-hover: color-mix(in srgb, var(--aud-ink) 6%, transparent);
+  --aud-overlay-press: color-mix(in srgb, var(--aud-ink) 12%, transparent);
+  --aud-ring: 0 0 0 3px color-mix(in srgb, var(--aud-accent) 35%, transparent);
+  --aud-disabled-opacity: 0.45;
+
+  /* --- Scrim for text over imagery (fail photos, share burn-in). A constant
+     dark gradient — a photo reads the same in either theme.                 */
+  --aud-scrim: linear-gradient(to top,
+    rgba(20, 19, 15, 0.85) 0%,
+    rgba(20, 19, 15, 0.45) 35%,
+    rgba(20, 19, 15, 0.00) 70%);
+
+  /* --- Motion --------------------------------------------------------------
+     Never linear. Three named curves set the tone; pair them with a duration.
+     Direction convention used across the kit: slide-UP = a temporary surface
+     (sheet / toast), slide-in-from-LEFT = forward progress through a flow.   */
+  --aud-ease-snap:   cubic-bezier(0.2, 0, 0, 1);        /* crisp, performant   */
+  --aud-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot    */
+  --aud-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);      /* calm, gentle        */
+  --aud-duration-fast: 120ms;   /* state flips: hover, press, toggle           */
+  --aud-duration:      200ms;   /* default: entrances, reveals                 */
+  --aud-duration-slow: 320ms;   /* large surfaces: sheets, page transitions    */
+
+  /* --- Colour depth --------------------------------------------------------
+     All DERIVED from the existing accent + neutrals via color-mix, so changing
+     --aud-accent (or the neutrals) re-derives everything. These are starting
+     points — tune the percentages / chart hexes freely in your app.
+
+     Accent ramp: the one moving accent → a 50–900 scale (500 IS the accent).  */
+  --aud-accent-50:  color-mix(in srgb, var(--aud-accent) 10%, var(--aud-surface));
+  --aud-accent-100: color-mix(in srgb, var(--aud-accent) 20%, var(--aud-surface));
+  --aud-accent-200: color-mix(in srgb, var(--aud-accent) 35%, var(--aud-surface));
+  --aud-accent-300: color-mix(in srgb, var(--aud-accent) 55%, var(--aud-surface));
+  --aud-accent-400: color-mix(in srgb, var(--aud-accent) 78%, var(--aud-surface));
+  --aud-accent-500: var(--aud-accent);
+  --aud-accent-600: color-mix(in srgb, var(--aud-accent) 88%, var(--aud-ink));
+  --aud-accent-700: color-mix(in srgb, var(--aud-accent) 74%, var(--aud-ink));
+  --aud-accent-800: color-mix(in srgb, var(--aud-accent) 60%, var(--aud-ink));
+  --aud-accent-900: color-mix(in srgb, var(--aud-accent) 46%, var(--aud-ink));
+  --aud-accent-hover: var(--aud-accent-700);     /* button/link hover           */
+  --aud-accent-link:  var(--aud-accent-400);     /* inline links                */
+  --aud-accent-strong: color-mix(in srgb, var(--aud-accent) 70%, var(--aud-ink)); /* WCAG: accent darkened for text-on-light */
+
+  /* Text hierarchy — no pure black; reserve --aud-ink for the single hero line. */
+  --aud-text-1: var(--aud-ink);                                            /* primary   */
+  --aud-text-2: color-mix(in srgb, var(--aud-ink) 80%, var(--aud-ground)); /* secondary */
+  --aud-text-3: var(--aud-mid);                                            /* tertiary  */
+
+  /* Tinted surfaces — a hint of accent in the neutral, never a coloured fill.  */
+  --aud-surface-tint: color-mix(in srgb, var(--aud-surface) 94%, var(--aud-accent));
+  --aud-ground-tint:  color-mix(in srgb, var(--aud-ground) 95%, var(--aud-accent));
+
+  /* Card edge: a defined border as an alternative to a shadow (the "85% white"
+     idea, expressed warm — a rule pushed toward the ink).                      */
+  --aud-border-card: color-mix(in srgb, var(--aud-rule) 70%, var(--aud-ink));
+
+  /* Single-hue accent gradient (this system never uses two-hue gradients).     */
+  --aud-gradient-accent: linear-gradient(135deg, var(--aud-accent-400), var(--aud-accent-700));
+
+  /* Chart series — six muted categorical hues. Series 1 follows the app accent;
+     2–6 are the sibling accents + one off-family. Starting values; tune freely. */
+  --aud-chart-1: var(--aud-accent);
+  --aud-chart-2: #5E7C93;  /* steel    */
+  --aud-chart-3: #7C8A5C;  /* sage     */
+  --aud-chart-4: #C26B52;  /* clay     */
+  --aud-chart-5: #4F8A80;  /* eucalypt */
+  --aud-chart-6: #9A7BA5;  /* muted plum — an off-family 6th series */
+
+  /* Media (photos / thumbnails) share the button radius — no default rounding. */
+  --aud-radius-media: var(--aud-radius);
 }
 
 /* --- Dark neutrals ---------------------------------------------------------
@@ -81,6 +183,14 @@
     --aud-surface: #211F17;  /* derived — raised warm near-black              */
     --aud-mid: #8E8B7F;      /* derived — warm muted grey, legible on dark    */
     --aud-rule: #2E2C22;     /* derived — low-contrast warm hairline          */
+
+    /* Semantic colours, dark register: brighter base for legibility on the
+       dark ground, deep tint (the "lighten for bg, darken for text" ramp
+       flips — base lightens, tint darkens). */
+    --aud-success: #8FB07F;  --aud-success-fg: #C4D6B8;  --aud-success-tint: #23291C;
+    --aud-warning: #D6AE5E;  --aud-warning-fg: #E6CE97;  --aud-warning-tint: #2C2415;
+    --aud-danger:  #D08172;  --aud-danger-fg:  #E6B3A8;  --aud-danger-tint:  #2C1C18;
+    --aud-info:    #8AA6BE;  --aud-info-fg:    #B6C8D8;  --aud-info-tint:    #1B232B;
   }
 }
 
@@ -90,6 +200,10 @@
   --aud-surface: #211F17;
   --aud-mid: #8E8B7F;
   --aud-rule: #2E2C22;
+  --aud-success: #8FB07F;  --aud-success-fg: #C4D6B8;  --aud-success-tint: #23291C;
+  --aud-warning: #D6AE5E;  --aud-warning-fg: #E6CE97;  --aud-warning-tint: #2C2415;
+  --aud-danger:  #D08172;  --aud-danger-fg:  #E6B3A8;  --aud-danger-tint:  #2C1C18;
+  --aud-info:    #8AA6BE;  --aud-info-fg:    #B6C8D8;  --aud-info-tint:    #1B232B;
 }
 
 /* Hard light override (wins over system dark). */
@@ -99,4 +213,8 @@
   --aud-surface: #FAFAF8;
   --aud-mid: #6B6960;
   --aud-rule: #D8D4CC;
+  --aud-success: #557A4E;  --aud-success-fg: #37512F;  --aud-success-tint: #E7EDE1;
+  --aud-warning: #B5832E;  --aud-warning-fg: #6F501A;  --aud-warning-tint: #F2E9D2;
+  --aud-danger:  #B14C3A;  --aud-danger-fg:  #732E22;  --aud-danger-tint:  #F3E1DB;
+  --aud-info:    #4D6C88;  --aud-info-fg:    #314659;  --aud-info-tint:    #E0E7ED;
 }

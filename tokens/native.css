@@ -1,0 +1,86 @@
+/* ==========================================================================
+   AuD native layer — the "feels like an app, not a website" reset for iOS/PWA.
+   --------------------------------------------------------------------------
+   Opt-in. Import AFTER tokens.css, once per app:
+       import '@aud/brand/tokens.css'
+       import '@aud/brand/native.css'
+
+   Everything here is the structural baseline the mobile videos call for;
+   colours/fonts stay yours (these only touch behaviour + layout primitives).
+   Pair with `viewport-fit=cover` in your <meta name="viewport"> so the
+   safe-area insets resolve.
+   ========================================================================== */
+
+:root {
+  /* Live safe-area insets, surfaced as tokens you can pad with. */
+  --aud-safe-top: env(safe-area-inset-top, 0px);
+  --aud-safe-right: env(safe-area-inset-right, 0px);
+  --aud-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --aud-safe-left: env(safe-area-inset-left, 0px);
+  /* Touch target floor — fingers, not cursors. */
+  --aud-touch-target: 44px;
+}
+
+/* Kill the iOS tap-flash; components supply their own press state instead. */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Stop the page bouncing/zooming as a unit; let real scrollers scroll. */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  /* No rubber-band white flash behind the app. */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Form controls ≥16px or iOS zooms the whole page on focus — the #1 "website"
+   tell. Apps can restyle freely; this only enforces the minimum size. */
+input,
+textarea,
+select {
+  font-size: max(16px, 1rem);
+}
+
+/* Controls shouldn't be text-selectable or fire the iOS long-press callout. */
+button,
+[role='button'],
+.aud-no-callout {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* Utilities ---------------------------------------------------------------- */
+
+/* Full real-viewport height (dvh tracks Safari's collapsing toolbar; vh doesn't). */
+.aud-dvh { height: 100dvh; }
+.aud-min-dvh { min-height: 100dvh; }
+
+/* Safe-area padding helpers (add to fixed bars, sheets, the app shell). */
+.aud-safe-pad { padding: var(--aud-safe-top) var(--aud-safe-right) var(--aud-safe-bottom) var(--aud-safe-left); }
+.aud-safe-pad-bottom { padding-bottom: var(--aud-safe-bottom); }
+.aud-safe-pad-top { padding-top: var(--aud-safe-top); }
+
+/* A scroll container with momentum + no scroll-chaining to the page. */
+.aud-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Hide the scrollbar (e.g. horizontal card rails) without losing scroll. */
+.aud-no-scrollbar { scrollbar-width: none; }
+.aud-no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Honour the system reduced-motion setting across the kit's animations. */
+@media (prefers-reduced-motion: reduce) {
+  .aud-skel,
+  .aud-toast,
+  .aud-sheet,
+  .aud-motion { animation: none !important; transition: none !important; }
+}

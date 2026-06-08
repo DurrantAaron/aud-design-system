@@ -13,6 +13,59 @@
 export { AudMark } from './components/AudMark'
 export type { AudMarkProps } from './components/AudMark'
 
+// --- UI primitives (consume the design tokens) ---
+export { AudButton } from './components/AudButton'
+export type { AudButtonProps, AudButtonVariant, AudButtonSize } from './components/AudButton'
+
+export { StatusChip } from './components/StatusChip'
+export type { StatusChipProps, StatusChipVariant, StatusName } from './components/StatusChip'
+
+export { EmptyState } from './components/EmptyState'
+export type { EmptyStateProps, EmptyStateAction } from './components/EmptyState'
+
+export { AudErrorState } from './components/AudErrorState'
+export type { AudErrorStateProps, ErrorStateAction } from './components/AudErrorState'
+
+export { AudSkeleton } from './components/AudSkeleton'
+export type { AudSkeletonProps } from './components/AudSkeleton'
+
+export { AudToast } from './components/AudToast'
+export type { AudToastProps, AudToastAction } from './components/AudToast'
+
+// --- Surfaces, inputs & data ---
+export { AudCard } from './components/AudCard'
+export type { AudCardProps, AudCardVariant, AudCardElevation } from './components/AudCard'
+
+export { AudBadge } from './components/AudBadge'
+export type { AudBadgeProps, AudBadgeStatus, AudBadgeSize } from './components/AudBadge'
+
+export { AudInput } from './components/AudInput'
+export type { AudInputProps } from './components/AudInput'
+
+export { AudModal } from './components/AudModal'
+export type { AudModalProps, ModalAction } from './components/AudModal'
+
+export { AudTabs } from './components/AudTabs'
+export type { AudTabsProps, TabItem } from './components/AudTabs'
+
+export { AudTable } from './components/AudTable'
+export type { AudTableProps, AudColumn } from './components/AudTable'
+
+export { CountUp } from './components/CountUp'
+export type { CountUpProps } from './components/CountUp'
+
+// --- Mobile / iPhone-native layer (pair with @aud/brand/native.css) ---
+export { BottomSheet } from './components/BottomSheet'
+export type { BottomSheetProps } from './components/BottomSheet'
+
+export { TabBar } from './components/TabBar'
+export type { TabBarProps, TabBarItem } from './components/TabBar'
+
+export { AudSwipeConfirm } from './components/AudSwipeConfirm'
+export type { AudSwipeConfirmProps } from './components/AudSwipeConfirm'
+
+export { useStandalone, useReducedMotion, useSafeArea } from './native'
+
 export { PoweredByAud } from './components/PoweredByAud'
 export type { PoweredByAudProps } from './components/PoweredByAud'
 
@@ -61,9 +114,12 @@ export type { FamilyProviderProps, FamilyContextValue } from './components/Famil
 export {
   accents,
   neutrals,
+  semantic,
   fonts,
+  motion,
+  chart,
 } from './tokens'
-export type { AccentName } from './tokens'
+export type { AccentName, SemanticName } from './tokens'
 
 export { familyPresets, reservedAccent } from './families'
 export type { FamilyKey, FamilyPreset } from './families'

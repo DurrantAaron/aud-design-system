@@ -35,6 +35,30 @@ export const neutrals = {
   },
 } as const
 
+/**
+ * Semantic status colours — CONSTANT across the suite (not the moving accent).
+ * Each has base (solid / icon / border / chart series), fg (text on its own
+ * tint) and tint (chip / banner fill). Mirrors the --aud-{name}[-fg|-tint]
+ * CSS variables. Reach for these in JS when CSS vars aren't available — most
+ * commonly chart series, canvas, or computed inline styles.
+ */
+export const semantic = {
+  light: {
+    success: { base: '#557A4E', fg: '#37512F', tint: '#E7EDE1' },
+    warning: { base: '#B5832E', fg: '#6F501A', tint: '#F2E9D2' },
+    danger: { base: '#B14C3A', fg: '#732E22', tint: '#F3E1DB' },
+    info: { base: '#4D6C88', fg: '#314659', tint: '#E0E7ED' },
+  },
+  dark: {
+    success: { base: '#8FB07F', fg: '#C4D6B8', tint: '#23291C' },
+    warning: { base: '#D6AE5E', fg: '#E6CE97', tint: '#2C2415' },
+    danger: { base: '#D08172', fg: '#E6B3A8', tint: '#2C1C18' },
+    info: { base: '#8AA6BE', fg: '#B6C8D8', tint: '#1B232B' },
+  },
+} as const
+
+export type SemanticName = keyof typeof semantic.light
+
 /** The brand type stack. */
 export const fonts = {
   display: "'Bebas Neue', 'Oswald', 'Anton', 'Arial Narrow', sans-serif",
@@ -44,3 +68,26 @@ export const fonts = {
   /** The mark's own scoped family — never repointed by app globals. */
   mark: "'AuD-Bebas', 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif",
 } as const
+
+/**
+ * Motion. Never linear. Direction convention used across the kit:
+ * slide-up = a temporary surface (sheet / toast), slide-in-from-left =
+ * forward progress through a flow. Mirrors the --aud-ease and --aud-duration
+ * CSS variables; use these when animating in JS (canvas, spring libs).
+ */
+export const motion = {
+  ease: {
+    snap: 'cubic-bezier(0.2, 0, 0, 1)',
+    spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  duration: { fast: 120, base: 200, slow: 320 },
+} as const
+
+/**
+ * Categorical chart-series palette — six muted, perceptually-spaced hues.
+ * Raw values for chart libraries that can't read CSS vars (Recharts, Chart.js,
+ * canvas). Series 1 here is the flagship brass; in CSS, --aud-chart-1 follows
+ * the app's own accent. Starting values — tune per dashboard.
+ */
+export const chart = ['#C8A84B', '#5E7C93', '#7C8A5C', '#C26B52', '#4F8A80', '#9A7BA5'] as const

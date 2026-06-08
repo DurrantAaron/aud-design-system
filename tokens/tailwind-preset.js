@@ -33,6 +33,46 @@ const preset = {
         'aud-steel': '#5E7C93',
         'aud-sage': '#7C8A5C',
         'aud-eucalypt': '#4F8A80',
+        // Semantic status colours — var-backed so they flip with the theme.
+        // base / -fg (text on tint) / -tint (chip fill). Meaning, not decoration.
+        'aud-success': 'var(--aud-success)',
+        'aud-success-fg': 'var(--aud-success-fg)',
+        'aud-success-tint': 'var(--aud-success-tint)',
+        'aud-warning': 'var(--aud-warning)',
+        'aud-warning-fg': 'var(--aud-warning-fg)',
+        'aud-warning-tint': 'var(--aud-warning-tint)',
+        'aud-danger': 'var(--aud-danger)',
+        'aud-danger-fg': 'var(--aud-danger-fg)',
+        'aud-danger-tint': 'var(--aud-danger-tint)',
+        'aud-info': 'var(--aud-info)',
+        'aud-info-fg': 'var(--aud-info-fg)',
+        'aud-info-tint': 'var(--aud-info-tint)',
+        // Accent ramp (50–900; 500 = the app accent) — all var-backed/derived.
+        'aud-accent-50': 'var(--aud-accent-50)',
+        'aud-accent-100': 'var(--aud-accent-100)',
+        'aud-accent-200': 'var(--aud-accent-200)',
+        'aud-accent-300': 'var(--aud-accent-300)',
+        'aud-accent-400': 'var(--aud-accent-400)',
+        'aud-accent-500': 'var(--aud-accent-500)',
+        'aud-accent-600': 'var(--aud-accent-600)',
+        'aud-accent-700': 'var(--aud-accent-700)',
+        'aud-accent-800': 'var(--aud-accent-800)',
+        'aud-accent-900': 'var(--aud-accent-900)',
+        'aud-accent-strong': 'var(--aud-accent-strong)',
+        // Text hierarchy (primary/secondary/tertiary) and tinted surfaces.
+        'aud-text-1': 'var(--aud-text-1)',
+        'aud-text-2': 'var(--aud-text-2)',
+        'aud-text-3': 'var(--aud-text-3)',
+        'aud-surface-tint': 'var(--aud-surface-tint)',
+        'aud-ground-tint': 'var(--aud-ground-tint)',
+        'aud-border-card': 'var(--aud-border-card)',
+        // Chart series (categorical).
+        'aud-chart-1': 'var(--aud-chart-1)',
+        'aud-chart-2': 'var(--aud-chart-2)',
+        'aud-chart-3': 'var(--aud-chart-3)',
+        'aud-chart-4': 'var(--aud-chart-4)',
+        'aud-chart-5': 'var(--aud-chart-5)',
+        'aud-chart-6': 'var(--aud-chart-6)',
       },
       fontFamily: {
         'aud-display': ['Bebas Neue', 'Oswald', 'Anton', 'Arial Narrow', 'sans-serif'],
@@ -53,6 +93,8 @@ const preset = {
         'aud-label': '0.2em',
         'aud-wide': '0.3em',
         'aud-mark': '-0.02em',
+        // Display tightening — pair with leading-aud-tight on large text.
+        'aud-tight': '-0.025em',
       },
       lineHeight: {
         'aud-tight': '1.1',
@@ -65,6 +107,31 @@ const preset = {
       },
       borderWidth: {
         'aud-hairline': '1px',
+      },
+      boxShadow: {
+        // Restrained, warm-tinted elevation; floating UI casts more than cards.
+        'aud-sm': '0 1px 2px rgba(20, 19, 15, 0.06)',
+        'aud': '0 2px 8px rgba(20, 19, 15, 0.08)',
+        'aud-lg': '0 8px 24px rgba(20, 19, 15, 0.12)',
+        'aud-overlay': '0 12px 40px rgba(20, 19, 15, 0.18)',
+        // Accent-tinted focus ring — inherits each app's --aud-accent.
+        'aud-ring': '0 0 0 3px color-mix(in srgb, var(--aud-accent) 35%, transparent)',
+      },
+      backgroundImage: {
+        // Scrim for legible text over imagery (fail photos, share burn-in).
+        'aud-scrim':
+          'linear-gradient(to top, rgba(20,19,15,0.85) 0%, rgba(20,19,15,0.45) 35%, rgba(20,19,15,0) 70%)',
+      },
+      transitionTimingFunction: {
+        // Never linear. snap = crisp · spring = slight overshoot · smooth = calm.
+        'aud-snap': 'cubic-bezier(0.2, 0, 0, 1)',
+        'aud-spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'aud-smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        'aud-fast': '120ms',
+        'aud': '200ms',
+        'aud-slow': '320ms',
       },
     },
   },
