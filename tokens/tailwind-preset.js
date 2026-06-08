@@ -33,6 +33,20 @@ const preset = {
         'aud-steel': '#5E7C93',
         'aud-sage': '#7C8A5C',
         'aud-eucalypt': '#4F8A80',
+        // Semantic status colours — var-backed so they flip with the theme.
+        // base / -fg (text on tint) / -tint (chip fill). Meaning, not decoration.
+        'aud-success': 'var(--aud-success)',
+        'aud-success-fg': 'var(--aud-success-fg)',
+        'aud-success-tint': 'var(--aud-success-tint)',
+        'aud-warning': 'var(--aud-warning)',
+        'aud-warning-fg': 'var(--aud-warning-fg)',
+        'aud-warning-tint': 'var(--aud-warning-tint)',
+        'aud-danger': 'var(--aud-danger)',
+        'aud-danger-fg': 'var(--aud-danger-fg)',
+        'aud-danger-tint': 'var(--aud-danger-tint)',
+        'aud-info': 'var(--aud-info)',
+        'aud-info-fg': 'var(--aud-info-fg)',
+        'aud-info-tint': 'var(--aud-info-tint)',
       },
       fontFamily: {
         'aud-display': ['Bebas Neue', 'Oswald', 'Anton', 'Arial Narrow', 'sans-serif'],
@@ -53,6 +67,8 @@ const preset = {
         'aud-label': '0.2em',
         'aud-wide': '0.3em',
         'aud-mark': '-0.02em',
+        // Display tightening — pair with leading-aud-tight on large text.
+        'aud-tight': '-0.025em',
       },
       lineHeight: {
         'aud-tight': '1.1',
@@ -65,6 +81,20 @@ const preset = {
       },
       borderWidth: {
         'aud-hairline': '1px',
+      },
+      boxShadow: {
+        // Restrained, warm-tinted elevation; floating UI casts more than cards.
+        'aud-sm': '0 1px 2px rgba(20, 19, 15, 0.06)',
+        'aud': '0 2px 8px rgba(20, 19, 15, 0.08)',
+        'aud-lg': '0 8px 24px rgba(20, 19, 15, 0.12)',
+        'aud-overlay': '0 12px 40px rgba(20, 19, 15, 0.18)',
+        // Accent-tinted focus ring — inherits each app's --aud-accent.
+        'aud-ring': '0 0 0 3px color-mix(in srgb, var(--aud-accent) 35%, transparent)',
+      },
+      backgroundImage: {
+        // Scrim for legible text over imagery (fail photos, share burn-in).
+        'aud-scrim':
+          'linear-gradient(to top, rgba(20,19,15,0.85) 0%, rgba(20,19,15,0.45) 35%, rgba(20,19,15,0) 70%)',
       },
     },
   },

@@ -61,9 +61,10 @@ export type { FamilyProviderProps, FamilyContextValue } from './components/Famil
 export {
   accents,
   neutrals,
+  semantic,
   fonts,
 } from './tokens'
-export type { AccentName } from './tokens'
+export type { AccentName, SemanticName } from './tokens'
 
 export { familyPresets, reservedAccent } from './families'
 export type { FamilyKey, FamilyPreset } from './families'

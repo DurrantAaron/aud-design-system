@@ -1,6 +1,6 @@
 {
   "name": "@aud/brand",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "AuD — the maker's-mark design system: the AuD lettermark, the AUDITOR wordmark, design tokens, and self-hosted brand fonts. Built for Aaron Durrant's operational audit/ops app suite.",
   "author": "Aaron Durrant",
   "license": "MIT",

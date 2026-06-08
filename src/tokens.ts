@@ -35,6 +35,30 @@ export const neutrals = {
   },
 } as const
 
+/**
+ * Semantic status colours — CONSTANT across the suite (not the moving accent).
+ * Each has base (solid / icon / border / chart series), fg (text on its own
+ * tint) and tint (chip / banner fill). Mirrors the --aud-{name}[-fg|-tint]
+ * CSS variables. Reach for these in JS when CSS vars aren't available — most
+ * commonly chart series, canvas, or computed inline styles.
+ */
+export const semantic = {
+  light: {
+    success: { base: '#557A4E', fg: '#37512F', tint: '#E7EDE1' },
+    warning: { base: '#B5832E', fg: '#6F501A', tint: '#F2E9D2' },
+    danger: { base: '#B14C3A', fg: '#732E22', tint: '#F3E1DB' },
+    info: { base: '#4D6C88', fg: '#314659', tint: '#E0E7ED' },
+  },
+  dark: {
+    success: { base: '#8FB07F', fg: '#C4D6B8', tint: '#23291C' },
+    warning: { base: '#D6AE5E', fg: '#E6CE97', tint: '#2C2415' },
+    danger: { base: '#D08172', fg: '#E6B3A8', tint: '#2C1C18' },
+    info: { base: '#8AA6BE', fg: '#B6C8D8', tint: '#1B232B' },
+  },
+} as const
+
+export type SemanticName = keyof typeof semantic.light
+
 /** The brand type stack. */
 export const fonts = {
   display: "'Bebas Neue', 'Oswald', 'Anton', 'Arial Narrow', sans-serif",

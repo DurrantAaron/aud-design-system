@@ -66,6 +66,49 @@
   --aud-space-8: 32px;
   --aud-space-12: 48px;
   --aud-space-16: 64px;
+
+  /* --- Display tightening — the "make big text read pro" lever ------------
+     Apply to large / display text alongside --aud-leading-tight (1.1).
+     ~-2.5% optical tracking; the bigger the type, the more it wants this.
+     (--aud-tracking-mark stays reserved for the lettermark itself.)         */
+  --aud-tracking-tight: -0.025em;
+
+  /* --- Semantic status colours -------------------------------------------
+     CONSTANT across the suite, like the neutrals — these are NOT the moving
+     accent. Muted to sit inside the warm instrument register. Each has:
+       -base  solid / icon / border / chart series
+       -fg    text or icon sitting on its own tint
+       -tint  subtle fill for chips, banners, row highlights
+     Use for meaning, never decoration: success · warning · danger · info.   */
+  --aud-success: #557A4E;  --aud-success-fg: #37512F;  --aud-success-tint: #E7EDE1;
+  --aud-warning: #B5832E;  --aud-warning-fg: #6F501A;  --aud-warning-tint: #F2E9D2;
+  --aud-danger:  #B14C3A;  --aud-danger-fg:  #732E22;  --aud-danger-tint:  #F3E1DB;
+  --aud-info:    #4D6C88;  --aud-info-fg:    #314659;  --aud-info-tint:    #E0E7ED;
+
+  /* --- Elevation ----------------------------------------------------------
+     Restrained, warm-tinted. Rules still do the structural work; reserve
+     shadows for surfaces that genuinely float. Low alpha, generous blur —
+     things that sit above other content (menus, sheets) cast more than cards.
+     In dark mode depth comes from the lighter --aud-surface, not shadow.    */
+  --aud-shadow-sm:      0 1px 2px  rgba(20, 19, 15, 0.06);   /* barely-raised card    */
+  --aud-shadow:         0 2px 8px  rgba(20, 19, 15, 0.08);   /* raised card           */
+  --aud-shadow-lg:      0 8px 24px rgba(20, 19, 15, 0.12);   /* menus, popovers       */
+  --aud-shadow-overlay: 0 12px 40px rgba(20, 19, 15, 0.18);  /* bottom sheets, modals */
+
+  /* --- Interaction states -------------------------------------------------
+     hover / press auto-flip with the theme because --aud-ink flips. The
+     focus ring is accent-tinted so it inherits each app's colour for free.  */
+  --aud-overlay-hover: color-mix(in srgb, var(--aud-ink) 6%, transparent);
+  --aud-overlay-press: color-mix(in srgb, var(--aud-ink) 12%, transparent);
+  --aud-ring: 0 0 0 3px color-mix(in srgb, var(--aud-accent) 35%, transparent);
+  --aud-disabled-opacity: 0.45;
+
+  /* --- Scrim for text over imagery (fail photos, share burn-in). A constant
+     dark gradient — a photo reads the same in either theme.                 */
+  --aud-scrim: linear-gradient(to top,
+    rgba(20, 19, 15, 0.85) 0%,
+    rgba(20, 19, 15, 0.45) 35%,
+    rgba(20, 19, 15, 0.00) 70%);
 }
 
 /* --- Dark neutrals ---------------------------------------------------------
@@ -81,6 +124,14 @@
     --aud-surface: #211F17;  /* derived — raised warm near-black              */
     --aud-mid: #8E8B7F;      /* derived — warm muted grey, legible on dark    */
     --aud-rule: #2E2C22;     /* derived — low-contrast warm hairline          */
+
+    /* Semantic colours, dark register: brighter base for legibility on the
+       dark ground, deep tint (the "lighten for bg, darken for text" ramp
+       flips — base lightens, tint darkens). */
+    --aud-success: #8FB07F;  --aud-success-fg: #C4D6B8;  --aud-success-tint: #23291C;
+    --aud-warning: #D6AE5E;  --aud-warning-fg: #E6CE97;  --aud-warning-tint: #2C2415;
+    --aud-danger:  #D08172;  --aud-danger-fg:  #E6B3A8;  --aud-danger-tint:  #2C1C18;
+    --aud-info:    #8AA6BE;  --aud-info-fg:    #B6C8D8;  --aud-info-tint:    #1B232B;
   }
 }
 
@@ -90,6 +141,10 @@
   --aud-surface: #211F17;
   --aud-mid: #8E8B7F;
   --aud-rule: #2E2C22;
+  --aud-success: #8FB07F;  --aud-success-fg: #C4D6B8;  --aud-success-tint: #23291C;
+  --aud-warning: #D6AE5E;  --aud-warning-fg: #E6CE97;  --aud-warning-tint: #2C2415;
+  --aud-danger:  #D08172;  --aud-danger-fg:  #E6B3A8;  --aud-danger-tint:  #2C1C18;
+  --aud-info:    #8AA6BE;  --aud-info-fg:    #B6C8D8;  --aud-info-tint:    #1B232B;
 }
 
 /* Hard light override (wins over system dark). */
@@ -99,4 +154,8 @@
   --aud-surface: #FAFAF8;
   --aud-mid: #6B6960;
   --aud-rule: #D8D4CC;
+  --aud-success: #557A4E;  --aud-success-fg: #37512F;  --aud-success-tint: #E7EDE1;
+  --aud-warning: #B5832E;  --aud-warning-fg: #6F501A;  --aud-warning-tint: #F2E9D2;
+  --aud-danger:  #B14C3A;  --aud-danger-fg:  #732E22;  --aud-danger-tint:  #F3E1DB;
+  --aud-info:    #4D6C88;  --aud-info-fg:    #314659;  --aud-info-tint:    #E0E7ED;
 }
