@@ -1,0 +1,452 @@
+{
+  "design/gen-family.mjs": {
+    "mtime": 1780902445.261097,
+    "ast_hash": "07452964c3b14e9998b43db9d6d99c18",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1780902445.5130956,
+    "ast_hash": "d1e283637b78e570ad1c16b6fd9c8d69",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-families-splash.data.jsx": {
+    "mtime": 1780902445.5290954,
+    "ast_hash": "e829bb7e9912b2ff606064e0cb201778",
+    "semantic_hash": ""
+  },
+  "scripts/fetch-fonts.py": {
+    "mtime": 1780902445.5730953,
+    "ast_hash": "ed8a7cf7dd6e69a7ee0d7500a9ef5cad",
+    "semantic_hash": ""
+  },
+  "showcase/package.json": {
+    "mtime": 1780902445.5810952,
+    "ast_hash": "5b967edef74f20c12280d186904acb41",
+    "semantic_hash": ""
+  },
+  "showcase/src/App.tsx": {
+    "mtime": 1780902445.5850952,
+    "ast_hash": "3f90423609fb0afa6240c4a632f49c95",
+    "semantic_hash": ""
+  },
+  "showcase/src/hubverify.tsx": {
+    "mtime": 1780902445.5850952,
+    "ast_hash": "66327495f82143ba8fbf2f48ef85d244",
+    "semantic_hash": ""
+  },
+  "showcase/src/main.tsx": {
+    "mtime": 1780902445.589095,
+    "ast_hash": "5fb963499ebc64486f5187ec0a6a0e3a",
+    "semantic_hash": ""
+  },
+  "showcase/src/verify-emc.tsx": {
+    "mtime": 1780902445.593095,
+    "ast_hash": "465d78ea62a491d404408b8294cd87e7",
+    "semantic_hash": ""
+  },
+  "showcase/src/verify.tsx": {
+    "mtime": 1780902445.597095,
+    "ast_hash": "3e33938b1ab6d3fa7545413dc1207a7c",
+    "semantic_hash": ""
+  },
+  "showcase/tsconfig.json": {
+    "mtime": 1780902445.597095,
+    "ast_hash": "d8bb0af5eb41c547e78766e34b9dce7c",
+    "semantic_hash": ""
+  },
+  "showcase/vite.config.ts": {
+    "mtime": 1780902445.6010952,
+    "ast_hash": "cf26a73d51cf3b76a57da0f7e7dd54b5",
+    "semantic_hash": ""
+  },
+  "src/autoUpdate.ts": {
+    "mtime": 1780902445.6010952,
+    "ast_hash": "23291997bc8208f9519c8b5531fcce82",
+    "semantic_hash": ""
+  },
+  "src/components/AppMark.tsx": {
+    "mtime": 1780902445.6085958,
+    "ast_hash": "0fee3f2c683c862a409c03e3fa922fe1",
+    "semantic_hash": ""
+  },
+  "src/components/AudMark.tsx": {
+    "mtime": 1780902445.6103883,
+    "ast_hash": "0439074c27f373fc32969b7cba2c36f4",
+    "semantic_hash": ""
+  },
+  "src/components/AuditorWordmark.tsx": {
+    "mtime": 1780902445.6103883,
+    "ast_hash": "2720cef3af80a42310287d4e9ffb7184",
+    "semantic_hash": ""
+  },
+  "src/components/DuotoneMissionControl.tsx": {
+    "mtime": 1780902445.613095,
+    "ast_hash": "c780d9618af5c181a3f8acca1c4d8c61",
+    "semantic_hash": ""
+  },
+  "src/components/DuotoneSplash.tsx": {
+    "mtime": 1780902445.617095,
+    "ast_hash": "e3d9fcf2862142de2f60db0eae2c7844",
+    "semantic_hash": ""
+  },
+  "src/components/EditorialMissionControl.tsx": {
+    "mtime": 1780902445.617095,
+    "ast_hash": "e7cd7a2d0c9237605d3d10805edb6f9e",
+    "semantic_hash": ""
+  },
+  "src/components/EditorialSplash.tsx": {
+    "mtime": 1780902445.621095,
+    "ast_hash": "107efe6227aa0f691e8c0d96ad4b8774",
+    "semantic_hash": ""
+  },
+  "src/components/FamilyProvider.tsx": {
+    "mtime": 1780902445.621095,
+    "ast_hash": "faf032a3e6bf59e640538a0b1f3b7926",
+    "semantic_hash": ""
+  },
+  "src/components/MissionControlHub.tsx": {
+    "mtime": 1780902445.625095,
+    "ast_hash": "2ff402873ca78c4392767e83357ab584",
+    "semantic_hash": ""
+  },
+  "src/components/PoweredByAud.tsx": {
+    "mtime": 1780902445.629095,
+    "ast_hash": "b880529835b643ab37a842fca7e1c66f",
+    "semantic_hash": ""
+  },
+  "src/components/SplashScreen.tsx": {
+    "mtime": 1780902445.629095,
+    "ast_hash": "0340021e1e82e33a0e883eab07012818",
+    "semantic_hash": ""
+  },
+  "src/components/WordmarkSplash.tsx": {
+    "mtime": 1780902445.641095,
+    "ast_hash": "729fc597ed814045097cbf56d573afed",
+    "semantic_hash": ""
+  },
+  "src/families.ts": {
+    "mtime": 1780902445.641095,
+    "ast_hash": "b120be81732fe481258fba72e5a53fa9",
+    "semantic_hash": ""
+  },
+  "src/index.ts": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "da52ce3dc791fbcb6dc08f6282c33407",
+    "semantic_hash": ""
+  },
+  "src/useTakeoverBody.ts": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "e79281670edfdfc4d680baa095e18c9b",
+    "semantic_hash": ""
+  },
+  "tokens/tailwind-preset.js": {
+    "mtime": 1780902445.6490948,
+    "ast_hash": "6ebe24c26037be8ab7e6182f16d7aca2",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1780902445.6547637,
+    "ast_hash": "deb6afb946bc2db5c4521d00d49adcd9",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1780902445.2490969,
+    "ast_hash": "b7d5d6b8a2730af4260a55bf3f2ccc46",
+    "semantic_hash": ""
+  },
+  "design/DESIGN-DIRECTION.md": {
+    "mtime": 1780902445.2530968,
+    "ast_hash": "a62ffef01a3dc9ebb6c6a9f46c177ba1",
+    "semantic_hash": ""
+  },
+  "design/REVISIONS.md": {
+    "mtime": 1780902445.2570968,
+    "ast_hash": "c7bee74a161760d1cabf08243118ce61",
+    "semantic_hash": ""
+  },
+  "fonts/FONTS.md": {
+    "mtime": 1780902445.4810958,
+    "ast_hash": "fe1da5c81ee69bbb06ea01d1689e7ec9",
+    "semantic_hash": ""
+  },
+  "fonts/OFL.txt": {
+    "mtime": 1780902445.4875412,
+    "ast_hash": "c03418ec8ee7640831ab92e6994d13ec",
+    "semantic_hash": ""
+  },
+  "reference/README.md": {
+    "mtime": 1780902445.5170956,
+    "ast_hash": "da989ae7c6335112946005261e6d6c80",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-auditor-wordmark.html": {
+    "mtime": 1780902445.5170956,
+    "ast_hash": "f2db7436a67ce20d7efd904d7e21ca21",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-bc-recoloured.html": {
+    "mtime": 1780902445.5237248,
+    "ast_hash": "75348695c43fa66ae4902ca3e5934014",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-brand-concepts.html": {
+    "mtime": 1780902445.5237248,
+    "ast_hash": "a7f2abc3c6d25a3f880c641664b93f30",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-colour-family.html": {
+    "mtime": 1780902445.5250955,
+    "ast_hash": "d121bdb8f4673071ad5cbe06ebac87ea",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-design-system-brief.md": {
+    "mtime": 1780902445.5290954,
+    "ast_hash": "5206fb9528ad949537d23211956f9822",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-families-splash.standalone.html": {
+    "mtime": 1780902445.5690954,
+    "ast_hash": "1aed82bdfd38a942b24b4a366e804caf",
+    "semantic_hash": ""
+  },
+  "reference/originals/aud-family-model-splash-spec.md": {
+    "mtime": 1780902445.5690954,
+    "ast_hash": "6413b18824005a3e63202869032bb17b",
+    "semantic_hash": ""
+  },
+  "showcase/hubverify.html": {
+    "mtime": 1780902445.5770953,
+    "ast_hash": "4e54ea299f146ea3993f8f9de847e0a4",
+    "semantic_hash": ""
+  },
+  "showcase/index.html": {
+    "mtime": 1780902445.5770953,
+    "ast_hash": "1b8d0daf7e653a560e62e284bab9d982",
+    "semantic_hash": ""
+  },
+  "showcase/verify-emc.html": {
+    "mtime": 1780902445.597095,
+    "ast_hash": "50e43027e922f252465ffb7147f5ec5a",
+    "semantic_hash": ""
+  },
+  "showcase/verify.html": {
+    "mtime": 1780902445.6010952,
+    "ast_hash": "7d91540ad14c1b2ce8edd274cc6e1622",
+    "semantic_hash": ""
+  },
+  "state.md": {
+    "mtime": 1780902445.6490948,
+    "ast_hash": "c113a880dfe675885471a0977ebadb23",
+    "semantic_hash": ""
+  },
+  "design/glyphs/cleaning-audit.svg": {
+    "mtime": 1780902445.261097,
+    "ast_hash": "bd8ee09544672ecf63d7fac8e88cdba0",
+    "semantic_hash": ""
+  },
+  "design/glyphs/cleaning-dashboard.svg": {
+    "mtime": 1780902445.26651,
+    "ast_hash": "1ef17eeb586db2097ca63962348f1e20",
+    "semantic_hash": ""
+  },
+  "design/glyphs/control-log.svg": {
+    "mtime": 1780902445.26651,
+    "ast_hash": "3bfa5d365c0457e8a4ac473513aa5f2f",
+    "semantic_hash": ""
+  },
+  "design/glyphs/family-audits.svg": {
+    "mtime": 1780902445.26651,
+    "ast_hash": "98f2cd53aaf87208aaf0a5799c5d2ac1",
+    "semantic_hash": ""
+  },
+  "design/glyphs/family-dashboards.svg": {
+    "mtime": 1780902445.2690969,
+    "ast_hash": "f18e2f46d3c475ae2faf55ffbe0e65e9",
+    "semantic_hash": ""
+  },
+  "design/glyphs/family-logs.svg": {
+    "mtime": 1780902445.2690969,
+    "ast_hash": "6352e86923dd9a2f911b6bd878a249fc",
+    "semantic_hash": ""
+  },
+  "design/glyphs/family-registers.svg": {
+    "mtime": 1780902445.2730968,
+    "ast_hash": "58a0c27425e58dc81c84b0f4b1ac3d75",
+    "semantic_hash": ""
+  },
+  "design/glyphs/first-aid-register.svg": {
+    "mtime": 1780902445.2730968,
+    "ast_hash": "3bdce8f5c42b4d1f971980c41d7e4d51",
+    "semantic_hash": ""
+  },
+  "design/glyphs/headset-issuance.svg": {
+    "mtime": 1780902445.2730968,
+    "ast_hash": "c3f7971c414fad87204f99133bcb1af7",
+    "semantic_hash": ""
+  },
+  "design/glyphs/precinct-compliance.svg": {
+    "mtime": 1780902445.2770967,
+    "ast_hash": "87f8e44c6a3cf5ddd6070fd916518ef2",
+    "semantic_hash": ""
+  },
+  "design/glyphs/precinct-ops.svg": {
+    "mtime": 1780902445.2770967,
+    "ast_hash": "661711f62e179dade310ccd0587d0451",
+    "semantic_hash": ""
+  },
+  "design/glyphs/security-tracker.svg": {
+    "mtime": 1780902445.2810967,
+    "ast_hash": "6ab170ffded4e488ebfe1e1d286724e5",
+    "semantic_hash": ""
+  },
+  "design/glyphs/venue-audit.svg": {
+    "mtime": 1780902445.2810967,
+    "ast_hash": "fa98c18298dde593299f2d11b39d1e97",
+    "semantic_hash": ""
+  },
+  "design/renders/family/cleaning-audit.png": {
+    "mtime": 1780902445.2930968,
+    "ast_hash": "d4046a5915f2ad637ab7c7bb95495567",
+    "semantic_hash": ""
+  },
+  "design/renders/family/cleaning-dashboard.png": {
+    "mtime": 1780902445.3090966,
+    "ast_hash": "529e251b37b9764f0f8d8499d2ccbf5b",
+    "semantic_hash": ""
+  },
+  "design/renders/family/control-log.png": {
+    "mtime": 1780902445.3210967,
+    "ast_hash": "fcf4d64ccd6d31936530fee5646d2ac5",
+    "semantic_hash": ""
+  },
+  "design/renders/family/first-aid-register.png": {
+    "mtime": 1780902445.3290966,
+    "ast_hash": "10fad46a2b42814e63cd3d382601ff1a",
+    "semantic_hash": ""
+  },
+  "design/renders/family/headset-issuance.png": {
+    "mtime": 1780902445.3450963,
+    "ast_hash": "4a174ee069a90dd90e8e1be6cdfaa36f",
+    "semantic_hash": ""
+  },
+  "design/renders/family/precinct-compliance.png": {
+    "mtime": 1780902445.3570964,
+    "ast_hash": "85879ddaa0f034827f96723a3491c968",
+    "semantic_hash": ""
+  },
+  "design/renders/family/precinct-ops.png": {
+    "mtime": 1780902445.3730962,
+    "ast_hash": "2b1c6c196310f21a381ec29dff965f7a",
+    "semantic_hash": ""
+  },
+  "design/renders/family/security-tracker.png": {
+    "mtime": 1780902445.3850963,
+    "ast_hash": "fa5dd2a12779c127a3c1e9e32a47cd8f",
+    "semantic_hash": ""
+  },
+  "design/renders/family/venue-audit.png": {
+    "mtime": 1780902445.3970962,
+    "ast_hash": "50520f7a1cec5a00eac25b7258313c09",
+    "semantic_hash": ""
+  },
+  "design/renders/glyph-family.png": {
+    "mtime": 1780902445.405096,
+    "ast_hash": "6f44d32ba193e0d58d0291d221053ec2",
+    "semantic_hash": ""
+  },
+  "design/renders/identical-vs-sibling.png": {
+    "mtime": 1780902445.421096,
+    "ast_hash": "0b0b79ac6c033962a033b307c9ab3e67",
+    "semantic_hash": ""
+  },
+  "design/renders/real-component/first-aid-register.png": {
+    "mtime": 1780902445.433096,
+    "ast_hash": "c93ac8512e9c9531d33d86678fa96257",
+    "semantic_hash": ""
+  },
+  "design/renders/real-component/precinct-compliance.png": {
+    "mtime": 1780902445.445096,
+    "ast_hash": "e406ef733bcac8bd3716cbaa811e4e2c",
+    "semantic_hash": ""
+  },
+  "design/renders/real-component/security-tracker.png": {
+    "mtime": 1780902445.4570959,
+    "ast_hash": "18c83c145c3d07a4da42b4b44873490a",
+    "semantic_hash": ""
+  },
+  "design/renders/real-component/venue-audit.png": {
+    "mtime": 1780902445.4690957,
+    "ast_hash": "51e32905a303bf7d1a7fd995d12339c3",
+    "semantic_hash": ""
+  },
+  "design/revisions/wordmark-splash.png": {
+    "mtime": 1780902445.4810958,
+    "ast_hash": "b015444234d427dac8fe6314528b4276",
+    "semantic_hash": ""
+  },
+  "src/glyphs/cleaning-audit.svg": {
+    "mtime": 1780902445.641095,
+    "ast_hash": "bd8ee09544672ecf63d7fac8e88cdba0",
+    "semantic_hash": ""
+  },
+  "src/glyphs/cleaning-dashboard.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "1ef17eeb586db2097ca63962348f1e20",
+    "semantic_hash": ""
+  },
+  "src/glyphs/control-log.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "3bfa5d365c0457e8a4ac473513aa5f2f",
+    "semantic_hash": ""
+  },
+  "src/glyphs/family-audits.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "98f2cd53aaf87208aaf0a5799c5d2ac1",
+    "semantic_hash": ""
+  },
+  "src/glyphs/family-dashboards.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "f18e2f46d3c475ae2faf55ffbe0e65e9",
+    "semantic_hash": ""
+  },
+  "src/glyphs/family-logs.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "6352e86923dd9a2f911b6bd878a249fc",
+    "semantic_hash": ""
+  },
+  "src/glyphs/family-registers.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "58a0c27425e58dc81c84b0f4b1ac3d75",
+    "semantic_hash": ""
+  },
+  "src/glyphs/first-aid-register.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "3bdce8f5c42b4d1f971980c41d7e4d51",
+    "semantic_hash": ""
+  },
+  "src/glyphs/headset-issuance.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "c3f7971c414fad87204f99133bcb1af7",
+    "semantic_hash": ""
+  },
+  "src/glyphs/precinct-compliance.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "87f8e44c6a3cf5ddd6070fd916518ef2",
+    "semantic_hash": ""
+  },
+  "src/glyphs/precinct-ops.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "661711f62e179dade310ccd0587d0451",
+    "semantic_hash": ""
+  },
+  "src/glyphs/security-tracker.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "6ab170ffded4e488ebfe1e1d286724e5",
+    "semantic_hash": ""
+  },
+  "src/glyphs/venue-audit.svg": {
+    "mtime": 1780902445.6481886,
+    "ast_hash": "fa98c18298dde593299f2d11b39d1e97",
+    "semantic_hash": ""
+  }
+}
