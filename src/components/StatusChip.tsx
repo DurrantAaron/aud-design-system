@@ -19,6 +19,9 @@ export interface StatusChipProps extends React.HTMLAttributes<HTMLSpanElement> {
   icon?: React.ReactNode
   /** Compact padding + smaller text. */
   size?: 'sm' | 'md'
+  /** Render with a dashed edge — signals a tentative / guessed / unverified value
+   *  (e.g. an AI-suggested name awaiting confirmation). Forces the `outline` look. */
+  tentative?: boolean
   children: React.ReactNode
 }
 
@@ -59,21 +62,23 @@ export function StatusChip({
   pulse = false,
   icon,
   size = 'md',
+  tentative = false,
   children,
   style,
   ...rest
 }: StatusChipProps) {
   const p = palette(status)
+  const v = tentative ? 'outline' : variant
 
   const skin: React.CSSProperties =
-    variant === 'solid'
+    v === 'solid'
       ? { background: p.base, color: ON_SOLID, border: '1px solid transparent' }
-      : variant === 'outline'
-        ? { background: 'transparent', color: p.fg, border: `1px solid ${p.base}` }
+      : v === 'outline'
+        ? { background: 'transparent', color: p.fg, border: `1px ${tentative ? 'dashed' : 'solid'} ${p.base}` }
         : { background: p.tintBg, color: p.fg, border: `1px solid ${p.tintBorder}` }
 
   // On a solid fill the dot needs contrast; elsewhere it's the base hue.
-  const dotColor = variant === 'solid' ? ON_SOLID : p.base
+  const dotColor = v === 'solid' ? ON_SOLID : p.base
 
   return (
     <span

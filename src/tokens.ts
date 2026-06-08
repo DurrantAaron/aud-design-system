@@ -83,3 +83,11 @@ export const motion = {
   },
   duration: { fast: 120, base: 200, slow: 320 },
 } as const
+
+/**
+ * Categorical chart-series palette — six muted, perceptually-spaced hues.
+ * Raw values for chart libraries that can't read CSS vars (Recharts, Chart.js,
+ * canvas). Series 1 here is the flagship brass; in CSS, --aud-chart-1 follows
+ * the app's own accent. Starting values — tune per dashboard.
+ */
+export const chart = ['#C8A84B', '#5E7C93', '#7C8A5C', '#C26B52', '#4F8A80', '#9A7BA5'] as const
