@@ -68,3 +68,18 @@ export const fonts = {
   /** The mark's own scoped family — never repointed by app globals. */
   mark: "'AuD-Bebas', 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif",
 } as const
+
+/**
+ * Motion. Never linear. Direction convention used across the kit:
+ * slide-up = a temporary surface (sheet / toast), slide-in-from-left =
+ * forward progress through a flow. Mirrors the --aud-ease and --aud-duration
+ * CSS variables; use these when animating in JS (canvas, spring libs).
+ */
+export const motion = {
+  ease: {
+    snap: 'cubic-bezier(0.2, 0, 0, 1)',
+    spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  duration: { fast: 120, base: 200, slow: 320 },
+} as const

@@ -96,6 +96,17 @@ const preset = {
         'aud-scrim':
           'linear-gradient(to top, rgba(20,19,15,0.85) 0%, rgba(20,19,15,0.45) 35%, rgba(20,19,15,0) 70%)',
       },
+      transitionTimingFunction: {
+        // Never linear. snap = crisp · spring = slight overshoot · smooth = calm.
+        'aud-snap': 'cubic-bezier(0.2, 0, 0, 1)',
+        'aud-spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'aud-smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        'aud-fast': '120ms',
+        'aud': '200ms',
+        'aud-slow': '320ms',
+      },
     },
   },
 }
