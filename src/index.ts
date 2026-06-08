@@ -13,6 +13,16 @@
 export { AudMark } from './components/AudMark'
 export type { AudMarkProps } from './components/AudMark'
 
+// --- UI primitives (consume the design tokens) ---
+export { AudButton } from './components/AudButton'
+export type { AudButtonProps, AudButtonVariant, AudButtonSize } from './components/AudButton'
+
+export { StatusChip } from './components/StatusChip'
+export type { StatusChipProps, StatusChipVariant, StatusName } from './components/StatusChip'
+
+export { EmptyState } from './components/EmptyState'
+export type { EmptyStateProps, EmptyStateAction } from './components/EmptyState'
+
 export { PoweredByAud } from './components/PoweredByAud'
 export type { PoweredByAudProps } from './components/PoweredByAud'
 
