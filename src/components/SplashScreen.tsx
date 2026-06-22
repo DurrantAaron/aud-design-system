@@ -65,9 +65,9 @@ export interface SplashScreenProps
  *
  * ```tsx
  * <SplashScreen
- *   mark={<MyTile>IVY</MyTile>}
+ *   mark={<MyTile>DEMO</MyTile>}
  *   title="Precinct Compliance"
- *   subtitle="AusComply checklist analytics · IVY Precinct"
+ *   subtitle="AusComply checklist analytics · Demo Precinct"
  *   accent={accents.steel}
  *   primary={{ label: 'Sign in with Microsoft', icon: <MsLogo/>, onClick, loading }}
  *   secondary={{ label: 'Continue with static data', onClick: guest }}

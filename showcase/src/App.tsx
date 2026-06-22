@@ -235,7 +235,7 @@ export function App() {
                 accent={accents.steel}
                 mark={<AppMark accent={accents.steel}><GlyphShield /></AppMark>}
                 title="Precinct Compliance"
-                subtitle="AusComply checklist analytics · IVY Precinct"
+                subtitle="AusComply checklist analytics · Demo Precinct"
                 primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
                 secondary={{ label: 'Continue with static data' }}
               />

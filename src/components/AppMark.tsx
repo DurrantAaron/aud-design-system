@@ -55,7 +55,7 @@ export interface AppMarkProps extends React.HTMLAttributes<HTMLDivElement> {
  * <AppMark accent={accents.brass}><ClipboardCheck /></AppMark>
  *
  * // Short-code fallback when an app has no glyph yet:
- * <AppMark accent={accents.steel}>IVY</AppMark>
+ * <AppMark accent={accents.steel}>DEMO</AppMark>
  *
  * // Quieter, for a header corner:
  * <AppMark variant="tint" size={32} accent={accents.sage}><Gauge /></AppMark>

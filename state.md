@@ -14,7 +14,7 @@ Open questions:
 - Whether/when to do backlog batches E–I (per-app dashboards, field apps, presentation, docs) — full list at ~/knowledge/aud-design-backlog.md.
 - Clean up the 4 now-merged/superseded worktrees under ~/projects/_wt/ (design-tokens, primitives, motion-states, full)? [CONFIRM]
 - (carry) Wayfinder PR #5 still OPEN — additive beside @aud/brand vs SUPERSEDE canonical tokens; merge as-is or iterate? [CONFIRM]
-- (carry) ⚠️ Pre-existing IVY leak on main: showcase/src/App.tsx has "…· IVY Precinct" — de-identify (repo is PUBLIC). [CONFIRM]
+- ✅ IVY leak de-identified (feat/strip-ivy): showcase App.tsx subtitle + AppMark/SplashScreen JSDoc examples now use "DEMO"/"Demo Precinct". Public repo clean.
 Built/shipped since last update:
 - 9a49f99 Merge pull request #25 from DurrantAaron/feat/design-system-full
 - a66fb3d feat: complete design-system layer — colour depth, component kit, iPhone-native, motion
