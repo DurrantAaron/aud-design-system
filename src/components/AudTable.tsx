@@ -67,7 +67,7 @@ function cellText(value: React.ReactNode): string {
  * <AudTable
  *   searchable
  *   columns={[{ key: 'name', header: 'Venue' }, { key: 'score', header: 'Score', align: 'right' }]}
- *   rows={[{ name: 'The Ivy', score: 92 }]}
+ *   rows={[{ name: 'Demo Venue', score: 92 }]}
  *   onRowClick={open}
  *   toolbar={<AudButton>New audit</AudButton>}
  * />
