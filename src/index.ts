@@ -75,6 +75,9 @@ export type { AuditorWordmarkProps } from './components/AuditorWordmark'
 export { SplashScreen } from './components/SplashScreen'
 export type { SplashScreenProps, SplashAction } from './components/SplashScreen'
 
+export { AppSwitcher } from './components/AppSwitcher'
+export type { AppSwitcherProps, AppSwitcherApp } from './components/AppSwitcher'
+
 export { AppMark } from './components/AppMark'
 export type { AppMarkProps } from './components/AppMark'
 
