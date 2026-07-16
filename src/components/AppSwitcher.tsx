@@ -19,6 +19,12 @@ export interface AppSwitcherApp {
   url: string
   /** Tile colour for this app's glyph square. */
   accent: string
+  /**
+   * Optional glyph for the tile — a small icon node (e.g. a lucide icon) shown
+   * instead of the letter `glyph`. Sized/coloured by the caller. Falls back to
+   * the `glyph` letters when omitted.
+   */
+  icon?: React.ReactNode
 }
 
 export interface AppSwitcherProps {
@@ -119,7 +125,9 @@ export function AppSwitcher({ apps, currentId, glyph = 'IVY' }: AppSwitcherProps
             flexShrink: 0,
           }}
         >
-          <span style={{ fontSize: '0.6875rem', fontWeight: 900, color: '#fff' }}>{glyph}</span>
+          {current.icon ?? (
+            <span style={{ fontSize: '0.6875rem', fontWeight: 900, color: '#fff' }}>{glyph}</span>
+          )}
         </span>
         <span style={{ minWidth: 0, flex: 1 }}>
           <span style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: 'oklch(0.92 0.005 260)', lineHeight: 1.3 }}>
@@ -167,7 +175,9 @@ export function AppSwitcher({ apps, currentId, glyph = 'IVY' }: AppSwitcherProps
                     flexShrink: 0,
                   }}
                 >
-                  <span style={{ fontSize: '0.5625rem', fontWeight: 900, color: '#fff' }}>{glyph}</span>
+                  {app.icon ?? (
+                    <span style={{ fontSize: '0.5625rem', fontWeight: 900, color: '#fff' }}>{glyph}</span>
+                  )}
                 </span>
                 <span style={{ minWidth: 0, flex: 1 }}>
                   <span style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'oklch(0.92 0.005 260)', lineHeight: 1.3 }}>
