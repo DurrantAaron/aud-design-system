@@ -67,6 +67,8 @@ const q = new URLSearchParams(location.search)
 const appKey = q.get('app') || 'cleaning'
 // Optional image: drop a file in showcase/public and pass ?img=/your.jpg
 const img = q.get('img') || undefined
+// Optional crop focal point, e.g. ?imgpos=60%25 center  (URL-encoded)
+const imgpos = q.get('imgpos') || 'center'
 
 const a = APPS[appKey] ?? APPS.cleaning
 
@@ -81,9 +83,8 @@ createRoot(document.getElementById('root')!).render(
     primary={{ label: 'Sign in with Microsoft', icon: <MsLogo /> }}
     brandPanel={{
       image: img,
-      eyebrow: a.eyebrow,
+      imagePosition: imgpos,
       statement: a.statement,
-      foot: a.foot,
     }}
     footer={<PoweredByAud accent={a.accent} />}
   />,

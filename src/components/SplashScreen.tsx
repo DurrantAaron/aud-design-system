@@ -279,7 +279,8 @@ export function SplashScreen({
     // A full-bleed image carries the panel (light scrim so the photo reads
     // rich); with no image, a bold accent gradient — a premium brand pane.
     const panelBackground = p.image
-      ? `linear-gradient(to top, rgba(8,7,4,0.45), rgba(8,7,4,0.04) 55%, rgba(8,7,4,0.28)), url("${p.image}")`
+      ? `linear-gradient(to right, rgba(8,7,4,0.80), rgba(8,7,4,0.30) 52%, rgba(8,7,4,0.04) 100%), ` +
+        `linear-gradient(to top, rgba(8,7,4,0.55), transparent 42%), url("${p.image}")`
       : `radial-gradient(85% 70% at 80% 10%, color-mix(in srgb, ${accent} 55%, transparent), transparent 60%), ` +
         `linear-gradient(150deg, color-mix(in srgb, ${accent} 60%, #0a0a08) 0%, ` +
         `color-mix(in srgb, ${accent} 26%, #0a0a08) 45%, ${neutrals.dark.ground} 100%)`
