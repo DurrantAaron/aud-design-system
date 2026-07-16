@@ -18,6 +18,25 @@ export interface SplashAction {
   disabled?: boolean
 }
 
+/**
+ * The branded visual half of the {@link SplashScreenProps.layout} `"split"`
+ * canvas. A full-bleed image with the brand statement over it; when no `image`
+ * is set it falls back to a restrained dark ground with only a whisper of
+ * accent (never a large accent fill — that's the brand rule).
+ */
+export interface SplashBrandPanel {
+  /** Full-bleed background image URL. Omit for the accent-tinted fallback. */
+  image?: string
+  /** Small uppercase line at the top — usually the app/precinct brand row. */
+  eyebrow?: React.ReactNode
+  /** The large brand statement (Barlow Condensed). Keep it short. */
+  statement?: React.ReactNode
+  /** A small foot line (e.g. the sub-brands / a tagline). */
+  foot?: React.ReactNode
+  /** Focal point for the image, e.g. "center", "50% 30%". Default "center". */
+  imagePosition?: string
+}
+
 export interface SplashScreenProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Brand tile / logo above the title — app-provided (an icon, a lettermark tile…). */
@@ -40,6 +59,15 @@ export interface SplashScreenProps
    */
   theme?: 'light' | 'dark'
   /**
+   * Overall composition.
+   * - `"centered"` (default) — the classic single centred column.
+   * - `"split"` — a two-pane canvas: a branded visual panel beside the form.
+   *   Collapses to an image band above the form on narrow screens.
+   */
+  layout?: 'centered' | 'split'
+  /** The visual pane for `layout="split"`. Ignored when centered. */
+  brandPanel?: SplashBrandPanel
+  /**
    * Render the `children` (fields) ABOVE the actions, for PIN/code apps where
    * the inputs come first. Default false — OAuth-first, button on top.
    */
@@ -54,6 +82,20 @@ export interface SplashScreenProps
   children?: React.ReactNode
 }
 
+const SPLIT_CSS = `
+.aud-splash-split{display:grid;grid-template-columns:1.05fr 0.95fr;min-height:100vh}
+.aud-splash-panel{position:relative;overflow:hidden;display:flex;flex-direction:column;
+  justify-content:space-between;padding:clamp(28px,4vw,52px)}
+.aud-splash-panel>*{position:relative;z-index:1}
+.aud-splash-formcol{position:relative;display:flex;align-items:center;justify-content:center;
+  padding:48px 32px}
+@media (max-width:820px){
+  .aud-splash-split{grid-template-columns:1fr;grid-template-rows:210px auto}
+  .aud-splash-panel{padding:24px}
+  .aud-splash-formcol{padding:36px 24px 68px}
+}
+`
+
 /**
  * The shared sign-in / splash scaffold.
  *
@@ -62,6 +104,8 @@ export interface SplashScreenProps
  * at the bottom. Self-contained inline styles (Tailwind optional) on the brand
  * neutrals, so every app's splash reads as one family — only the `accent` and
  * the app-provided `mark` move.
+ *
+ * Pass `layout="split"` with a `brandPanel` for the two-pane canvas.
  *
  * ```tsx
  * <SplashScreen
@@ -84,6 +128,8 @@ export function SplashScreen({
   error,
   accent = DEFAULT_ACCENT,
   theme,
+  layout = 'centered',
+  brandPanel,
   actionsLast,
   formMode,
   fieldNote,
@@ -100,6 +146,7 @@ export function SplashScreen({
   // Dark ink on the accent fill reads on all five (mid-luminance) accents.
   const onAccent = neutrals.dark.ground
   const errorColor = resolvedTheme === 'dark' ? '#F0857C' : '#B23B30'
+  const isSplit = layout === 'split'
 
   // The app-provided fields (children) + an optional mono micro-line under them.
   const fields =
@@ -114,7 +161,7 @@ export function SplashScreen({
               fontSize: '0.6875rem',
               letterSpacing: '0.04em',
               lineHeight: 1.5,
-              textAlign: 'center',
+              textAlign: isSplit ? 'left' : 'center',
               color: n.mid,
             }}
           >
@@ -129,7 +176,9 @@ export function SplashScreen({
       <SplashButton variant="primary" action={primary} accent={accent} onAccent={onAccent} n={n} />
 
       {error && (
-        <p style={{ margin: 0, fontSize: '0.75rem', textAlign: 'center', color: errorColor }}>{error}</p>
+        <p style={{ margin: 0, fontSize: '0.75rem', textAlign: isSplit ? 'left' : 'center', color: errorColor }}>
+          {error}
+        </p>
       )}
 
       {secondary && (
@@ -145,6 +194,164 @@ export function SplashScreen({
     </>
   )
 
+  // The mark + title + subtitle + actions/fields — shared by both layouts; only
+  // the alignment moves (centred column vs left-aligned form pane).
+  const formStack = (
+    <div
+      style={{
+        width: '100%',
+        maxWidth: isSplit ? 340 : 360,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 24,
+      }}
+    >
+      <div
+        style={{
+          textAlign: isSplit ? 'left' : 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: isSplit ? 'flex-start' : 'center',
+          gap: 12,
+        }}
+      >
+        {mark}
+        <div>
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: fonts.heading,
+              fontWeight: 600,
+              fontSize: '1.5rem',
+              lineHeight: 1.1,
+              letterSpacing: '0.01em',
+              color: n.ink,
+            }}
+          >
+            {title}
+          </h1>
+          {subtitle && (
+            <p style={{ margin: '6px 0 0', fontSize: '0.875rem', lineHeight: 1.4, color: n.mid }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {fieldsFirst ? (
+          <>
+            {fields}
+            {actions}
+          </>
+        ) : (
+          <>
+            {actions}
+            {fields}
+          </>
+        )}
+      </div>
+    </div>
+  )
+
+  const footerNode =
+    footer !== null ? footer ?? <PoweredByAud accent={accent} /> : null
+
+  const footerSlot = footerNode && (
+    <div
+      style={{
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 24,
+        display: 'flex',
+        justifyContent: 'center',
+        color: n.mid,
+      }}
+    >
+      {footerNode}
+    </div>
+  )
+
+  // ── split canvas ──────────────────────────────────────────────────────────
+  if (isSplit) {
+    const p = brandPanel ?? {}
+    // Restraint rule: a full-bleed image carries the panel; with no image we
+    // fall back to the dark ground with only a whisper of accent — never a
+    // large accent fill.
+    const panelBackground = p.image
+      ? `linear-gradient(to top, rgba(8,7,4,0.62), rgba(8,7,4,0.12) 52%, rgba(8,7,4,0.40)), url("${p.image}")`
+      : `radial-gradient(120% 95% at 18% 12%, color-mix(in srgb, ${accent} 20%, transparent), transparent 58%), ` +
+        `radial-gradient(90% 80% at 92% 96%, color-mix(in srgb, ${accent} 12%, transparent), transparent 60%), ` +
+        `${neutrals.dark.ground}`
+
+    return (
+      <div
+        className="aud-splash-split"
+        style={{
+          background: n.ground,
+          color: n.ink,
+          fontFamily: fonts.body,
+          ...style,
+        }}
+        {...rest}
+      >
+        <style>{'@keyframes aud-splash-spin{to{transform:rotate(360deg)}}' + SPLIT_CSS}</style>
+
+        {/* visual pane */}
+        <aside
+          className="aud-splash-panel"
+          style={{
+            background: panelBackground,
+            backgroundSize: 'cover',
+            backgroundPosition: p.imagePosition ?? 'center',
+            color: '#F6F4EE',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: fonts.mono,
+              fontSize: '0.6875rem',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: 'rgba(246,244,238,0.82)',
+            }}
+          >
+            {p.eyebrow}
+          </div>
+          {p.statement && (
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: fonts.heading,
+                fontWeight: 600,
+                fontSize: 'clamp(1.6rem, 3.2vw, 2.5rem)',
+                lineHeight: 1.06,
+                letterSpacing: '0.005em',
+                textWrap: 'balance',
+                maxWidth: '15ch',
+              }}
+            >
+              {/* a thin accent rule above the statement — accent as a key rule, not a fill */}
+              <span
+                style={{ display: 'block', width: 36, height: 2, background: accent, marginBottom: 18, borderRadius: 2 }}
+              />
+              {p.statement}
+            </h2>
+          )}
+          {p.foot && <div style={{ fontSize: '0.75rem', color: 'rgba(246,244,238,0.72)' }}>{p.foot}</div>}
+        </aside>
+
+        {/* form pane */}
+        <div className="aud-splash-formcol">
+          {formStack}
+          {footerSlot}
+        </div>
+      </div>
+    )
+  }
+
+  // ── centred column (default, unchanged) ───────────────────────────────────
   return (
     <div
       style={{
@@ -163,61 +370,9 @@ export function SplashScreen({
     >
       <style>{'@keyframes aud-splash-spin{to{transform:rotate(360deg)}}'}</style>
 
-      <div style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', gap: 24 }}>
-        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-          {mark}
-          <div>
-            <h1
-              style={{
-                margin: 0,
-                fontFamily: fonts.heading,
-                fontWeight: 600,
-                fontSize: '1.5rem',
-                lineHeight: 1.1,
-                letterSpacing: '0.01em',
-                color: n.ink,
-              }}
-            >
-              {title}
-            </h1>
-            {subtitle && (
-              <p style={{ margin: '6px 0 0', fontSize: '0.875rem', lineHeight: 1.4, color: n.mid }}>
-                {subtitle}
-              </p>
-            )}
-          </div>
-        </div>
+      {formStack}
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {fieldsFirst ? (
-            <>
-              {fields}
-              {actions}
-            </>
-          ) : (
-            <>
-              {actions}
-              {fields}
-            </>
-          )}
-        </div>
-      </div>
-
-      {footer !== null && (
-        <div
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 24,
-            display: 'flex',
-            justifyContent: 'center',
-            color: n.mid,
-          }}
-        >
-          {footer ?? <PoweredByAud accent={accent} />}
-        </div>
-      )}
+      {footerSlot}
     </div>
   )
 }
