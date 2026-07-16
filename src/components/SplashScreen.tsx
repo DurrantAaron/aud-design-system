@@ -276,14 +276,13 @@ export function SplashScreen({
   // ── split canvas ──────────────────────────────────────────────────────────
   if (isSplit) {
     const p = brandPanel ?? {}
-    // Restraint rule: a full-bleed image carries the panel; with no image we
-    // fall back to the dark ground with only a whisper of accent — never a
-    // large accent fill.
+    // A full-bleed image carries the panel (light scrim so the photo reads
+    // rich); with no image, a bold accent gradient — a premium brand pane.
     const panelBackground = p.image
-      ? `linear-gradient(to top, rgba(8,7,4,0.62), rgba(8,7,4,0.12) 52%, rgba(8,7,4,0.40)), url("${p.image}")`
-      : `radial-gradient(120% 95% at 18% 12%, color-mix(in srgb, ${accent} 20%, transparent), transparent 58%), ` +
-        `radial-gradient(90% 80% at 92% 96%, color-mix(in srgb, ${accent} 12%, transparent), transparent 60%), ` +
-        `${neutrals.dark.ground}`
+      ? `linear-gradient(to top, rgba(8,7,4,0.45), rgba(8,7,4,0.04) 55%, rgba(8,7,4,0.28)), url("${p.image}")`
+      : `radial-gradient(85% 70% at 80% 10%, color-mix(in srgb, ${accent} 55%, transparent), transparent 60%), ` +
+        `linear-gradient(150deg, color-mix(in srgb, ${accent} 60%, #0a0a08) 0%, ` +
+        `color-mix(in srgb, ${accent} 26%, #0a0a08) 45%, ${neutrals.dark.ground} 100%)`
 
     return (
       <div
